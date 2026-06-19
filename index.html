@@ -6,683 +6,593 @@
 <title>StatistikaKu — Belajar Statistika</title>
 <meta name="description" content="StatistikaKu: platform belajar statistika gratis, materi lengkap, rumus matematika, dan contoh soal." />
 
-<!-- KaTeX untuk render rumus matematika -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
-
-<!-- Markdown parser ringan -->
 <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
-
-<!-- Syntax highlight -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" id="hljs-theme">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-
 <style>
-/* ===================================================================
-   StatistikaKu — Stylesheet
-   Tema: Modern Academic — Biru Statistik (#2563EB), Putih, Abu muda
-   =================================================================== */
-
-:root{
-  --color-primary: #2563EB;
-  --color-primary-dark: #1E4FCB;
-  --color-primary-light: #EFF4FF;
-  --color-accent: #2563EB;
+:root {
+  --primary: #2563EB;
+  --primary-dark: #1E4FCB;
+  --primary-light: #EFF4FF;
+  --accent: #0EA5E9;
 
   --bg-app: #F4F6F9;
   --bg-surface: #FFFFFF;
   --bg-surface-2: #F8F9FB;
   --bg-sidebar: #FFFFFF;
-  --border-color: #E5E8EE;
+  --border: #E5E8EE;
 
-  --text-primary: #111827;
-  --text-secondary: #5B6472;
-  --text-muted: #8A93A2;
+  --text-1: #111827;
+  --text-2: #5B6472;
+  --text-3: #8A93A2;
 
   --code-bg: #F1F3F8;
   --shadow-sm: 0 1px 2px rgba(16,24,40,.06);
   --shadow-md: 0 4px 16px rgba(16,24,40,.08);
   --shadow-lg: 0 12px 32px rgba(16,24,40,.12);
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
 
-  --sidebar-width: 280px;
-  --navbar-height: 64px;
+  --sidebar-w: 280px;
+  --nav-h: 64px;
 
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: "JetBrains Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono", SFMono-Regular, Consolas, monospace;
   color-scheme: light;
 }
 
-[data-theme="dark"]{
+[data-theme="dark"] {
   --bg-app: #0F1420;
   --bg-surface: #161D2E;
   --bg-surface-2: #1B2336;
   --bg-sidebar: #131A2A;
-  --border-color: #263049;
-
-  --text-primary: #E8ECF4;
-  --text-secondary: #A6AFC2;
-  --text-muted: #717A8E;
-
+  --border: #263049;
+  --text-1: #E8ECF4;
+  --text-2: #A6AFC2;
+  --text-3: #717A8E;
   --code-bg: #1E2740;
-  --color-primary-light: #1B2A4D;
-
+  --primary-light: #1B2A4D;
   --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
   --shadow-md: 0 4px 16px rgba(0,0,0,.35);
   --shadow-lg: 0 12px 32px rgba(0,0,0,.45);
-
   color-scheme: dark;
 }
 
-/* ===== RESET ===== */
-*,*::before,*::after{ box-sizing: border-box; }
-html,body{ margin:0; padding:0; }
-body{
-  font-family: var(--font-sans);
+*,*::before,*::after { box-sizing: border-box; }
+html,body { margin:0; padding:0; }
+body {
+  font-family: var(--sans);
   background: var(--bg-app);
-  color: var(--text-primary);
+  color: var(--text-1);
   -webkit-font-smoothing: antialiased;
-  transition: background .25s ease, color .25s ease;
+  transition: background .25s, color .25s;
 }
-a{ color: var(--color-primary); text-decoration: none; }
-a:hover{ text-decoration: underline; }
-button{ font-family: inherit; }
-ul{ margin:0; padding:0; }
-img{ max-width:100%; }
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button { font-family: inherit; }
+ul { margin:0; padding:0; list-style:none; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
 
 /* ===== NAVBAR ===== */
-.navbar{
-  position: sticky;
-  top:0;
-  z-index: 50;
-  height: var(--navbar-height);
-  display:flex;
-  align-items:center;
-  gap: 14px;
+.navbar {
+  position: sticky; top:0; z-index: 50;
+  height: var(--nav-h);
+  display: flex; align-items: center; gap: 14px;
   padding: 0 18px;
   background: var(--bg-surface);
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
 }
-.icon-btn{
-  display:flex; align-items:center; justify-content:center;
+.icon-btn {
+  display: flex; align-items: center; justify-content: center;
   width: 38px; height: 38px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--r-sm);
   border: 1px solid transparent;
   background: transparent;
-  color: var(--text-secondary);
-  cursor:pointer;
+  color: var(--text-2);
+  cursor: pointer;
   transition: background .15s, color .15s;
   flex-shrink: 0;
 }
-.icon-btn:hover{ background: var(--bg-surface-2); color: var(--color-primary); }
-
-.brand{
-  display:flex; align-items:center; gap:8px;
-  font-weight:700; font-size:1.15rem;
-  color: var(--text-primary);
-  flex-shrink:0;
+.icon-btn:hover { background: var(--bg-surface-2); color: var(--primary); }
+.brand {
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 700; font-size: 1.15rem;
+  color: var(--text-1); flex-shrink: 0;
 }
-.brand:hover{ text-decoration:none; }
-.brand-logo{
-  display:flex; align-items:center; justify-content:center;
-  width:34px; height:34px;
-  border-radius: 9px;
-  background: linear-gradient(135deg, var(--color-primary), #4F8CFF);
-  color:#fff; font-weight:700; font-size:1.1rem;
-  flex-shrink:0;
+.brand:hover { text-decoration: none; }
+.brand-logo {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 9px;
+  background: linear-gradient(135deg, var(--primary), #4F8CFF);
+  color: #fff; font-weight: 700; font-size: 1.1rem;
 }
-.brand-accent{ color: var(--color-primary); }
-
-.navbar-search{
-  flex:1;
-  max-width: 480px;
-  margin: 0 auto 0 12px;
-  display:flex; align-items:center; gap:8px;
+.brand-accent { color: var(--primary); }
+.navbar-search {
+  flex: 1; max-width: 440px; margin: 0 auto 0 12px;
+  display: flex; align-items: center; gap: 8px;
   background: var(--bg-surface-2);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 8px 12px;
-  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 8px 12px; color: var(--text-3);
 }
-.navbar-search input{
-  border:none; outline:none; background:transparent;
-  width:100%; font-size:.92rem;
-  color: var(--text-primary);
+.navbar-search input {
+  border: none; outline: none; background: transparent;
+  width: 100%; font-size: .92rem; color: var(--text-1);
 }
-@media (max-width: 720px){
-  .navbar-search{ display:none; }
-}
+@media (max-width: 720px) { .navbar-search { display: none; } }
 
 /* ===== APP SHELL ===== */
-.app-shell{
-  display:flex;
-  min-height: calc(100vh - var(--navbar-height));
-}
+.app-shell { display: flex; min-height: calc(100vh - var(--nav-h)); }
 
 /* ===== SIDEBAR ===== */
-.sidebar{
-  width: var(--sidebar-width);
-  flex-shrink:0;
+.sidebar {
+  width: var(--sidebar-w); flex-shrink: 0;
   background: var(--bg-sidebar);
-  border-right: 1px solid var(--border-color);
-  position: sticky;
-  top: var(--navbar-height);
-  height: calc(100vh - var(--navbar-height));
-  overflow-y:auto;
+  border-right: 1px solid var(--border);
+  position: sticky; top: var(--nav-h);
+  height: calc(100vh - var(--nav-h));
+  overflow-y: auto;
 }
-.sidebar-inner{ padding: 16px 12px 40px; }
-.sidebar-search-mobile{ display:none; margin-bottom: 12px; }
-.sidebar-search-mobile input{
-  width:100%; padding:9px 12px;
-  border-radius: var(--radius-sm);
-  border:1px solid var(--border-color);
-  background: var(--bg-surface-2);
-  color: var(--text-primary);
-  outline:none;
+.sidebar-inner { padding: 12px 10px 40px; }
+.sidebar-search-mobile { display: none; margin-bottom: 12px; }
+.sidebar-search-mobile input {
+  width: 100%; padding: 9px 12px;
+  border-radius: var(--r-sm); border: 1px solid var(--border);
+  background: var(--bg-surface-2); color: var(--text-1); outline: none;
 }
 
-.materi-list{ display:flex; flex-direction:column; gap:2px; }
-.materi-group-label{
-  font-size: .72rem;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: var(--text-muted);
-  font-weight:700;
-  padding: 14px 10px 6px;
+/* --- SIDEBAR CATEGORY ACCORDION --- */
+.sb-category { margin-bottom: 4px; }
+
+.sb-cat-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 10px 8px 8px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  user-select: none;
+  transition: background .15s;
+  gap: 8px;
 }
-.materi-link{
-  display:flex; align-items:center; gap:10px;
-  padding: 9px 10px;
-  border-radius: var(--radius-sm);
-  color: var(--text-secondary);
-  font-size: .92rem;
-  cursor:pointer;
+.sb-cat-header:hover { background: var(--bg-surface-2); }
+.sb-cat-header.open { background: var(--primary-light); }
+
+.sb-cat-icon {
+  width: 28px; height: 28px; border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem; flex-shrink: 0;
+  background: var(--primary-light);
+}
+.sb-cat-header.open .sb-cat-icon { background: var(--primary); }
+
+.sb-cat-label {
+  flex: 1;
+  font-size: .82rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em;
+  color: var(--text-2);
+}
+.sb-cat-header.open .sb-cat-label { color: var(--primary); }
+
+.sb-cat-chevron {
+  width: 16px; height: 16px; flex-shrink: 0;
+  color: var(--text-3);
+  transition: transform .2s;
+}
+.sb-cat-header.open .sb-cat-chevron { transform: rotate(180deg); }
+
+/* --- SIDEBAR TOPIC (Materi Utama) --- */
+.sb-topics { overflow: hidden; }
+.sb-topic {
+  margin: 2px 0;
+}
+.sb-topic-header {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 10px 7px 14px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  color: var(--text-2);
+  font-size: .88rem; font-weight: 600;
   transition: background .15s, color .15s;
 }
-.materi-link:hover{ background: var(--bg-surface-2); color: var(--text-primary); text-decoration:none; }
-.materi-link.active{
-  background: var(--color-primary-light);
-  color: var(--color-primary);
-  font-weight:600;
-}
-.materi-link .dot{
-  width:6px; height:6px; border-radius:50%;
-  background: var(--text-muted);
-  flex-shrink:0;
-}
-.materi-link.active .dot{ background: var(--color-primary); }
+.sb-topic-header:hover { background: var(--bg-surface-2); color: var(--text-1); }
+.sb-topic-header.active { background: var(--primary-light); color: var(--primary); }
 
-.sidebar-empty{
-  text-align:center; color: var(--text-muted);
-  font-size: .88rem; padding: 20px 10px;
+.sb-topic-chevron {
+  width: 14px; height: 14px; flex-shrink: 0; margin-left: auto;
+  color: var(--text-3); transition: transform .2s;
+}
+.sb-topic-header.open .sb-topic-chevron { transform: rotate(180deg); }
+.sb-topic-header.active .sb-topic-chevron { color: var(--primary); }
+
+/* --- SIDEBAR SUB MATERI --- */
+.sb-subtopics { overflow: hidden; }
+.sb-sub-link {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 10px 6px 32px;
+  border-radius: var(--r-sm);
+  color: var(--text-2);
+  font-size: .84rem;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.sb-sub-link:hover { background: var(--bg-surface-2); color: var(--text-1); text-decoration: none; }
+.sb-sub-link.active {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 600;
+}
+.sb-sub-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--text-3); flex-shrink: 0;
+}
+.sb-sub-link.active .sb-sub-dot { background: var(--primary); }
+
+.sidebar-empty { text-align: center; color: var(--text-3); font-size: .88rem; padding: 20px 10px; }
+.sidebar-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.4); z-index: 45;
 }
 
-.sidebar-overlay{
-  display:none;
-  position: fixed; inset:0;
-  background: rgba(0,0,0,.4);
-  z-index: 45;
-}
-
-@media (max-width: 960px){
-  .sidebar{
-    position: fixed;
-    top: var(--navbar-height);
-    left: 0;
-    height: calc(100vh - var(--navbar-height));
+@media (max-width: 960px) {
+  .sidebar {
+    position: fixed; top: var(--nav-h); left: 0;
+    height: calc(100vh - var(--nav-h));
     transform: translateX(-100%);
-    transition: transform .25s ease;
-    z-index: 46;
+    transition: transform .25s ease; z-index: 46;
     box-shadow: var(--shadow-lg);
   }
-  .sidebar.open{ transform: translateX(0); }
-  .sidebar-search-mobile{ display:block; }
-  .sidebar-overlay.show{ display:block; }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-search-mobile { display: block; }
+  .sidebar-overlay.show { display: block; }
 }
 
 /* ===== MAIN CONTENT ===== */
-.content{
-  flex:1;
-  min-width:0;
-  padding: 32px 28px 80px;
-}
-@media (max-width: 640px){
-  .content{ padding: 22px 16px 60px; }
-}
+.content { flex: 1; min-width: 0; padding: 32px 28px 80px; }
+@media (max-width: 640px) { .content { padding: 22px 16px 60px; } }
 
-/* ===== HOME / HERO ===== */
-.view-home{ max-width: 1080px; margin:0 auto; }
-.hero{
-  text-align:center;
-  padding: 48px 16px 36px;
-}
-.hero-logo{
-  width: 64px; height:64px; margin: 0 auto 18px;
-  display:flex; align-items:center; justify-content:center;
+/* ===== HOME HERO ===== */
+.view-home { max-width: 1080px; margin: 0 auto; }
+.hero { text-align: center; padding: 48px 16px 36px; }
+.hero-logo {
+  width: 64px; height: 64px; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
   border-radius: 16px;
-  background: linear-gradient(135deg, var(--color-primary), #4F8CFF);
-  color:#fff; font-size: 1.8rem; font-weight:700;
+  background: linear-gradient(135deg, var(--primary), #4F8CFF);
+  color: #fff; font-size: 1.8rem; font-weight: 700;
   box-shadow: var(--shadow-md);
 }
-.hero h1{
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  margin: 0 0 12px;
-  font-weight: 800;
-  letter-spacing: -.02em;
-}
-.hero-subtitle{
-  color: var(--text-secondary);
-  font-size: 1.02rem;
-  max-width: 620px;
-  margin: 0 auto 26px;
-  line-height: 1.6;
-}
-.hero-actions{ display:flex; justify-content:center; gap:12px; }
+.hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin: 0 0 12px; font-weight: 800; letter-spacing: -.02em; }
+.hero-subtitle { color: var(--text-2); font-size: 1.02rem; max-width: 620px; margin: 0 auto 26px; line-height: 1.6; }
+.hero-actions { display: flex; justify-content: center; gap: 12px; }
 
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  gap:6px;
-  padding: 11px 22px;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: .94rem;
-  cursor:pointer;
+/* ===== HOME CATEGORY SECTIONS ===== */
+.home-cats { margin-top: 32px; display: flex; flex-direction: column; gap: 36px; }
+.home-cat-section {}
+.home-cat-title {
+  font-size: 1.1rem; font-weight: 700; color: var(--text-1);
+  margin: 0 0 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.home-cat-title .cat-badge {
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--primary); background: var(--primary-light);
+  padding: 3px 10px; border-radius: 999px;
+}
+.home-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+.topic-card {
+  display: block;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 18px 20px;
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+  cursor: pointer;
+}
+.topic-card:hover {
+  text-decoration: none; transform: translateY(-3px);
+  box-shadow: var(--shadow-md); border-color: var(--primary);
+}
+.topic-card-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: var(--primary-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; margin-bottom: 12px;
+}
+.topic-card h3 { margin: 0 0 5px; font-size: 1rem; color: var(--text-1); }
+.topic-card .sub-count { font-size: .8rem; color: var(--text-3); }
+
+/* ===== KATEGORI OVERVIEW PAGE ===== */
+.view-kategori { max-width: 900px; margin: 0 auto; }
+.kat-hero {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px 32px 24px;
+  margin-bottom: 28px;
+  display: flex; align-items: center; gap: 20px;
+}
+.kat-hero-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary), #4F8CFF);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; flex-shrink: 0;
+}
+.kat-hero-text h1 { margin: 0 0 6px; font-size: 1.7rem; font-weight: 800; }
+.kat-hero-text p { margin: 0; color: var(--text-2); font-size: .95rem; line-height: 1.5; }
+
+.kat-topics-title { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--text-3); margin: 0 0 14px; }
+.kat-topic-list { display: flex; flex-direction: column; gap: 12px; }
+.kat-topic-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+}
+.kat-topic-item:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); text-decoration: none; }
+.kat-topic-item-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.kat-topic-num {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--primary-light); color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .8rem; font-weight: 800; flex-shrink: 0;
+}
+.kat-topic-item-header h3 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-1); }
+.kat-topic-desc { font-size: .875rem; color: var(--text-2); line-height: 1.5; margin: 0 0 12px; }
+.kat-sub-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.kat-sub-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .76rem; color: var(--primary);
+  background: var(--primary-light);
+  padding: 3px 10px; border-radius: 999px;
+  cursor: pointer; transition: background .15s;
+}
+.kat-sub-chip:hover { background: var(--primary); color: #fff; text-decoration: none; }
+
+/* ===== TOPIC OVERVIEW PAGE ===== */
+.view-topic { max-width: 900px; margin: 0 auto; }
+.topic-overview-header {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+.topic-overview-header .cat-tag {
+  display: inline-block; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--primary); background: var(--primary-light);
+  padding: 3px 10px; border-radius: 999px; margin-bottom: 10px;
+  cursor: pointer;
+}
+.topic-overview-header .cat-tag:hover { text-decoration: none; background: var(--primary); color: #fff; }
+.topic-overview-header h1 { margin: 0 0 8px; font-size: 1.7rem; font-weight: 800; }
+.topic-overview-header p { margin: 0; color: var(--text-2); font-size: .95rem; line-height: 1.5; }
+
+.sub-list-title { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--text-3); margin: 0 0 14px; }
+.sub-list { display: flex; flex-direction: column; gap: 10px; }
+.sub-list-item {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: border-color .15s, transform .12s;
+}
+.sub-list-item:hover { border-color: var(--primary); transform: translateX(3px); text-decoration: none; }
+.sub-list-num {
+  width: 32px; height: 32px; border-radius: 9px;
+  background: var(--primary-light); color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .82rem; font-weight: 800; flex-shrink: 0;
+}
+.sub-list-text { flex: 1; min-width: 0; }
+.sub-list-text h4 { margin: 0 0 3px; font-size: .95rem; font-weight: 600; color: var(--text-1); }
+.sub-list-text p { margin: 0; font-size: .82rem; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sub-list-arrow { color: var(--text-3); flex-shrink: 0; }
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 6px; padding: 10px 20px; border-radius: var(--r-md);
+  font-weight: 600; font-size: .94rem; cursor: pointer;
   border: 1px solid transparent;
-  transition: transform .12s ease, box-shadow .12s ease, background .15s;
+  transition: transform .12s, box-shadow .12s, background .15s;
 }
-.btn:hover{ text-decoration:none; }
-.btn-primary{
-  background: var(--color-primary);
-  color: #fff;
-  box-shadow: var(--shadow-sm);
-}
-.btn-primary:hover{ background: var(--color-primary-dark); box-shadow: var(--shadow-md); }
-.btn-outline{
-  background: var(--bg-surface);
-  color: var(--text-primary);
-  border-color: var(--border-color);
-}
-.btn-outline:hover{ border-color: var(--color-primary); color: var(--color-primary); }
-.btn:disabled{ opacity:.4; cursor:not-allowed; transform:none !important; }
-
-.home-grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-  margin-top: 12px;
-}
-.materi-card{
-  display:block;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  transition: transform .15s ease, box-shadow .15s ease, border-color .15s;
-}
-.materi-card:hover{
-  text-decoration:none;
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--color-primary);
-}
-.materi-card .cat{
-  display:inline-block;
-  font-size:.72rem; font-weight:700;
-  text-transform:uppercase; letter-spacing:.04em;
-  color: var(--color-primary);
-  background: var(--color-primary-light);
-  padding: 3px 9px;
-  border-radius: 999px;
-  margin-bottom: 10px;
-}
-.materi-card h3{
-  margin: 0 0 6px;
-  font-size: 1.05rem;
-  color: var(--text-primary);
-}
-.materi-card p{
-  margin:0;
-  font-size: .87rem;
-  color: var(--text-secondary);
-  line-height:1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow:hidden;
-}
+.btn:hover { text-decoration: none; }
+.btn-primary { background: var(--primary); color: #fff; box-shadow: var(--shadow-sm); }
+.btn-primary:hover { background: var(--primary-dark); box-shadow: var(--shadow-md); }
+.btn-outline { background: var(--bg-surface); color: var(--text-1); border-color: var(--border); }
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
 
 /* ===== BREADCRUMB ===== */
-.breadcrumb{
-  font-size: .85rem;
-  color: var(--text-muted);
-  margin-bottom: 18px;
-}
-.breadcrumb a{ color: var(--text-secondary); }
-.breadcrumb .sep{ margin: 0 6px; }
-.breadcrumb .current{ color: var(--color-primary); font-weight:600; }
+.breadcrumb { font-size: .84rem; color: var(--text-3); margin-bottom: 18px; display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+.breadcrumb a { color: var(--text-2); }
+.breadcrumb a:hover { color: var(--primary); }
+.breadcrumb .sep { color: var(--text-3); }
+.breadcrumb .current { color: var(--primary); font-weight: 600; }
 
 /* ===== MATERI LAYOUT ===== */
-.materi-layout{
-  display:flex; gap: 32px;
-  max-width: 1200px;
-  margin: 0 auto;
-  align-items:flex-start;
-}
-.materi-article{
-  flex:1; min-width:0;
+.materi-layout { display: flex; gap: 32px; max-width: 1200px; margin: 0 auto; align-items: flex-start; }
+.materi-article {
+  flex: 1; min-width: 0;
   background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
   padding: 8px 36px 36px;
-  position: relative;
-  overflow:hidden;
+  position: relative; overflow: hidden;
 }
-@media (max-width: 640px){
-  .materi-article{ padding: 8px 18px 26px; border-radius: var(--radius-md); }
-}
+@media (max-width: 640px) { .materi-article { padding: 8px 18px 26px; border-radius: var(--r-md); } }
 
-.reading-progress-wrap{
-  position: sticky;
-  top:0;
-  height:4px;
-  background: var(--border-color);
-  margin: 0 -36px 26px;
-}
-@media (max-width: 640px){ .reading-progress-wrap{ margin: 0 -18px 20px; } }
-.reading-progress-bar{
-  height:100%; width:0%;
-  background: var(--color-primary);
-  transition: width .1s linear;
-}
+.reading-progress-wrap { position: sticky; top: 0; height: 4px; background: var(--border); margin: 0 -36px 26px; }
+@media (max-width: 640px) { .reading-progress-wrap { margin: 0 -18px 20px; } }
+.reading-progress-bar { height: 100%; width: 0%; background: var(--primary); transition: width .1s linear; }
 
-.materi-header{ margin-bottom: 22px; }
-.materi-kategori{
-  display:inline-block;
-  font-size:.74rem; font-weight:700;
-  text-transform:uppercase; letter-spacing:.05em;
-  color: var(--color-primary);
-  background: var(--color-primary-light);
-  padding: 4px 10px;
-  border-radius: 999px;
-  margin-bottom: 10px;
+.materi-header { margin-bottom: 22px; }
+.materi-breadcrumb-tags { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+.materi-tag {
+  display: inline-block; font-size: .72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em;
+  padding: 3px 10px; border-radius: 999px;
+  cursor: pointer;
 }
-.materi-header h1{
-  margin: 0;
-  font-size: clamp(1.4rem, 3vw, 1.9rem);
-  font-weight: 800;
-}
+.materi-tag.cat { color: var(--primary); background: var(--primary-light); }
+.materi-tag.cat:hover { background: var(--primary); color: #fff; text-decoration: none; }
+.materi-tag.topic { color: var(--text-2); background: var(--bg-surface-2); border: 1px solid var(--border); }
+.materi-tag.topic:hover { border-color: var(--primary); color: var(--primary); text-decoration: none; }
+.materi-tag-sep { color: var(--text-3); font-size: .8rem; }
 
-.materi-nav-buttons{
-  display:flex; justify-content:space-between; gap:10px;
-  margin-top: 36px;
-  padding-top: 22px;
-  border-top: 1px solid var(--border-color);
+.materi-header h1 { margin: 0; font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; }
+
+.materi-nav-buttons {
+  display: flex; justify-content: space-between; gap: 10px;
+  margin-top: 36px; padding-top: 22px;
+  border-top: 1px solid var(--border);
 }
-@media (max-width:560px){
-  .materi-nav-buttons{ flex-direction:column; }
-  .materi-nav-buttons .btn{ width:100%; }
-}
+@media (max-width: 560px) { .materi-nav-buttons { flex-direction: column; } .materi-nav-buttons .btn { width: 100%; } }
 
 /* ===== TOC ===== */
-.toc-panel{
-  width: 230px;
-  flex-shrink:0;
-  position: sticky;
-  top: calc(var(--navbar-height) + 24px);
-}
-.toc-title{
-  font-size:.78rem; font-weight:700;
-  text-transform:uppercase; letter-spacing:.05em;
-  color: var(--text-muted);
-  margin-bottom: 10px;
-}
-.toc-list{ display:flex; flex-direction:column; gap:6px; }
-.toc-list a{
-  display:block;
-  font-size: .86rem;
-  color: var(--text-secondary);
-  padding: 4px 0 4px 10px;
-  border-left: 2px solid var(--border-color);
-}
-.toc-list a:hover{ color: var(--color-primary); text-decoration:none; }
-.toc-list a.h3{ padding-left: 20px; font-size:.82rem; }
-.toc-list a.active{ color: var(--color-primary); border-left-color: var(--color-primary); font-weight:600; }
-
-@media (max-width: 1100px){
-  .toc-panel{ display:none; }
-}
+.toc-panel { width: 220px; flex-shrink: 0; position: sticky; top: calc(var(--nav-h) + 24px); }
+.toc-title { font-size: .76rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-3); margin-bottom: 10px; }
+.toc-list { display: flex; flex-direction: column; gap: 4px; }
+.toc-list a { display: block; font-size: .85rem; color: var(--text-2); padding: 4px 0 4px 10px; border-left: 2px solid var(--border); }
+.toc-list a:hover { color: var(--primary); text-decoration: none; }
+.toc-list a.h3 { padding-left: 20px; font-size: .8rem; }
+.toc-list a.active { color: var(--primary); border-left-color: var(--primary); font-weight: 600; }
+@media (max-width: 1100px) { .toc-panel { display: none; } }
 
 /* ===== MARKDOWN BODY ===== */
-.markdown-body{
-  line-height: 1.75;
-  font-size: 1rem;
-  color: var(--text-primary);
-}
-.markdown-body h2{
-  font-size: 1.35rem;
-  margin: 34px 0 14px;
-  font-weight:700;
-  scroll-margin-top: 90px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-color);
-}
-.markdown-body h3{
-  font-size: 1.12rem;
-  margin: 26px 0 10px;
-  font-weight:700;
-  scroll-margin-top: 90px;
-}
-.markdown-body h4{ font-size: 1rem; margin: 20px 0 8px; font-weight:700; }
-.markdown-body p{ margin: 0 0 16px; color: var(--text-primary); }
-.markdown-body ul, .markdown-body ol{ margin: 0 0 16px; padding-left: 22px; }
-.markdown-body li{ margin-bottom: 6px; }
-.markdown-body strong{ font-weight:700; }
-.markdown-body blockquote{
-  margin: 0 0 16px;
-  padding: 12px 18px;
-  border-left: 4px solid var(--color-primary);
-  background: var(--color-primary-light);
-  border-radius: 0 8px 8px 0;
-  color: var(--text-secondary);
-}
-.markdown-body blockquote p:last-child{ margin-bottom:0; }
+.markdown-body { line-height: 1.75; font-size: 1rem; color: var(--text-1); }
+.markdown-body h2 { font-size: 1.35rem; margin: 34px 0 14px; font-weight: 700; scroll-margin-top: 90px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.markdown-body h3 { font-size: 1.12rem; margin: 26px 0 10px; font-weight: 700; scroll-margin-top: 90px; }
+.markdown-body h4 { font-size: 1rem; margin: 20px 0 8px; font-weight: 700; }
+.markdown-body p { margin: 0 0 16px; }
+.markdown-body ul, .markdown-body ol { margin: 0 0 16px; padding-left: 22px; }
+.markdown-body li { margin-bottom: 6px; }
+.markdown-body strong { font-weight: 700; }
+.markdown-body blockquote { margin: 0 0 16px; padding: 12px 18px; border-left: 4px solid var(--primary); background: var(--primary-light); border-radius: 0 8px 8px 0; color: var(--text-2); }
+.markdown-body blockquote p:last-child { margin-bottom: 0; }
+.markdown-body table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: .92rem; display: block; overflow-x: auto; white-space: nowrap; }
+.markdown-body th, .markdown-body td { border: 1px solid var(--border); padding: 9px 13px; text-align: left; }
+.markdown-body th { background: var(--bg-surface-2); font-weight: 700; }
+.markdown-body tr:nth-child(even) td { background: var(--bg-surface-2); }
+.markdown-body code { font-family: var(--mono); background: var(--code-bg); padding: 2px 6px; border-radius: 5px; font-size: .88em; }
+.markdown-body pre { background: var(--code-bg); border-radius: var(--r-md); padding: 16px 18px; overflow-x: auto; margin: 0 0 18px; border: 1px solid var(--border); }
+.markdown-body pre code { background: none; padding: 0; font-size: .87rem; line-height: 1.6; }
+.markdown-body img { border-radius: var(--r-md); margin: 10px 0; }
+.markdown-body hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
 
-.markdown-body table{
-  width:100%;
-  border-collapse: collapse;
-  margin: 0 0 20px;
-  font-size: .92rem;
-  display:block;
-  overflow-x:auto;
-  white-space:nowrap;
-}
-.markdown-body th, .markdown-body td{
-  border: 1px solid var(--border-color);
-  padding: 9px 13px;
-  text-align:left;
-}
-.markdown-body th{
-  background: var(--bg-surface-2);
-  font-weight:700;
-}
-.markdown-body tr:nth-child(even) td{ background: var(--bg-surface-2); }
+/* ===== KATEX ===== */
+.formula-block { position: relative; margin: 18px 0 24px; padding: 18px 50px 18px 18px; background: var(--bg-surface-2); border: 1px solid var(--border); border-radius: var(--r-md); overflow-x: auto; }
+.formula-block .katex-display { margin: 0; }
+.copy-formula-btn { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 7px; border: 1px solid var(--border); background: var(--bg-surface); color: var(--text-3); cursor: pointer; transition: color .15s, border-color .15s; }
+.copy-formula-btn:hover { color: var(--primary); border-color: var(--primary); }
+.copy-toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%) translateY(10px); background: var(--text-1); color: var(--bg-surface); padding: 9px 18px; border-radius: 999px; font-size: .85rem; box-shadow: var(--shadow-lg); z-index: 200; opacity: 0; transition: opacity .2s, transform .2s; border: none; }
+.copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-.markdown-body code{
-  font-family: var(--font-mono);
-  background: var(--code-bg);
-  padding: 2px 6px;
-  border-radius: 5px;
-  font-size: .88em;
-}
-.markdown-body pre{
-  background: var(--code-bg);
-  border-radius: var(--radius-md);
-  padding: 16px 18px;
-  overflow-x: auto;
-  margin: 0 0 18px;
-  border: 1px solid var(--border-color);
-}
-.markdown-body pre code{
-  background: none;
-  padding:0;
-  font-size: .87rem;
-  line-height:1.6;
-}
-.markdown-body img{ border-radius: var(--radius-md); margin: 10px 0; }
-.markdown-body hr{ border:none; border-top:1px solid var(--border-color); margin: 28px 0; }
-
-/* ===== KATEX BLOCK + COPY BUTTON ===== */
-.formula-block{
-  position: relative;
-  margin: 18px 0 24px;
-  padding: 18px 50px 18px 18px;
-  background: var(--bg-surface-2);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  overflow-x:auto;
-}
-.formula-block .katex-display{ margin:0; }
-.copy-formula-btn{
-  position:absolute;
-  top:10px; right:10px;
-  width: 30px; height:30px;
-  display:flex; align-items:center; justify-content:center;
-  border-radius: 7px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-surface);
-  color: var(--text-muted);
-  cursor:pointer;
-  transition: color .15s, border-color .15s;
-}
-.copy-formula-btn:hover{ color: var(--color-primary); border-color: var(--color-primary); }
-
-.copy-toast{
-  position: fixed;
-  bottom: 26px; left:50%;
-  transform: translateX(-50%) translateY(10px);
-  background: var(--text-primary);
-  color: var(--bg-surface);
-  padding: 9px 18px;
-  border-radius: 999px;
-  font-size: .85rem;
-  box-shadow: var(--shadow-lg);
-  z-index: 200;
-  opacity:0;
-  transition: opacity .2s, transform .2s;
-  border:none;
-}
-.copy-toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
-
-/* ===== EMPTY STATE / 404 ===== */
-.empty-state{
-  text-align:center;
-  padding: 80px 20px;
-  max-width: 480px;
-  margin: 0 auto;
-}
-.empty-state h2{ margin-bottom: 10px; }
-.empty-state p{ color: var(--text-secondary); margin-bottom: 22px; }
+/* ===== EMPTY STATE ===== */
+.empty-state { text-align: center; padding: 80px 20px; max-width: 480px; margin: 0 auto; }
+.empty-state h2 { margin-bottom: 10px; }
+.empty-state p { color: var(--text-2); margin-bottom: 22px; }
 
 /* ===== SCROLLBAR ===== */
-.sidebar::-webkit-scrollbar{ width:6px; }
-.sidebar::-webkit-scrollbar-thumb{ background: var(--border-color); border-radius:3px; }
+.sidebar::-webkit-scrollbar { width: 5px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
-/* ===== UTIL ===== */
-[hidden]{ display:none !important; }
+/* ===== VIEW TRANSITIONS ===== */
+.view { animation: fadeIn .18s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 </style>
 </head>
 <body>
 
-<!-- ===== TOP NAVBAR ===== -->
 <header class="navbar">
-  <button id="sidebarToggle" class="icon-btn" aria-label="Buka menu materi" title="Menu">
+  <button id="sidebarToggle" class="icon-btn" aria-label="Menu">
     <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
   </button>
-
   <a href="#/" class="brand">
     <span class="brand-logo">Σ</span>
-    <span class="brand-text">Statistika<span class="brand-accent">Ku</span></span>
+    <span>Statistika<span class="brand-accent">Ku</span></span>
   </a>
-
   <div class="navbar-search">
     <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-    <input type="text" id="searchInput" placeholder="Cari materi... (judul / isi)" autocomplete="off">
+    <input type="text" id="searchInput" placeholder="Cari materi..." autocomplete="off">
   </div>
-
-  <button id="themeToggle" class="icon-btn" aria-label="Ganti tema" title="Mode gelap/terang">
+  <button id="themeToggle" class="icon-btn" aria-label="Ganti tema">
     <svg id="themeIcon" viewBox="0 0 24 24" width="20" height="20"><path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="currentColor"/></svg>
   </button>
 </header>
 
 <div class="app-shell">
 
-  <!-- ===== SIDEBAR ===== -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-inner">
       <div class="sidebar-search-mobile">
         <input type="text" id="searchInputMobile" placeholder="Cari materi...">
       </div>
-      <nav id="materiList" class="materi-list" aria-label="Daftar Materi">
-        <!-- Diisi otomatis oleh script -->
-      </nav>
+      <nav id="sidebarNav" aria-label="Navigasi Materi"></nav>
       <p class="sidebar-empty" id="searchEmpty" hidden>Materi tidak ditemukan.</p>
     </div>
   </aside>
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <!-- ===== MAIN CONTENT ===== -->
   <main class="content" id="mainContent">
 
-    <!-- ---- HOME / LANDING ---- -->
+    <!-- HOME -->
     <section id="view-home" class="view view-home">
       <div class="hero">
         <div class="hero-logo">Σ</div>
         <h1>Selamat Datang di <span class="brand-accent">StatistikaKu</span></h1>
-        <p class="hero-subtitle">
-          Platform belajar statistika gratis — rumus, contoh soal, dan penjelasan
-          lengkap mulai dari statistika deskriptif hingga regresi, langsung di browser.
-        </p>
+        <p class="hero-subtitle">Platform belajar statistika gratis — materi lengkap dengan rumus, contoh soal, dan penjelasan dari dasar hingga mahir.</p>
         <div class="hero-actions">
-          <a href="#/materi" class="btn btn-primary" id="btnMulaiBelajar">Mulai Belajar →</a>
+          <a href="#/materi" class="btn btn-primary">Mulai Belajar →</a>
         </div>
       </div>
-
-      <div class="home-grid" id="homeGrid">
-        <!-- kartu materi diisi otomatis -->
-      </div>
+      <div id="homeCats" class="home-cats"></div>
     </section>
 
-    <!-- ---- MATERI VIEW ---- -->
-    <section id="view-materi" class="view view-materi" hidden>
+    <!-- KATEGORI OVERVIEW -->
+    <section id="view-kategori" class="view view-kategori" hidden>
+      <nav class="breadcrumb" id="katBreadcrumb"></nav>
+      <div id="katContent"></div>
+    </section>
 
-      <nav class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb"></nav>
+    <!-- TOPIC OVERVIEW -->
+    <section id="view-topic" class="view view-topic" hidden>
+      <nav class="breadcrumb" id="topicBreadcrumb"></nav>
+      <div id="topicContent"></div>
+    </section>
 
+    <!-- SUB MATERI -->
+    <section id="view-materi" class="view" hidden>
+      <nav class="breadcrumb" id="materiBreadcrumb"></nav>
       <div class="materi-layout">
         <article class="materi-article">
           <div class="reading-progress-wrap">
             <div class="reading-progress-bar" id="readingProgress"></div>
           </div>
-
           <header class="materi-header">
-            <span class="materi-kategori" id="materiKategori"></span>
+            <div class="materi-breadcrumb-tags" id="materiTags"></div>
             <h1 id="materiJudul"></h1>
           </header>
-
           <div id="materiBody" class="markdown-body"></div>
-
           <div class="materi-nav-buttons">
-            <button id="btnPrev" class="btn btn-outline" disabled>← Materi Sebelumnya</button>
-            <button id="btnNext" class="btn btn-outline" disabled>Materi Berikutnya →</button>
+            <button id="btnPrev" class="btn btn-outline" disabled>← Sebelumnya</button>
+            <button id="btnNext" class="btn btn-outline" disabled>Berikutnya →</button>
           </div>
         </article>
-
         <aside class="toc-panel" id="tocPanel">
           <div class="toc-title">Daftar Isi</div>
           <nav id="tocList" class="toc-list"></nav>
@@ -690,10 +600,10 @@ img{ max-width:100%; }
       </div>
     </section>
 
-    <!-- ---- NOT FOUND ---- -->
+    <!-- NOT FOUND -->
     <section id="view-notfound" class="view" hidden>
       <div class="empty-state">
-        <h2>404 — Materi tidak ditemukan</h2>
+        <h2>404 — Halaman tidak ditemukan</h2>
         <p>Materi yang kamu cari tidak ada atau sudah dipindahkan.</p>
         <a href="#/" class="btn btn-primary">Kembali ke Beranda</a>
       </div>
@@ -704,108 +614,138 @@ img{ max-width:100%; }
 
 <button id="copyToast" class="copy-toast" hidden>Rumus disalin!</button>
 
-<!-- Manifest daftar materi (satu-satunya bagian yang perlu diedit saat menambah materi baru).
-     File fisik tiap materi tetap harus ada di folder /materi karena dimuat
-     secara dinamis saat runtime oleh loadAllMateri() di bawah. -->
+<!-- =====================================================================
+     DATA STRUKTUR MATERI
+     Format: KATEGORI > MATERI UTAMA (topic) > SUB MATERI
+     Setiap sub materi dimuat dari file JS terpisah di folder /materi/
+     ===================================================================== -->
 <script>
-const MATERI_LIST = [
-  "statistik_deskriptif",
-  "distribusi_normal",
-  "korelasi",
-  "regresi"
+/**
+ * STRUKTUR DATA MATERI
+ * 
+ * kategori: kelompok besar topik
+ * topics: materi utama di dalam kategori
+ *   - id: unik, dipakai di URL
+ *   - judul: nama materi utama
+ *   - icon: emoji/ikon
+ *   - deskripsi: pengantar singkat
+ *   - subs: daftar sub materi
+ *     - id: unik, sesuai nama file JS di /materi/
+ *     - judul: nama sub materi
+ *     - deskripsi: ringkasan singkat
+ */
+window.KURIKULUM = [
+  {
+    id: "deskriptif",
+    label: "Statistika Deskriptif",
+    icon: "📊",
+    deskripsi: "Teknik meringkas dan menyajikan data secara informatif tanpa generalisasi ke populasi.",
+    topics: [
+      {
+        id: "ukuran_pemusatan",
+        judul: "Ukuran Pemusatan",
+        icon: "⚖️",
+        deskripsi: "Cara menggambarkan nilai tengah atau nilai yang mewakili sekumpulan data.",
+        subs: [
+          { id: "statistik_deskriptif", judul: "Mean, Median & Modus", deskripsi: "Pengertian, rumus, dan perbandingan ketiga ukuran pusat." },
+          { id: "distribusi_normal",    judul: "Distribusi Normal",    deskripsi: "Bentuk distribusi simetris yang paling umum dalam statistika." },
+        ]
+      },
+      {
+        id: "korelasi_regresi",
+        judul: "Korelasi & Regresi",
+        icon: "📈",
+        deskripsi: "Mengukur dan memodelkan hubungan antar variabel.",
+        subs: [
+          { id: "korelasi", judul: "Korelasi",       deskripsi: "Kekuatan dan arah hubungan linier antara dua variabel." },
+          { id: "regresi",  judul: "Regresi Linier", deskripsi: "Memprediksi nilai variabel berdasarkan variabel lain." },
+        ]
+      }
+    ]
+  },
+  {
+    id: "inferensial",
+    label: "Statistika Inferensial",
+    icon: "🔍",
+    deskripsi: "Teknik menarik kesimpulan tentang populasi berdasarkan sampel data.",
+    topics: [
+      {
+        id: "uji_hipotesis",
+        judul: "Uji Hipotesis",
+        icon: "🧪",
+        deskripsi: "Prosedur formal untuk menguji klaim atau asumsi tentang populasi.",
+        subs: [
+          { id: "uji_t",   judul: "Uji-t",      deskripsi: "Membandingkan rata-rata satu atau dua kelompok sampel." },
+          { id: "uji_chi", judul: "Uji Chi-Kuadrat", deskripsi: "Menguji kecocokan distribusi dan independensi dua variabel kategorik." },
+        ]
+      }
+    ]
+  }
 ];
-window.MATERI_LIST = MATERI_LIST;
 </script>
 
 <script>
-/**
- * ======================================================================
- * StatistikaKu — Aplikasi (Router + Logika Utama)
- * Semua HTML, CSS, dan JS digabung dalam satu file index.html agar
- * lebih sederhana dan mengurangi risiko race-condition antar file.
- * Materi tetap dipisah di folder /materi agar mudah ditambah.
- * ======================================================================
- */
 (() => {
   "use strict";
 
-  // ===================================================
-  // ROUTER SEDERHANA BERBASIS HASH (#)
-  // ===================================================
+  // =====================================================================
+  // ROUTER
+  // =====================================================================
   const Router = (() => {
     let routes = [];
-    let notFoundHandler = () => {};
-
-    function on(pattern, handler) {
-      routes.push({ pattern, handler });
-      return Router;
-    }
-    function notFound(handler) {
-      notFoundHandler = handler;
-      return Router;
-    }
-    function getCurrentPath() {
-      const hash = window.location.hash || "#/";
-      let path = hash.slice(1);
-      if (path === "") path = "/";
-      return path;
-    }
-    function resolve() {
-      const path = getCurrentPath();
-      for (const route of routes) {
-        const match = path.match(route.pattern);
-        if (match) {
-          route.handler(match);
-          return;
-        }
-      }
-      notFoundHandler();
-    }
-    function navigate(path) {
-      window.location.hash = path;
-    }
-    function init() {
-      window.addEventListener("hashchange", resolve);
-    }
-
-    return { on, notFound, navigate, resolve, getCurrentPath, init };
+    let notFoundCb = () => {};
+    const on = (pat, fn) => { routes.push({ pat, fn }); return Router; };
+    const notFound = (fn) => { notFoundCb = fn; return Router; };
+    const path = () => { const h = window.location.hash || "#/"; let p = h.slice(1); return p || "/"; };
+    const resolve = () => {
+      const p = path();
+      for (const r of routes) { const m = p.match(r.pat); if (m) { r.fn(m); return; } }
+      notFoundCb();
+    };
+    const go = (p) => { window.location.hash = p; };
+    window.addEventListener("hashchange", resolve);
+    return { on, notFound, resolve, go, path };
   })();
-  Router.init();
 
-  // ===================================================
+  // =====================================================================
   // STATE
-  // ===================================================
+  // =====================================================================
   const state = {
-    materiData: {},     // { id: { id, judul, kategori, isi } }
-    materiOrder: [],    // urutan id sesuai MATERI_LIST
+    subData: {},       // id -> { id, judul, kategoriId, topicId, isi }
+    subOrder: [],      // flat ordered list of sub materi ids
+    topicMap: {},      // topicId -> topic object
+    katMap: {},        // katId -> kategori object
     loaded: false,
     currentId: null,
+    sidebarOpenKats: new Set(),
+    sidebarOpenTopics: new Set(),
   };
 
-  // ===================================================
-  // DOM REFS
-  // ===================================================
-  const $ = (sel) => document.querySelector(sel);
-  const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
 
   const refs = {
     sidebar: $("#sidebar"),
     sidebarToggle: $("#sidebarToggle"),
     sidebarOverlay: $("#sidebarOverlay"),
-    materiList: $("#materiList"),
+    sidebarNav: $("#sidebarNav"),
     searchEmpty: $("#searchEmpty"),
     searchInput: $("#searchInput"),
     searchInputMobile: $("#searchInputMobile"),
     themeToggle: $("#themeToggle"),
     themeIcon: $("#themeIcon"),
-
+    homeCats: $("#homeCats"),
     viewHome: $("#view-home"),
+    viewKategori: $("#view-kategori"),
+    viewTopic: $("#view-topic"),
     viewMateri: $("#view-materi"),
     viewNotFound: $("#view-notfound"),
-    homeGrid: $("#homeGrid"),
-
-    breadcrumb: $("#breadcrumb"),
-    materiKategori: $("#materiKategori"),
+    katBreadcrumb: $("#katBreadcrumb"),
+    katContent: $("#katContent"),
+    topicBreadcrumb: $("#topicBreadcrumb"),
+    topicContent: $("#topicContent"),
+    materiBreadcrumb: $("#materiBreadcrumb"),
+    materiTags: $("#materiTags"),
     materiJudul: $("#materiJudul"),
     materiBody: $("#materiBody"),
     btnPrev: $("#btnPrev"),
@@ -816,540 +756,646 @@ window.MATERI_LIST = MATERI_LIST;
     copyToast: $("#copyToast"),
   };
 
-  // ===================================================
-  // MARKDOWN-IT + LATEX (diinisialisasi di dalam init(),
-  // SETELAH library CDN dipastikan siap — lihat waitForLibraries)
-  // ===================================================
+  // =====================================================================
+  // BUILD INDEX dari KURIKULUM
+  // =====================================================================
+  const KUR = window.KURIKULUM || [];
+  KUR.forEach((kat) => {
+    state.katMap[kat.id] = kat;
+    kat.topics.forEach((topic) => {
+      topic.katId = kat.id;
+      state.topicMap[topic.id] = topic;
+      topic.subs.forEach((sub) => {
+        sub.katId = kat.id;
+        sub.topicId = topic.id;
+        state.subOrder.push(sub.id);
+      });
+    });
+  });
+
+  // =====================================================================
+  // MARKDOWN + KATEX
+  // =====================================================================
   let md = null;
   let mathStore = [];
 
   function stashMath(raw) {
-    let result = raw;
-
-    // Blok $$ ... $$ (multiline)
-    result = result.replace(/\$\$([\s\S]+?)\$\$/g, (_, expr) => {
-      const idx = mathStore.push({ type: "block", expr: expr.trim() }) - 1;
-      return `\n\n@@MATH_BLOCK_${idx}@@\n\n`;
+    let r = raw;
+    r = r.replace(/\$\$([\s\S]+?)\$\$/g, (_, e) => {
+      const i = mathStore.push({ type: "block", expr: e.trim() }) - 1;
+      return `\n\n@@MATH_B_${i}@@\n\n`;
     });
-
-    // Inline $ ... $ (tidak menangkap $$ karena sudah diganti di atas)
-    result = result.replace(/\$([^\$\n]+?)\$/g, (_, expr) => {
-      const idx = mathStore.push({ type: "inline", expr: expr.trim() }) - 1;
-      return `@@MATH_INLINE_${idx}@@`;
+    r = r.replace(/\$([^\$\n]+?)\$/g, (_, e) => {
+      const i = mathStore.push({ type: "inline", expr: e.trim() }) - 1;
+      return `@@MATH_I_${i}@@`;
     });
-
-    return result;
+    return r;
   }
 
-  function renderMathPlaceholders(html) {
-    html = html.replace(/@@MATH_BLOCK_(\d+)@@/g, (_, i) => {
-      const item = mathStore[parseInt(i, 10)];
-      if (!item) return "";
+  function renderMath(html) {
+    html = html.replace(/@@MATH_B_(\d+)@@/g, (_, i) => {
+      const it = mathStore[+i];
       let rendered = "";
-      try {
-        rendered = window.katex.renderToString(item.expr, { displayMode: true, throwOnError: false });
-      } catch (e) {
-        rendered = `<span class="katex-error">${escapeHtml(item.expr)}</span>`;
-      }
-      return `<div class="formula-block" data-formula="${escapeAttr(item.expr)}">
-        <button class="copy-formula-btn" title="Salin rumus" aria-label="Salin rumus">
+      try { rendered = window.katex.renderToString(it.expr, { displayMode: true, throwOnError: false }); }
+      catch (e) { rendered = escH(it.expr); }
+      return `<div class="formula-block" data-formula="${escA(it.expr)}">
+        <button class="copy-formula-btn" title="Salin rumus">
           <svg viewBox="0 0 24 24" width="15" height="15"><rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M5 15V5a2 2 0 0 1 2-2h10" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-        </button>
-        ${rendered}
-      </div>`;
+        </button>${rendered}</div>`;
     });
-
-    html = html.replace(/@@MATH_INLINE_(\d+)@@/g, (_, i) => {
-      const item = mathStore[parseInt(i, 10)];
-      if (!item) return "";
-      try {
-        return window.katex.renderToString(item.expr, { displayMode: false, throwOnError: false });
-      } catch (e) {
-        return `<span class="katex-error">${escapeHtml(item.expr)}</span>`;
-      }
+    html = html.replace(/@@MATH_I_(\d+)@@/g, (_, i) => {
+      const it = mathStore[+i];
+      try { return window.katex.renderToString(it.expr, { displayMode: false, throwOnError: false }); }
+      catch (e) { return escH(it.expr); }
     });
-
     return html;
   }
 
-  function escapeHtml(str) {
-    return str.replace(/[&<>"']/g, (c) => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-    }[c]));
-  }
-  function escapeAttr(str) {
-    return str.replace(/"/g, "&quot;");
-  }
-
-  function renderMarkdownWithMath(rawText) {
+  function renderMD(raw) {
     mathStore = [];
-    const stashed = stashMath(rawText);
-    let html = md.render(stashed);
-    html = renderMathPlaceholders(html);
-    return html;
+    return renderMath(md.render(stashMath(raw)));
   }
 
-  // ===================================================
-  // LOADING MATERI (dinamis via <script> injection)
-  // ===================================================
+  function escH(s) { return s.replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c])); }
+  function escA(s) { return s.replace(/"/g, "&quot;"); }
+
+  // =====================================================================
+  // LOAD SUB MATERI (dinamis dari file JS)
+  // =====================================================================
   function loadScript(src) {
-    return new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => resolve();
-      script.onerror = () => reject(new Error("Gagal memuat: " + src));
-      document.body.appendChild(script);
+    return new Promise((res, rej) => {
+      const s = document.createElement("script");
+      s.src = src; s.onload = res; s.onerror = () => rej(new Error("Gagal: " + src));
+      document.body.appendChild(s);
     });
   }
 
-  async function loadAllMateri() {
-    const list = window.MATERI_LIST || [];
-    state.materiOrder = list.slice();
-
-    for (const id of list) {
-      try {
-        // Setiap file materi mendefinisikan ulang window.MATERI,
-        // jadi kita tangkap nilainya tepat setelah script dimuat.
-        await loadScript(`materi/${id}.js`);
-        if (window.MATERI && window.MATERI.id) {
-          state.materiData[window.MATERI.id] = {
-            id: window.MATERI.id,
-            judul: window.MATERI.judul || window.MATERI.id,
-            kategori: window.MATERI.kategori || "Umum",
-            isi: window.MATERI.isi || "",
-          };
+  async function loadAll() {
+    for (const kat of KUR) {
+      for (const topic of kat.topics) {
+        for (const sub of topic.subs) {
+          try {
+            await loadScript(`materi/${sub.id}.js`);
+            if (window.MATERI && window.MATERI.id) {
+              state.subData[window.MATERI.id] = {
+                id: window.MATERI.id,
+                judul: window.MATERI.judul || window.MATERI.id,
+                isi: window.MATERI.isi || "",
+                katId: sub.katId,
+                topicId: sub.topicId,
+              };
+            }
+          } catch (e) {
+            console.warn(`[StatistikaKu] Gagal memuat: ${sub.id}`, e);
+            // Buat placeholder agar halaman tetap tampil
+            state.subData[sub.id] = {
+              id: sub.id,
+              judul: sub.judul,
+              isi: `## ${sub.judul}\n\n_Konten sub materi ini belum tersedia atau gagal dimuat._`,
+              katId: sub.katId,
+              topicId: sub.topicId,
+            };
+          }
         }
-      } catch (err) {
-        console.error(`[StatistikaKu] Gagal memuat materi "${id}":`, err);
       }
     }
     state.loaded = true;
   }
 
-  // ===================================================
-  // SIDEBAR RENDER
-  // ===================================================
-  function renderSidebar(filterText = "") {
-    const filter = filterText.trim().toLowerCase();
-    refs.materiList.innerHTML = "";
-
-    const grouped = {};
-    state.materiOrder.forEach((id) => {
-      const m = state.materiData[id];
-      if (!m) return;
-
-      const matchSearch =
-        !filter ||
-        m.judul.toLowerCase().includes(filter) ||
-        m.isi.toLowerCase().includes(filter) ||
-        m.kategori.toLowerCase().includes(filter);
-
-      if (!matchSearch) return;
-
-      if (!grouped[m.kategori]) grouped[m.kategori] = [];
-      grouped[m.kategori].push(m);
-    });
-
-    const categories = Object.keys(grouped);
-
-    if (categories.length === 0) {
-      refs.searchEmpty.hidden = false;
-      return;
-    }
-    refs.searchEmpty.hidden = true;
-
-    categories.forEach((cat) => {
-      const label = document.createElement("div");
-      label.className = "materi-group-label";
-      label.textContent = cat;
-      refs.materiList.appendChild(label);
-
-      grouped[cat].forEach((m) => {
-        const link = document.createElement("a");
-        link.href = `#/materi/${m.id}`;
-        link.className = "materi-link" + (state.currentId === m.id ? " active" : "");
-        link.innerHTML = `<span class="dot"></span><span>${escapeHtml(m.judul)}</span>`;
-        link.addEventListener("click", () => closeMobileSidebar());
-        refs.materiList.appendChild(link);
-      });
-    });
-  }
-
-  function renderHomeGrid() {
-    refs.homeGrid.innerHTML = "";
-    state.materiOrder.forEach((id) => {
-      const m = state.materiData[id];
-      if (!m) return;
-      const plainText = m.isi.replace(/[#*`$>\-]/g, "").replace(/\n+/g, " ").trim();
-      const card = document.createElement("a");
-      card.href = `#/materi/${m.id}`;
-      card.className = "materi-card";
-      card.innerHTML = `
-        <span class="cat">${escapeHtml(m.kategori)}</span>
-        <h3>${escapeHtml(m.judul)}</h3>
-        <p>${escapeHtml(plainText.slice(0, 110))}...</p>
-      `;
-      refs.homeGrid.appendChild(card);
-    });
-  }
-
-  // ===================================================
-  // VIEW SWITCHING
-  // ===================================================
-  function showView(viewName) {
-    refs.viewHome.hidden = viewName !== "home";
-    refs.viewMateri.hidden = viewName !== "materi";
-    refs.viewNotFound.hidden = viewName !== "notfound";
+  // =====================================================================
+  // VIEWS
+  // =====================================================================
+  function showView(name) {
+    refs.viewHome.hidden      = name !== "home";
+    refs.viewKategori.hidden  = name !== "kategori";
+    refs.viewTopic.hidden     = name !== "topic";
+    refs.viewMateri.hidden    = name !== "materi";
+    refs.viewNotFound.hidden  = name !== "notfound";
     window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
   }
 
-  // ===================================================
-  // RENDER HALAMAN MATERI
-  // ===================================================
-  function renderMateriPage(id) {
-    const m = state.materiData[id];
-    if (!m) {
-      showView("notfound");
-      state.currentId = null;
-      renderSidebar(refs.searchInput.value);
-      return;
-    }
+  // =====================================================================
+  // HOME
+  // =====================================================================
+  function renderHome() {
+    refs.homeCats.innerHTML = "";
+    KUR.forEach((kat) => {
+      const sec = document.createElement("div");
+      sec.className = "home-cat-section";
+      let topicsHTML = kat.topics.map((topic) => {
+        const subCount = topic.subs.length;
+        return `<a href="#/kategori/${kat.id}/topic/${topic.id}" class="topic-card">
+          <div class="topic-card-icon">${topic.icon}</div>
+          <h3>${escH(topic.judul)}</h3>
+          <span class="sub-count">${subCount} sub materi</span>
+        </a>`;
+      }).join("");
+      sec.innerHTML = `
+        <div class="home-cat-title">
+          <a href="#/kategori/${kat.id}" class="cat-badge">${escH(kat.label)}</a>
+          ${escH(kat.label)}
+        </div>
+        <div class="home-topic-grid">${topicsHTML}</div>`;
+      refs.homeCats.appendChild(sec);
+    });
+  }
+
+  // =====================================================================
+  // KATEGORI PAGE
+  // =====================================================================
+  function renderKategoriPage(katId) {
+    const kat = state.katMap[katId];
+    if (!kat) { showView("notfound"); return; }
+    showView("kategori");
+    document.title = `${kat.label} — StatistikaKu`;
+
+    refs.katBreadcrumb.innerHTML = `
+      <a href="#/">Beranda</a><span class="sep">/</span>
+      <span class="current">${escH(kat.label)}</span>`;
+
+    const topicsHTML = kat.topics.map((topic, idx) => {
+      const subsChips = topic.subs.map((sub) =>
+        `<a href="#/materi/${sub.id}" class="kat-sub-chip">
+          <svg viewBox="0 0 24 24" width="11" height="11"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+          ${escH(sub.judul)}
+        </a>`
+      ).join("");
+      return `
+        <a href="#/kategori/${kat.id}/topic/${topic.id}" class="kat-topic-item">
+          <div class="kat-topic-item-header">
+            <div class="kat-topic-num">${idx + 1}</div>
+            <h3>${escH(topic.judul)}</h3>
+          </div>
+          <p class="kat-topic-desc">${escH(topic.deskripsi)}</p>
+          <div class="kat-sub-chips">${subsChips}</div>
+        </a>`;
+    }).join("");
+
+    refs.katContent.innerHTML = `
+      <div class="kat-hero">
+        <div class="kat-hero-icon">${kat.icon}</div>
+        <div class="kat-hero-text">
+          <h1>${escH(kat.label)}</h1>
+          <p>${escH(kat.deskripsi)}</p>
+        </div>
+      </div>
+      <p class="kat-topics-title">Materi Utama dalam Kategori Ini</p>
+      <div class="kat-topic-list">${topicsHTML}</div>`;
+
+    renderSidebar();
+    setSidebarActive(null, null);
+  }
+
+  // =====================================================================
+  // TOPIC (MATERI UTAMA) PAGE
+  // =====================================================================
+  function renderTopicPage(katId, topicId) {
+    const kat = state.katMap[katId];
+    const topic = state.topicMap[topicId];
+    if (!kat || !topic) { showView("notfound"); return; }
+    showView("topic");
+    document.title = `${topic.judul} — StatistikaKu`;
+
+    refs.topicBreadcrumb.innerHTML = `
+      <a href="#/">Beranda</a><span class="sep">/</span>
+      <a href="#/kategori/${kat.id}">${escH(kat.label)}</a><span class="sep">/</span>
+      <span class="current">${escH(topic.judul)}</span>`;
+
+    const subsHTML = topic.subs.map((sub, idx) => {
+      const d = state.subData[sub.id];
+      const preview = d ? d.isi.replace(/[#*`$>\-]/g, "").replace(/\n+/g, " ").trim().slice(0, 80) : sub.deskripsi;
+      return `
+        <a href="#/materi/${sub.id}" class="sub-list-item">
+          <div class="sub-list-num">${idx + 1}</div>
+          <div class="sub-list-text">
+            <h4>${escH(sub.judul)}</h4>
+            <p>${escH(preview)}...</p>
+          </div>
+          <svg class="sub-list-arrow" viewBox="0 0 24 24" width="18" height="18"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </a>`;
+    }).join("");
+
+    refs.topicContent.innerHTML = `
+      <div class="topic-overview-header">
+        <a href="#/kategori/${kat.id}" class="cat-tag">${escH(kat.label)}</a>
+        <h1>${topic.icon} ${escH(topic.judul)}</h1>
+        <p>${escH(topic.deskripsi)}</p>
+      </div>
+      <p class="sub-list-title">Sub Materi (${topic.subs.length} topik)</p>
+      <div class="sub-list">${subsHTML}</div>`;
+
+    renderSidebar();
+    setSidebarActive(null, topicId);
+    state.sidebarOpenKats.add(katId);
+    state.sidebarOpenTopics.add(topicId);
+    renderSidebar();
+  }
+
+  // =====================================================================
+  // SUB MATERI PAGE
+  // =====================================================================
+  function renderSubMateriPage(id) {
+    const m = state.subData[id];
+    if (!m) { showView("notfound"); return; }
+
+    const kat = state.katMap[m.katId];
+    const topic = state.topicMap[m.topicId];
 
     state.currentId = id;
     showView("materi");
+    document.title = `${m.judul} — StatistikaKu`;
 
-    refs.breadcrumb.innerHTML = `
-      <a href="#/">Beranda</a>
-      <span class="sep">/</span>
-      <span>${escapeHtml(m.kategori)}</span>
-      <span class="sep">/</span>
-      <span class="current">${escapeHtml(m.judul)}</span>
-    `;
+    refs.materiBreadcrumb.innerHTML = `
+      <a href="#/">Beranda</a><span class="sep">/</span>
+      <a href="#/kategori/${kat.id}">${escH(kat.label)}</a><span class="sep">/</span>
+      <a href="#/kategori/${kat.id}/topic/${topic.id}">${escH(topic.judul)}</a><span class="sep">/</span>
+      <span class="current">${escH(m.judul)}</span>`;
 
-    refs.materiKategori.textContent = m.kategori;
+    refs.materiTags.innerHTML = `
+      <a href="#/kategori/${kat.id}" class="materi-tag cat">${escH(kat.label)}</a>
+      <span class="materi-tag-sep">›</span>
+      <a href="#/kategori/${kat.id}/topic/${topic.id}" class="materi-tag topic">${escH(topic.judul)}</a>`;
+
     refs.materiJudul.textContent = m.judul;
-    refs.materiBody.innerHTML = renderMarkdownWithMath(m.isi);
+    refs.materiBody.innerHTML = renderMD(m.isi);
 
     if (window.hljs) {
-      refs.materiBody.querySelectorAll("pre code").forEach((block) => {
-        window.hljs.highlightElement(block);
-      });
+      refs.materiBody.querySelectorAll("pre code").forEach((b) => window.hljs.highlightElement(b));
     }
 
     buildTOC();
-    attachCopyFormulaHandlers();
+    attachCopyHandlers();
     setupPrevNext(id);
-    renderSidebar(refs.searchInput.value);
-    updateReadingProgress();
-    document.title = `${m.judul} — StatistikaKu`;
+    updateProgress();
+
+    // Sidebar: buka kategori & topic yang relevan
+    state.sidebarOpenKats.add(m.katId);
+    state.sidebarOpenTopics.add(m.topicId);
+    renderSidebar();
+    setSidebarActive(id, m.topicId);
   }
 
-  // ===================================================
-  // DAFTAR ISI (TOC) OTOMATIS
-  // ===================================================
-  function buildTOC() {
-    const headings = refs.materiBody.querySelectorAll("h2, h3");
-    refs.tocList.innerHTML = "";
+  // =====================================================================
+  // SIDEBAR
+  // =====================================================================
+  function renderSidebar(filter = "") {
+    const q = filter.trim().toLowerCase();
+    refs.sidebarNav.innerHTML = "";
+    let anyVisible = false;
 
-    if (headings.length === 0) {
-      refs.tocPanel.style.display = "none";
-      return;
+    KUR.forEach((kat) => {
+      // Filter check
+      const katMatch = !q || kat.label.toLowerCase().includes(q);
+      const topicsFiltered = kat.topics.map((topic) => {
+        const topicMatch = !q || topic.judul.toLowerCase().includes(q);
+        const subsFiltered = topic.subs.filter((sub) =>
+          !q || sub.judul.toLowerCase().includes(q) ||
+          (state.subData[sub.id] && state.subData[sub.id].isi.toLowerCase().includes(q))
+        );
+        if (!q || topicMatch || subsFiltered.length > 0) {
+          return { ...topic, subsFiltered: q ? subsFiltered : topic.subs };
+        }
+        return null;
+      }).filter(Boolean);
+
+      if (!katMatch && topicsFiltered.length === 0) return;
+      anyVisible = true;
+
+      const isKatOpen = state.sidebarOpenKats.has(kat.id) || !!q;
+
+      const katDiv = document.createElement("div");
+      katDiv.className = "sb-category";
+
+      const catHeader = document.createElement("div");
+      catHeader.className = "sb-cat-header" + (isKatOpen ? " open" : "");
+      catHeader.innerHTML = `
+        <div class="sb-cat-icon">${kat.icon}</div>
+        <span class="sb-cat-label">${escH(kat.label)}</span>
+        <svg class="sb-cat-chevron" viewBox="0 0 24 24" width="16" height="16"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`;
+
+      const topicsDiv = document.createElement("div");
+      topicsDiv.className = "sb-topics";
+      topicsDiv.style.display = isKatOpen ? "block" : "none";
+
+      catHeader.addEventListener("click", () => {
+        const open = catHeader.classList.toggle("open");
+        topicsDiv.style.display = open ? "block" : "none";
+        if (open) state.sidebarOpenKats.add(kat.id);
+        else state.sidebarOpenKats.delete(kat.id);
+      });
+
+      topicsFiltered.forEach((topic) => {
+        const isTopicOpen = state.sidebarOpenTopics.has(topic.id) || !!q;
+        const isTopicActive = state.currentId && topic.subs.some(s => s.id === state.currentId);
+
+        const topicDiv = document.createElement("div");
+        topicDiv.className = "sb-topic";
+
+        const topicHeader = document.createElement("div");
+        topicHeader.className = "sb-topic-header" +
+          (isTopicActive ? " active" : "") +
+          (isTopicOpen ? " open" : "");
+        topicHeader.innerHTML = `
+          <span>${escH(topic.judul)}</span>
+          <svg class="sb-topic-chevron" viewBox="0 0 24 24" width="14" height="14"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`;
+        topicHeader.addEventListener("click", () => {
+          const open = topicHeader.classList.toggle("open");
+          subsDiv.style.display = open ? "block" : "none";
+          if (open) state.sidebarOpenTopics.add(topic.id);
+          else state.sidebarOpenTopics.delete(topic.id);
+          // Klik header topic juga bisa navigate ke topic overview
+        });
+
+        // Double click / long-press tidak praktis; tambahkan link terpisah opsional
+        // Navigasi ke topic page via klik pada nama (bukan chevron):
+        topicHeader.addEventListener("dblclick", (e) => {
+          e.stopPropagation();
+          Router.go(`/kategori/${kat.id}/topic/${topic.id}`);
+          closeMobileSidebar();
+        });
+
+        const subsDiv = document.createElement("div");
+        subsDiv.className = "sb-subtopics";
+        subsDiv.style.display = isTopicOpen ? "block" : "none";
+
+        topic.subsFiltered.forEach((sub) => {
+          const isActive = state.currentId === sub.id;
+          const a = document.createElement("a");
+          a.href = `#/materi/${sub.id}`;
+          a.className = "sb-sub-link" + (isActive ? " active" : "");
+          a.innerHTML = `<span class="sb-sub-dot"></span><span>${escH(sub.judul)}</span>`;
+          a.addEventListener("click", () => closeMobileSidebar());
+          subsDiv.appendChild(a);
+        });
+
+        topicDiv.appendChild(topicHeader);
+        topicDiv.appendChild(subsDiv);
+        topicsDiv.appendChild(topicDiv);
+      });
+
+      katDiv.appendChild(catHeader);
+      katDiv.appendChild(topicsDiv);
+      refs.sidebarNav.appendChild(katDiv);
+    });
+
+    refs.searchEmpty.hidden = anyVisible;
+  }
+
+  function setSidebarActive(subId, topicId) {
+    state.currentId = subId;
+  }
+
+  // =====================================================================
+  // PREV / NEXT
+  // =====================================================================
+  function setupPrevNext(id) {
+    const idx = state.subOrder.indexOf(id);
+    const prevId = idx > 0 ? state.subOrder[idx - 1] : null;
+    const nextId = idx < state.subOrder.length - 1 ? state.subOrder[idx + 1] : null;
+
+    if (prevId && state.subData[prevId]) {
+      refs.btnPrev.disabled = false;
+      refs.btnPrev.textContent = `← ${state.subData[prevId].judul}`;
+      refs.btnPrev.onclick = () => Router.go(`/materi/${prevId}`);
+    } else {
+      refs.btnPrev.disabled = true;
+      refs.btnPrev.textContent = "← Sebelumnya";
+      refs.btnPrev.onclick = null;
     }
+
+    if (nextId && state.subData[nextId]) {
+      refs.btnNext.disabled = false;
+      refs.btnNext.textContent = `${state.subData[nextId].judul} →`;
+      refs.btnNext.onclick = () => Router.go(`/materi/${nextId}`);
+    } else {
+      refs.btnNext.disabled = true;
+      refs.btnNext.textContent = "Berikutnya →";
+      refs.btnNext.onclick = null;
+    }
+  }
+
+  // =====================================================================
+  // TOC
+  // =====================================================================
+  function buildTOC() {
+    const heads = refs.materiBody.querySelectorAll("h2, h3");
+    refs.tocList.innerHTML = "";
+    if (!heads.length) { refs.tocPanel.style.display = "none"; return; }
     refs.tocPanel.style.display = "";
-
-    headings.forEach((h, i) => {
-      const slug = `sec-${i}-` + h.textContent.toLowerCase()
-        .replace(/[^\w\s-]/g, "")
-        .trim()
-        .replace(/\s+/g, "-");
+    heads.forEach((h, i) => {
+      const slug = `s${i}-${h.textContent.toLowerCase().replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-")}`;
       h.id = slug;
-
       const a = document.createElement("a");
-      a.href = `#${slug}`;
-      a.textContent = h.textContent;
-      a.className = h.tagName.toLowerCase() === "h3" ? "h3" : "h2";
+      a.href = `#${slug}`; a.textContent = h.textContent;
+      a.className = h.tagName === "H3" ? "h3" : "h2";
       a.addEventListener("click", (e) => {
         e.preventDefault();
         h.scrollIntoView({ behavior: "smooth", block: "start" });
-        history.replaceState(null, "", `#/materi/${state.currentId}`);
       });
       refs.tocList.appendChild(a);
     });
-
-    observeTOCHighlight(headings);
+    observeTOC(heads);
   }
 
-  let tocObserver = null;
-  function observeTOCHighlight(headings) {
-    if (tocObserver) tocObserver.disconnect();
-    tocObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            $$(".toc-list a").forEach((a) => a.classList.remove("active"));
-            const activeLink = refs.tocList.querySelector(`a[href="#${id}"]`);
-            if (activeLink) activeLink.classList.add("active");
-          }
-        });
-      },
-      { rootMargin: "-100px 0px -70% 0px" }
-    );
-    headings.forEach((h) => tocObserver.observe(h));
+  let tocObs = null;
+  function observeTOC(heads) {
+    if (tocObs) tocObs.disconnect();
+    tocObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          $$(".toc-list a").forEach((a) => a.classList.remove("active"));
+          const a = refs.tocList.querySelector(`a[href="#${entry.target.id}"]`);
+          if (a) a.classList.add("active");
+        }
+      });
+    }, { rootMargin: "-100px 0px -70% 0px" });
+    heads.forEach((h) => tocObs.observe(h));
   }
 
-  // ===================================================
-  // TOMBOL SALIN RUMUS
-  // ===================================================
-  function attachCopyFormulaHandlers() {
+  // =====================================================================
+  // COPY FORMULA
+  // =====================================================================
+  function attachCopyHandlers() {
     refs.materiBody.querySelectorAll(".copy-formula-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
-        const formula = btn.closest(".formula-block").dataset.formula;
-        copyToClipboard(formula);
+        copyText(btn.closest(".formula-block").dataset.formula);
       });
     });
   }
 
-  function copyToClipboard(text) {
+  function copyText(text) {
     const fallback = () => {
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      ta.style.position = "fixed";
-      ta.style.opacity = "0";
-      document.body.appendChild(ta);
-      ta.select();
-      try { document.execCommand("copy"); } catch (e) {}
-      document.body.removeChild(ta);
-      showToast();
+      const ta = Object.assign(document.createElement("textarea"), { value: text });
+      ta.style.cssText = "position:fixed;opacity:0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch (_) {}
+      document.body.removeChild(ta); showToast();
     };
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(showToast).catch(fallback);
-    } else {
-      fallback();
-    }
+    if (navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(showToast).catch(fallback);
+    else fallback();
   }
 
-  let toastTimer = null;
+  let toastTmr = null;
   function showToast() {
     refs.copyToast.hidden = false;
     requestAnimationFrame(() => refs.copyToast.classList.add("show"));
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => {
+    clearTimeout(toastTmr);
+    toastTmr = setTimeout(() => {
       refs.copyToast.classList.remove("show");
       setTimeout(() => { refs.copyToast.hidden = true; }, 200);
     }, 1600);
   }
 
-  // ===================================================
-  // NAVIGASI PREV / NEXT
-  // ===================================================
-  function setupPrevNext(id) {
-    const idx = state.materiOrder.indexOf(id);
-    const prevId = idx > 0 ? state.materiOrder[idx - 1] : null;
-    const nextId = idx >= 0 && idx < state.materiOrder.length - 1 ? state.materiOrder[idx + 1] : null;
-
-    if (prevId && state.materiData[prevId]) {
-      refs.btnPrev.disabled = false;
-      refs.btnPrev.textContent = `← ${state.materiData[prevId].judul}`;
-      refs.btnPrev.onclick = () => Router.navigate(`/materi/${prevId}`);
-    } else {
-      refs.btnPrev.disabled = true;
-      refs.btnPrev.textContent = "← Materi Sebelumnya";
-      refs.btnPrev.onclick = null;
-    }
-
-    if (nextId && state.materiData[nextId]) {
-      refs.btnNext.disabled = false;
-      refs.btnNext.textContent = `${state.materiData[nextId].judul} →`;
-      refs.btnNext.onclick = () => Router.navigate(`/materi/${nextId}`);
-    } else {
-      refs.btnNext.disabled = true;
-      refs.btnNext.textContent = "Materi Berikutnya →";
-      refs.btnNext.onclick = null;
-    }
-  }
-
-  // ===================================================
-  // PROGRESS MEMBACA
-  // ===================================================
-  function updateReadingProgress() {
-    const article = $(".materi-article");
-    if (!article) return;
+  // =====================================================================
+  // READING PROGRESS
+  // =====================================================================
+  function updateProgress() {
+    const art = $(".materi-article");
+    if (!art) return;
     const onScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = article.offsetHeight - window.innerHeight;
-      const pct = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
+      const pct = Math.min(100, Math.max(0, (window.scrollY / Math.max(1, art.offsetHeight - window.innerHeight)) * 100));
       refs.readingProgress.style.width = pct + "%";
     };
-    window.removeEventListener("scroll", window.__scrollHandlerStatistikaKu || (() => {}));
-    window.__scrollHandlerStatistikaKu = onScroll;
+    window.removeEventListener("scroll", window.__skuScroll || (() => {}));
+    window.__skuScroll = onScroll;
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }
 
-  // ===================================================
-  // PENCARIAN
-  // ===================================================
+  // =====================================================================
+  // SEARCH
+  // =====================================================================
   function setupSearch() {
     const handler = (e) => {
-      const val = e.target.value;
-      refs.searchInput.value = val;
-      refs.searchInputMobile.value = val;
-      renderSidebar(val);
+      const v = e.target.value;
+      refs.searchInput.value = v;
+      refs.searchInputMobile.value = v;
+      renderSidebar(v);
     };
     refs.searchInput.addEventListener("input", handler);
     refs.searchInputMobile.addEventListener("input", handler);
   }
 
-  // ===================================================
-  // SIDEBAR MOBILE TOGGLE
-  // ===================================================
-  function openMobileSidebar() {
-    refs.sidebar.classList.add("open");
-    refs.sidebarOverlay.classList.add("show");
-  }
+  // =====================================================================
+  // SIDEBAR MOBILE
+  // =====================================================================
   function closeMobileSidebar() {
     refs.sidebar.classList.remove("open");
     refs.sidebarOverlay.classList.remove("show");
   }
   function setupSidebarToggle() {
     refs.sidebarToggle.addEventListener("click", () => {
-      refs.sidebar.classList.contains("open") ? closeMobileSidebar() : openMobileSidebar();
+      const open = refs.sidebar.classList.toggle("open");
+      refs.sidebarOverlay.classList.toggle("show", open);
     });
     refs.sidebarOverlay.addEventListener("click", closeMobileSidebar);
   }
 
-  // ===================================================
-  // DARK / LIGHT MODE
-  // ===================================================
+  // =====================================================================
+  // DARK MODE
+  // =====================================================================
   const THEME_KEY = "statistikaku-theme";
-
-  function applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    refs.themeIcon.innerHTML =
-      theme === "dark"
-        ? '<path d="M12 3a9 9 0 109 9 7 7 0 01-9-9z" fill="currentColor"/>'
-        : '<path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="currentColor"/>';
-    const hljsTheme = $("#hljs-theme");
-    if (hljsTheme) {
-      hljsTheme.href = theme === "dark"
-        ? "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
-        : "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
-    }
+  function applyTheme(t) {
+    document.documentElement.setAttribute("data-theme", t);
+    refs.themeIcon.innerHTML = t === "dark"
+      ? '<path d="M12 3a9 9 0 109 9 7 7 0 01-9-9z" fill="currentColor"/>'
+      : '<path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="currentColor"/>';
+    const el = $("#hljs-theme");
+    if (el) el.href = t === "dark"
+      ? "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+      : "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
   }
-
   function setupTheme() {
-    let saved = localStorage.getItem(THEME_KEY);
-    if (!saved) {
-      saved = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    }
+    const saved = localStorage.getItem(THEME_KEY) ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     applyTheme(saved);
-
     refs.themeToggle.addEventListener("click", () => {
-      const current = document.documentElement.getAttribute("data-theme");
-      const next = current === "dark" ? "light" : "dark";
-      applyTheme(next);
-      localStorage.setItem(THEME_KEY, next);
+      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(next); localStorage.setItem(THEME_KEY, next);
     });
   }
 
-  // ===================================================
-  // ROUTING SETUP
-  // ===================================================
+  // =====================================================================
+  // ROUTES
+  // =====================================================================
   function setupRoutes() {
-    Router.on(/^\/$/, () => {
-      showView("home");
-      state.currentId = null;
-      renderHomeGrid();
-      renderSidebar(refs.searchInput.value);
-      document.title = "StatistikaKu — Belajar Statistika";
-    });
-
-    Router.on(/^\/materi\/([a-zA-Z0-9_\-]+)$/, (match) => {
-      const id = match[1];
-      renderMateriPage(id);
-    });
-
-    Router.on(/^\/materi$/, () => {
-      if (state.materiOrder.length > 0) {
-        Router.navigate(`/materi/${state.materiOrder[0]}`);
-      } else {
-        Router.navigate("/");
-      }
-    });
-
-    Router.notFound(() => {
-      showView("notfound");
-      document.title = "Materi tidak ditemukan — StatistikaKu";
-    });
+    Router
+      .on(/^\/$/, () => {
+        showView("home");
+        state.currentId = null;
+        renderHome();
+        renderSidebar(refs.searchInput.value);
+        document.title = "StatistikaKu — Belajar Statistika";
+      })
+      .on(/^\/kategori\/([^/]+)$/, (m) => {
+        renderKategoriPage(m[1]);
+      })
+      .on(/^\/kategori\/([^/]+)\/topic\/([^/]+)$/, (m) => {
+        renderTopicPage(m[1], m[2]);
+      })
+      .on(/^\/materi\/([a-zA-Z0-9_\-]+)$/, (m) => {
+        renderSubMateriPage(m[1]);
+      })
+      .on(/^\/materi$/, () => {
+        const firstId = state.subOrder[0];
+        if (firstId) Router.go(`/materi/${firstId}`);
+        else Router.go("/");
+      })
+      .notFound(() => {
+        showView("notfound");
+        document.title = "Tidak Ditemukan — StatistikaKu";
+      });
   }
 
-  // ===================================================
-  // PENGAMAN: TUNGGU LIBRARY CDN SIAP
-  // ===================================================
-  // Mencegah error "window.markdownit is not a function" / "katex is not defined"
-  // jika CDN sedikit lambat dimuat (terutama di koneksi lambat / mobile).
-  function waitForLibraries(maxWaitMs = 8000) {
-    return new Promise((resolve) => {
-      const start = Date.now();
+  // =====================================================================
+  // WAIT FOR LIBRARIES
+  // =====================================================================
+  function waitLibs(max = 8000) {
+    return new Promise((res) => {
+      const t0 = Date.now();
       const check = () => {
-        const ready =
-          typeof window.markdownit === "function" &&
-          typeof window.katex !== "undefined";
-        if (ready) {
-          resolve(true);
-        } else if (Date.now() - start > maxWaitMs) {
-          console.error("[StatistikaKu] Library CDN (markdown-it/KaTeX) gagal dimuat. Periksa koneksi internet atau apakah CDN diblokir.");
-          resolve(false);
-        } else {
-          setTimeout(check, 100);
-        }
+        if (typeof window.markdownit === "function" && typeof window.katex !== "undefined") return res(true);
+        if (Date.now() - t0 > max) return res(false);
+        setTimeout(check, 100);
       };
       check();
     });
   }
 
-  // ===================================================
+  // =====================================================================
   // INIT
-  // ===================================================
+  // =====================================================================
   async function init() {
     setupTheme();
     setupSearch();
     setupSidebarToggle();
     setupRoutes();
 
-    const librariesReady = await waitForLibraries();
-    if (!librariesReady) {
-      refs.homeGrid.innerHTML = `
-        <div class="empty-state" style="grid-column:1/-1;">
-          <h2>Gagal memuat library</h2>
-          <p>Markdown/KaTeX dari CDN tidak berhasil dimuat. Periksa koneksi internet kamu, lalu refresh halaman ini.</p>
-          <button class="btn btn-primary" onclick="location.reload()">Coba Lagi</button>
-        </div>`;
+    const ok = await waitLibs();
+    if (!ok) {
+      refs.homeCats.innerHTML = `<div class="empty-state"><h2>Gagal memuat library</h2><p>Periksa koneksi internet lalu refresh halaman.</p><button class="btn btn-primary" onclick="location.reload()">Coba Lagi</button></div>`;
       return;
     }
 
-    // Inisialisasi markdown-it HANYA setelah dipastikan library siap.
-    md = window.markdownit({
-      html: false,
-      linkify: true,
-      typographer: true,
-      breaks: false,
-    });
+    md = window.markdownit({ html: false, linkify: true, typographer: true });
 
-    await loadAllMateri();
+    // Buka kategori pertama secara default
+    if (KUR.length > 0) {
+      state.sidebarOpenKats.add(KUR[0].id);
+      if (KUR[0].topics.length > 0) {
+        state.sidebarOpenTopics.add(KUR[0].topics[0].id);
+      }
+    }
 
+    await loadAll();
+
+    renderHome();
     renderSidebar();
-    renderHomeGrid();
     Router.resolve();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
-  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
 })();
 </script>
 </body>
