@@ -1,137 +1,151 @@
 window.MATERI = {
   id: "regresi",
-  judul: "Analisis Regresi",
-  kategori: "Regresi",
+  judul: "Regresi Linier",
   isi: `
-# Analisis Regresi
+## Apa Itu Regresi Linier?
 
-Regresi linear sederhana digunakan untuk memodelkan hubungan antara satu
-variabel bebas ($X$) dan satu variabel terikat ($Y$) dalam bentuk garis
-lurus. Tujuannya adalah memprediksi nilai $Y$ berdasarkan nilai $X$.
+Regresi linier adalah metode statistik untuk **memodelkan hubungan** antara satu atau lebih variabel bebas ($X$) dengan variabel terikat ($Y$) dalam bentuk persamaan garis lurus. Tujuannya adalah **memprediksi** nilai $Y$ berdasarkan nilai $X$ yang diketahui.
 
-> Regresi berbeda dari korelasi: korelasi hanya mengukur kekuatan hubungan,
-> sedangkan regresi membangun **model prediksi** dari hubungan tersebut.
+---
 
-## Model Regresi Linear Sederhana
+## Regresi Linier Sederhana
 
-Bentuk umum model regresi linear sederhana adalah:
+Model regresi linier sederhana (satu variabel bebas):
 
-$$
-Y = a + bX
-$$
+$$\\hat{Y} = a + bX$$
 
-Dengan:
-- $Y$ = variabel terikat (yang diprediksi)
-- $X$ = variabel bebas (prediktor)
-- $a$ = konstanta (intercept), nilai $Y$ saat $X = 0$
-- $b$ = koefisien regresi (slope), besar perubahan $Y$ untuk setiap kenaikan satu unit $X$
+- $\\hat{Y}$ = nilai prediksi $Y$
+- $a$ = intersep (nilai $Y$ saat $X = 0$)
+- $b$ = koefisien regresi / kemiringan (slope)
 
-## Rumus
+### Rumus Koefisien
 
-Koefisien $b$ (slope) dihitung dengan:
+Menggunakan metode **Ordinary Least Squares (OLS)** — meminimalkan jumlah kuadrat residual:
 
-$$
-b = \\frac{n\\sum XY - (\\sum X)(\\sum Y)}{n\\sum X^2 - (\\sum X)^2}
-$$
+$$b = \\frac{n\\sum x_i y_i - (\\sum x_i)(\\sum y_i)}{n\\sum x_i^2 - (\\sum x_i)^2}$$
 
-Setelah $b$ diketahui, konstanta $a$ dihitung dengan:
+$$a = \\bar{y} - b\\bar{x}$$
 
-$$
-a = \\frac{\\sum Y - b\\sum X}{n}
-$$
+---
 
-## Contoh
+## Contoh Perhitungan
 
-Jika diketahui data berikut:
+Data luas lahan ($X$, hektar) dan hasil panen ($Y$, ton):
 
-$$
-X = [1,2,3,4]
-$$
+| No | $x$ | $y$ | $x^2$ | $xy$ |
+|----|-----|-----|-------|------|
+| 1  | 1   | 2   | 1     | 2    |
+| 2  | 2   | 3   | 4     | 6    |
+| 3  | 3   | 5   | 9     | 15   |
+| 4  | 4   | 6   | 16    | 24   |
+| 5  | 5   | 8   | 25    | 40   |
+| **$\\Sigma$** | **15** | **24** | **55** | **87** |
 
-$$
-Y = [2,4,5,8]
-$$
+$$\\bar{x} = \\frac{15}{5} = 3, \\quad \\bar{y} = \\frac{24}{5} = 4{,}8$$
 
-**Langkah 1 — Susun tabel bantu:**
+$$b = \\frac{5(87) - (15)(24)}{5(55) - (15)^2} = \\frac{435 - 360}{275 - 225} = \\frac{75}{50} = 1{,}5$$
 
-| $X$ | $Y$ | $XY$ | $X^2$ |
-|-----|-----|------|-------|
-| 1 | 2 | 2  | 1  |
-| 2 | 4 | 8  | 4  |
-| 3 | 5 | 15 | 9  |
-| 4 | 8 | 32 | 16 |
+$$a = 4{,}8 - 1{,}5(3) = 4{,}8 - 4{,}5 = 0{,}3$$
 
-Jumlah: $\\sum X = 10$, $\\sum Y = 19$, $\\sum XY = 57$, $\\sum X^2 = 30$, $n = 4$
+**Persamaan regresi:**
 
-**Langkah 2 — Hitung $b$:**
+$$\\hat{Y} = 0{,}3 + 1{,}5X$$
 
-$$
-b = \\frac{4(57) - (10)(19)}{4(30) - (10)^2} = \\frac{228 - 190}{120 - 100} = \\frac{38}{20} = 1.9
-$$
+**Interpretasi:**
+- Setiap penambahan 1 hektar lahan, hasil panen bertambah **1,5 ton**
+- Prediksi untuk $X = 6$ hektar: $\\hat{Y} = 0{,}3 + 1{,}5(6) = 9{,}3$ ton
 
-**Langkah 3 — Hitung $a$:**
+---
 
-$$
-a = \\frac{19 - (1.9)(10)}{4} = \\frac{19 - 19}{4} = 0
-$$
+## Residual dan Asumsi OLS
 
-**Langkah 4 — Model regresi yang dihasilkan:**
+**Residual** adalah selisih antara nilai aktual dan nilai prediksi:
 
-$$
-Y = 0 + 1.9X \\quad \\text{atau} \\quad Y = 1.9X
-$$
+$$e_i = y_i - \\hat{y}_i$$
 
-Maka, jika $X = 5$, prediksi $Y$ adalah:
+OLS meminimalkan:
 
-$$
-Y = 1.9(5) = 9.5
-$$
+$$SSE = \\sum_{i=1}^{n} e_i^2 = \\sum_{i=1}^{n}(y_i - \\hat{y}_i)^2$$
 
-## Koefisien Determinasi ($R^2$)
+### Asumsi Model Regresi Linier
 
-Untuk mengetahui seberapa baik model regresi menjelaskan variasi data,
-digunakan koefisien determinasi $R^2$ (kuadrat dari koefisien korelasi $r$):
+1. **Linieritas** — hubungan $X$ dan $Y$ bersifat linier
+2. **Independensi** — residual tidak saling berkorelasi
+3. **Homoskedastisitas** — varians residual konstan
+4. **Normalitas** — residual berdistribusi normal
 
-$$
-R^2 = r^2
-$$
+---
 
-Nilai $R^2$ berkisar antara $0$ dan $1$. Semakin mendekati $1$, semakin
-baik model regresi menjelaskan data.
+## Ukuran Kebaikan Model
 
-## Asumsi Regresi Linear
+### Koefisien Determinasi ($R^2$)
 
-1. **Linearitas** — hubungan antar variabel berbentuk linear.
-2. **Homoskedastisitas** — varians residual konstan di semua nilai $X$.
-3. **Normalitas residual** — error terdistribusi normal.
-4. **Independensi** — observasi tidak saling berkorelasi.
+$$R^2 = 1 - \\frac{SSE}{SST} = 1 - \\frac{\\sum(y_i - \\hat{y}_i)^2}{\\sum(y_i - \\bar{y})^2}$$
 
-## Implementasi Sederhana (JavaScript)
+$R^2$ berkisar antara 0 dan 1. Semakin mendekati 1, semakin baik model menjelaskan variasi data.
 
-\`\`\`javascript
-function linearRegression(x, y) {
-  const n = x.length;
-  const sumX = x.reduce((a, b) => a + b, 0);
-  const sumY = y.reduce((a, b) => a + b, 0);
-  const sumXY = x.reduce((sum, xi, i) => sum + xi * y[i], 0);
-  const sumX2 = x.reduce((sum, xi) => sum + xi * xi, 0);
+**Contoh (dari data di atas):**
 
-  const b = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX ** 2);
-  const a = (sumY - b * sumX) / n;
+| $y_i$ | $\\hat{y}_i$ | $e_i$ | $e_i^2$ | $(y_i-\\bar{y})^2$ |
+|-------|------------|-------|---------|-----------------|
+| 2 | 1,8 | 0,2 | 0,04 | 7,84 |
+| 3 | 3,3 | −0,3 | 0,09 | 3,24 |
+| 5 | 4,8 | 0,2 | 0,04 | 0,04 |
+| 6 | 6,3 | −0,3 | 0,09 | 1,44 |
+| 8 | 7,8 | 0,2 | 0,04 | 10,24 |
+| | | | **0,30** | **22,80** |
 
-  return { a, b, predict: (xi) => a + b * xi };
-}
+$$R^2 = 1 - \\frac{0{,}30}{22{,}80} = 1 - 0{,}0132 = 0{,}987$$
 
-const model = linearRegression([1,2,3,4], [2,4,5,8]);
-console.log(model.a, model.b);       // 0, 1.9
-console.log(model.predict(5));        // 9.5
-\`\`\`
+Model menjelaskan **98,7%** variasi hasil panen.
 
-## Ringkasan
+### Standard Error of Estimate ($S_e$)
 
-- Model regresi linear sederhana: $Y = a + bX$.
-- $b$ menunjukkan arah dan kekuatan pengaruh $X$ terhadap $Y$.
-- $R^2$ mengukur seberapa baik model menjelaskan variasi data.
-- Regresi digunakan untuk **prediksi**, bukan hanya mengukur hubungan.
+$$S_e = \\sqrt{\\frac{SSE}{n-2}} = \\sqrt{\\frac{0{,}30}{3}} = \\sqrt{0{,}10} \\approx 0{,}316 \\text{ ton}$$
+
+---
+
+## Uji Signifikansi Koefisien
+
+### Uji-$t$ untuk Slope ($b$)
+
+$$t = \\frac{b}{S_b}, \\quad S_b = \\frac{S_e}{\\sqrt{\\sum(x_i - \\bar{x})^2}}$$
+
+$H_0: b = 0$ (tidak ada hubungan linier)  
+$H_1: b \\neq 0$ (ada hubungan linier)
+
+Tolak $H_0$ jika $|t_{hitung}| > t_{\\alpha/2, n-2}$
+
+---
+
+## Regresi Linier Berganda
+
+Jika terdapat lebih dari satu variabel bebas:
+
+$$\\hat{Y} = a + b_1 X_1 + b_2 X_2 + \\cdots + b_k X_k$$
+
+Estimasi koefisien menggunakan matriks:
+
+$$\\mathbf{b} = (\\mathbf{X}^T \\mathbf{X})^{-1} \\mathbf{X}^T \\mathbf{Y}$$
+
+> **Perhatian:** Regresi berganda rentan terhadap **multikolinearitas** (variabel bebas saling berkorelasi kuat). Periksa dengan VIF (*Variance Inflation Factor*): $\\text{VIF} > 10$ menandakan multikolinearitas serius.
+
+---
+
+## Latihan Soal
+
+**Soal.** Data pengeluaran iklan ($X$, juta rupiah) dan penjualan ($Y$, unit) selama 5 bulan:
+
+| Bulan | $X$ | $Y$ |
+|-------|-----|-----|
+| 1 | 10 | 150 |
+| 2 | 15 | 200 |
+| 3 | 20 | 250 |
+| 4 | 25 | 280 |
+| 5 | 30 | 320 |
+
+a) Tentukan persamaan regresi linier $\\hat{Y} = a + bX$  
+b) Prediksi penjualan jika pengeluaran iklan = 35 juta rupiah  
+c) Hitung $R^2$ dan interpretasikan
 `
 };
