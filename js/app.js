@@ -540,6 +540,31 @@
   }
 
   // ===================================================
+  // PENGAMAN: TUNGGU LIBRARY CDN SIAP
+  // ===================================================
+  // Mencegah error "window.markdownit is not a function" / "katex is not defined"
+  // jika CDN sedikit lambat dimuat (terutama di koneksi lambat / mobile).
+  function waitForLibraries(maxWaitMs = 8000) {
+    return new Promise((resolve) => {
+      const start = Date.now();
+      const check = () => {
+        const ready =
+          typeof window.markdownit === "function" &&
+          typeof window.katex !== "undefined";
+        if (ready) {
+          resolve(true);
+        } else if (Date.now() - start > maxWaitMs) {
+          console.error("[StatistikaKu] Library CDN (markdown-it/KaTeX) gagal dimuat dalam waktu yang wajar. Periksa koneksi internet atau apakah CDN diblokir.");
+          resolve(false);
+        } else {
+          setTimeout(check, 100);
+        }
+      };
+      check();
+    });
+  }
+
+  // ===================================================
   // INIT
   // ===================================================
   async function init() {
@@ -547,6 +572,17 @@
     setupSearch();
     setupSidebarToggle();
     setupRoutes();
+
+    const librariesReady = await waitForLibraries();
+    if (!librariesReady) {
+      refs.homeGrid.innerHTML = `
+        <div class="empty-state" style="grid-column:1/-1;">
+          <h2>Gagal memuat library</h2>
+          <p>Markdown/KaTeX dari CDN tidak berhasil dimuat. Periksa koneksi internet kamu, lalu refresh halaman ini.</p>
+          <button class="btn btn-primary" onclick="location.reload()">Coba Lagi</button>
+        </div>`;
+      return;
+    }
 
     await loadAllMateri();
 
