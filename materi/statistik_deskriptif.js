@@ -1,143 +1,129 @@
 window.MATERI = {
   id: "statistik_deskriptif",
-  judul: "Statistika Deskriptif",
-  kategori: "Dasar",
+  judul: "Mean, Median & Modus",
   isi: `
-# Statistika Deskriptif
+## Pengertian Ukuran Pemusatan
 
-Statistika deskriptif adalah cabang ilmu statistika yang berfokus pada
-**pengumpulan, penyajian, dan peringkasan data** tanpa menarik kesimpulan
-di luar data yang diamati. Tujuannya adalah menggambarkan karakteristik
-utama dari suatu kumpulan data secara sederhana dan mudah dipahami.
+Ukuran pemusatan adalah nilai tunggal yang mewakili kumpulan data secara keseluruhan. Tiga ukuran yang paling sering digunakan adalah **mean**, **median**, dan **modus**.
 
-> Statistika deskriptif menjawab pertanyaan "Bagaimana data ini terlihat?",
-> bukan "Apa yang bisa kita simpulkan tentang populasi?"
+---
 
-## Ukuran Pemusatan Data
+## Mean (Rata-Rata)
 
-Ukuran pemusatan menggambarkan nilai pusat atau nilai tipikal dari sekumpulan data.
+Mean adalah jumlah seluruh nilai data dibagi banyaknya data.
 
-### Rata-rata (Mean)
+$$\\bar{x} = \\frac{\\sum_{i=1}^{n} x_i}{n}$$
 
-Rata-rata aritmetika dihitung dengan menjumlahkan seluruh data lalu membaginya
-dengan banyaknya data.
+**Contoh:**
 
-$$
-\\bar{x} = \\frac{\\sum_{i=1}^{n} x_i}{n}
-$$
+Data nilai ujian: 70, 80, 75, 90, 85
 
-Dengan:
-- $\\bar{x}$ = rata-rata
-- $x_i$ = nilai data ke-$i$
-- $n$ = banyaknya data
+$$\\bar{x} = \\frac{70 + 80 + 75 + 90 + 85}{5} = \\frac{400}{5} = 80$$
 
-### Median
+### Mean Data Berkelompok
 
-Median adalah nilai tengah dari data yang telah diurutkan. Jika $n$ ganjil:
+Untuk data yang sudah dikelompokkan dalam kelas interval:
 
-$$
-Me = x_{\\frac{n+1}{2}}
-$$
+$$\\bar{x} = \\frac{\\sum f_i \\cdot x_i}{\\sum f_i}$$
 
-Jika $n$ genap, median adalah rata-rata dari dua nilai tengah:
+di mana $f_i$ adalah frekuensi kelas ke-$i$ dan $x_i$ adalah nilai tengah kelas ke-$i$.
 
-$$
-Me = \\frac{x_{\\frac{n}{2}} + x_{\\frac{n}{2}+1}}{2}
-$$
+| Nilai | Frekuensi ($f$) | Nilai Tengah ($x$) | $f \\cdot x$ |
+|-------|-----------------|---------------------|--------------|
+| 60–69 | 3 | 64,5 | 193,5 |
+| 70–79 | 8 | 74,5 | 596,0 |
+| 80–89 | 6 | 84,5 | 507,0 |
+| 90–99 | 3 | 94,5 | 283,5 |
+| **Total** | **20** | | **1580,0** |
 
-### Modus
+$$\\bar{x} = \\frac{1580}{20} = 79$$
 
-Modus adalah nilai yang paling sering muncul dalam suatu kumpulan data.
-Suatu data bisa memiliki lebih dari satu modus (bimodal/multimodal) atau
-tidak memiliki modus sama sekali.
+---
 
-## Ukuran Penyebaran Data
+## Median
 
-Ukuran penyebaran menunjukkan seberapa jauh data tersebar dari nilai pusatnya.
+Median adalah nilai tengah data setelah diurutkan dari terkecil ke terbesar.
 
-### Varians
+- **Jika $n$ ganjil:** median = nilai ke-$\\frac{n+1}{2}$
+- **Jika $n$ genap:** median = rata-rata nilai ke-$\\frac{n}{2}$ dan ke-$\\frac{n}{2}+1$
 
-Varians mengukur rata-rata kuadrat selisih setiap data terhadap rata-ratanya.
+$$M_e = \\frac{x_{n/2} + x_{n/2+1}}{2} \\quad (\\text{untuk } n \\text{ genap})$$
 
-$$
-s^2 = \\frac{\\sum_{i=1}^{n}(x_i - \\bar{x})^2}{n-1}
-$$
+**Contoh ($n$ ganjil):**
 
-### Standar Deviasi
+Data: 3, 7, 5, 12, 9 → diurutkan: 3, 5, **7**, 9, 12
 
-Standar deviasi adalah akar kuadrat dari varians, dan memiliki satuan yang
-sama dengan data aslinya sehingga lebih mudah diinterpretasikan.
+Median = 7 (nilai ke-3 dari 5 data)
 
-$$
-s = \\sqrt{\\frac{\\sum_{i=1}^{n}(x_i - \\bar{x})^2}{n-1}}
-$$
+**Contoh ($n$ genap):**
 
-### Rentang (Range)
+Data: 3, 5, 7, 9 → Median $= \\frac{5+7}{2} = 6$
 
-$$
-R = x_{maks} - x_{min}
-$$
+### Median Data Berkelompok
 
-## Contoh Soal
+$$M_e = L + \\frac{\\frac{n}{2} - F}{f} \\cdot c$$
 
-Diketahui data nilai ujian 5 mahasiswa:
+- $L$ = batas bawah kelas median  
+- $n$ = total frekuensi  
+- $F$ = frekuensi kumulatif sebelum kelas median  
+- $f$ = frekuensi kelas median  
+- $c$ = lebar kelas  
 
-$$
-X = [70, 75, 80, 85, 90]
-$$
+---
 
-**Langkah 1 — Hitung rata-rata:**
+## Modus
 
-$$
-\\bar{x} = \\frac{70+75+80+85+90}{5} = \\frac{400}{5} = 80
-$$
+Modus adalah nilai yang **paling sering muncul** dalam data.
 
-**Langkah 2 — Hitung varians:**
+**Contoh:**
 
-| $x_i$ | $x_i - \\bar{x}$ | $(x_i - \\bar{x})^2$ |
-|-------|------------------|------------------------|
-| 70    | -10              | 100                    |
-| 75    | -5               | 25                     |
-| 80    | 0                | 0                      |
-| 85    | 5                | 25                     |
-| 90    | 10               | 100                    |
+Data: 4, 6, 6, 7, 8, 8, 8, 9 → **Modus = 8** (muncul 3 kali)
 
-$$
-s^2 = \\frac{100+25+0+25+100}{5-1} = \\frac{250}{4} = 62.5
-$$
+Data bisa memiliki **lebih dari satu modus** (bimodal / multimodal), atau **tidak memiliki modus** jika semua nilai muncul sama sering.
 
-**Langkah 3 — Standar deviasi:**
+### Modus Data Berkelompok
 
-$$
-s = \\sqrt{62.5} \\approx 7.91
-$$
+$$M_o = L + \\frac{d_1}{d_1 + d_2} \\cdot c$$
 
-## Implementasi Sederhana (JavaScript)
+- $L$ = batas bawah kelas modus  
+- $d_1$ = selisih frekuensi kelas modus dengan kelas sebelumnya  
+- $d_2$ = selisih frekuensi kelas modus dengan kelas sesudahnya  
+- $c$ = lebar kelas  
 
-Berikut contoh kode untuk menghitung mean dan standar deviasi:
+---
 
-\`\`\`javascript
-function mean(data) {
-  return data.reduce((a, b) => a + b, 0) / data.length;
-}
+## Perbandingan Mean, Median & Modus
 
-function stdDev(data) {
-  const m = mean(data);
-  const variance =
-    data.reduce((sum, x) => sum + (x - m) ** 2, 0) / (data.length - 1);
-  return Math.sqrt(variance);
-}
+| Ukuran | Kelebihan | Kekurangan |
+|--------|-----------|------------|
+| Mean | Memperhitungkan semua data | Sensitif terhadap outlier |
+| Median | Tidak terpengaruh outlier | Tidak memperhitungkan semua nilai |
+| Modus | Mudah ditemukan | Bisa tidak ada / lebih dari satu |
 
-const nilai = [70, 75, 80, 85, 90];
-console.log("Rata-rata:", mean(nilai));     // 80
-console.log("Std Dev:", stdDev(nilai));     // 7.91
-\`\`\`
+### Hubungan pada Distribusi Miring
 
-## Ringkasan
+Untuk distribusi **miring kanan** (positif skewed):
 
-- Ukuran pemusatan: **mean**, **median**, **modus**.
-- Ukuran penyebaran: **varians**, **standar deviasi**, **range**.
-- Statistika deskriptif menjadi dasar sebelum melangkah ke statistika
-  inferensial seperti uji hipotesis dan estimasi parameter.
+$$\\text{Modus} < \\text{Median} < \\text{Mean}$$
+
+Untuk distribusi **miring kiri** (negatif skewed):
+
+$$\\text{Mean} < \\text{Median} < \\text{Modus}$$
+
+> **Tips:** Gunakan **median** ketika data mengandung outlier (nilai ekstrem), misalnya data pendapatan. Gunakan **mean** ketika distribusi data mendekati simetris.
+
+---
+
+## Latihan Soal
+
+**Soal 1.** Diketahui data: 12, 15, 18, 15, 20, 25, 15, 22. Tentukan mean, median, dan modusnya!
+
+**Penyelesaian:**
+
+Data diurutkan: 12, 15, 15, 15, 18, 20, 22, 25
+
+- **Mean** $= \\frac{12+15+15+15+18+20+22+25}{8} = \\frac{142}{8} = 17{,}75$
+- **Median** $= \\frac{15+18}{2} = 16{,}5$ (rata-rata nilai ke-4 dan ke-5)
+- **Modus** $= 15$ (muncul 3 kali)
 `
 };
