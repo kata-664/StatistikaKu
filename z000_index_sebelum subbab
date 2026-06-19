@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StatistikaKu — Belajar Statistika</title>
+<meta name="description" content="StatistikaKu: platform belajar statistika gratis, materi lengkap, rumus matematika, dan contoh soal." />
+
+<!-- KaTeX untuk render rumus matematika -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+
+<!-- Markdown parser ringan -->
+<script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+
+<!-- Syntax highlight -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" id="hljs-theme">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+<style>
+/* ===================================================================
+   StatistikaKu — Stylesheet
+   Tema: Modern Academic — Biru Statistik (#2563EB), Putih, Abu muda
+   =================================================================== */
+
+:root{
+  --color-primary: #2563EB;
+  --color-primary-dark: #1E4FCB;
+  --color-primary-light: #EFF4FF;
+  --color-accent: #2563EB;
+
+  --bg-app: #F4F6F9;
+  --bg-surface: #FFFFFF;
+  --bg-surface-2: #F8F9FB;
+  --bg-sidebar: #FFFFFF;
+  --border-color: #E5E8EE;
+
+  --text-primary: #111827;
+  --text-secondary: #5B6472;
+  --text-muted: #8A93A2;
+
+  --code-bg: #F1F3F8;
+  --shadow-sm: 0 1px 2px rgba(16,24,40,.06);
+  --shadow-md: 0 4px 16px rgba(16,24,40,.08);
+  --shadow-lg: 0 12px 32px rgba(16,24,40,.12);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --sidebar-width: 280px;
+  --navbar-height: 64px;
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+
+  color-scheme: light;
+}
+
+[data-theme="dark"]{
+  --bg-app: #0F1420;
+  --bg-surface: #161D2E;
+  --bg-surface-2: #1B2336;
+  --bg-sidebar: #131A2A;
+  --border-color: #263049;
+
+  --text-primary: #E8ECF4;
+  --text-secondary: #A6AFC2;
+  --text-muted: #717A8E;
+
+  --code-bg: #1E2740;
+  --color-primary-light: #1B2A4D;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.35);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,.45);
+
+  color-scheme: dark;
+}
+
+/* ===== RESET ===== */
+*,*::before,*::after{ box-sizing: border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  font-family: var(--font-sans);
+  background: var(--bg-app);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  transition: background .25s ease, color .25s ease;
+}
+a{ color: var(--color-primary); text-decoration: none; }
+a:hover{ text-decoration: underline; }
+button{ font-family: inherit; }
+ul{ margin:0; padding:0; }
+img{ max-width:100%; }
+
+/* ===== NAVBAR ===== */
+.navbar{
+  position: sticky;
+  top:0;
+  z-index: 50;
+  height: var(--navbar-height);
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  padding: 0 18px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+.icon-btn{
+  display:flex; align-items:center; justify-content:center;
+  width: 38px; height: 38px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor:pointer;
+  transition: background .15s, color .15s;
+  flex-shrink: 0;
+}
+.icon-btn:hover{ background: var(--bg-surface-2); color: var(--color-primary); }
+
+.brand{
+  display:flex; align-items:center; gap:8px;
+  font-weight:700; font-size:1.15rem;
+  color: var(--text-primary);
+  flex-shrink:0;
+}
+.brand:hover{ text-decoration:none; }
+.brand-logo{
+  display:flex; align-items:center; justify-content:center;
+  width:34px; height:34px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, var(--color-primary), #4F8CFF);
+  color:#fff; font-weight:700; font-size:1.1rem;
+  flex-shrink:0;
+}
+.brand-accent{ color: var(--color-primary); }
+
+.navbar-search{
+  flex:1;
+  max-width: 480px;
+  margin: 0 auto 0 12px;
+  display:flex; align-items:center; gap:8px;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  color: var(--text-muted);
+}
+.navbar-search input{
+  border:none; outline:none; background:transparent;
+  width:100%; font-size:.92rem;
+  color: var(--text-primary);
+}
+@media (max-width: 720px){
+  .navbar-search{ display:none; }
+}
+
+/* ===== APP SHELL ===== */
+.app-shell{
+  display:flex;
+  min-height: calc(100vh - var(--navbar-height));
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  width: var(--sidebar-width);
+  flex-shrink:0;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
+  position: sticky;
+  top: var(--navbar-height);
+  height: calc(100vh - var(--navbar-height));
+  overflow-y:auto;
+}
+.sidebar-inner{ padding: 16px 12px 40px; }
+.sidebar-search-mobile{ display:none; margin-bottom: 12px; }
+.sidebar-search-mobile input{
+  width:100%; padding:9px 12px;
+  border-radius: var(--radius-sm);
+  border:1px solid var(--border-color);
+  background: var(--bg-surface-2);
+  color: var(--text-primary);
+  outline:none;
+}
+
+.materi-list{ display:flex; flex-direction:column; gap:2px; }
+.materi-group-label{
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-muted);
+  font-weight:700;
+  padding: 14px 10px 6px;
+}
+.materi-link{
+  display:flex; align-items:center; gap:10px;
+  padding: 9px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: .92rem;
+  cursor:pointer;
+  transition: background .15s, color .15s;
+}
+.materi-link:hover{ background: var(--bg-surface-2); color: var(--text-primary); text-decoration:none; }
+.materi-link.active{
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight:600;
+}
+.materi-link .dot{
+  width:6px; height:6px; border-radius:50%;
+  background: var(--text-muted);
+  flex-shrink:0;
+}
+.materi-link.active .dot{ background: var(--color-primary); }
+
+.sidebar-empty{
+  text-align:center; color: var(--text-muted);
+  font-size: .88rem; padding: 20px 10px;
+}
+
+.sidebar-overlay{
+  display:none;
+  position: fixed; inset:0;
+  background: rgba(0,0,0,.4);
+  z-index: 45;
+}
+
+@media (max-width: 960px){
+  .sidebar{
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    height: calc(100vh - var(--navbar-height));
+    transform: translateX(-100%);
+    transition: transform .25s ease;
+    z-index: 46;
+    box-shadow: var(--shadow-lg);
+  }
+  .sidebar.open{ transform: translateX(0); }
+  .sidebar-search-mobile{ display:block; }
+  .sidebar-overlay.show{ display:block; }
+}
+
+/* ===== MAIN CONTENT ===== */
+.content{
+  flex:1;
+  min-width:0;
+  padding: 32px 28px 80px;
+}
+@media (max-width: 640px){
+  .content{ padding: 22px 16px 60px; }
+}
+
+/* ===== HOME / HERO ===== */
+.view-home{ max-width: 1080px; margin:0 auto; }
+.hero{
+  text-align:center;
+  padding: 48px 16px 36px;
+}
+.hero-logo{
+  width: 64px; height:64px; margin: 0 auto 18px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--color-primary), #4F8CFF);
+  color:#fff; font-size: 1.8rem; font-weight:700;
+  box-shadow: var(--shadow-md);
+}
+.hero h1{
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin: 0 0 12px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+.hero-subtitle{
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+  max-width: 620px;
+  margin: 0 auto 26px;
+  line-height: 1.6;
+}
+.hero-actions{ display:flex; justify-content:center; gap:12px; }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:6px;
+  padding: 11px 22px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: .94rem;
+  cursor:pointer;
+  border: 1px solid transparent;
+  transition: transform .12s ease, box-shadow .12s ease, background .15s;
+}
+.btn:hover{ text-decoration:none; }
+.btn-primary{
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover{ background: var(--color-primary-dark); box-shadow: var(--shadow-md); }
+.btn-outline{
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+.btn-outline:hover{ border-color: var(--color-primary); color: var(--color-primary); }
+.btn:disabled{ opacity:.4; cursor:not-allowed; transform:none !important; }
+
+.home-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+.materi-card{
+  display:block;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s;
+}
+.materi-card:hover{
+  text-decoration:none;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+.materi-card .cat{
+  display:inline-block;
+  font-size:.72rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.04em;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+.materi-card h3{
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+}
+.materi-card p{
+  margin:0;
+  font-size: .87rem;
+  color: var(--text-secondary);
+  line-height:1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow:hidden;
+}
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb{
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+.breadcrumb a{ color: var(--text-secondary); }
+.breadcrumb .sep{ margin: 0 6px; }
+.breadcrumb .current{ color: var(--color-primary); font-weight:600; }
+
+/* ===== MATERI LAYOUT ===== */
+.materi-layout{
+  display:flex; gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items:flex-start;
+}
+.materi-article{
+  flex:1; min-width:0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 8px 36px 36px;
+  position: relative;
+  overflow:hidden;
+}
+@media (max-width: 640px){
+  .materi-article{ padding: 8px 18px 26px; border-radius: var(--radius-md); }
+}
+
+.reading-progress-wrap{
+  position: sticky;
+  top:0;
+  height:4px;
+  background: var(--border-color);
+  margin: 0 -36px 26px;
+}
+@media (max-width: 640px){ .reading-progress-wrap{ margin: 0 -18px 20px; } }
+.reading-progress-bar{
+  height:100%; width:0%;
+  background: var(--color-primary);
+  transition: width .1s linear;
+}
+
+.materi-header{ margin-bottom: 22px; }
+.materi-kategori{
+  display:inline-block;
+  font-size:.74rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.05em;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+.materi-header h1{
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 800;
+}
+
+.materi-nav-buttons{
+  display:flex; justify-content:space-between; gap:10px;
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border-color);
+}
+@media (max-width:560px){
+  .materi-nav-buttons{ flex-direction:column; }
+  .materi-nav-buttons .btn{ width:100%; }
+}
+
+/* ===== TOC ===== */
+.toc-panel{
+  width: 230px;
+  flex-shrink:0;
+  position: sticky;
+  top: calc(var(--navbar-height) + 24px);
+}
+.toc-title{
+  font-size:.78rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.05em;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.toc-list{ display:flex; flex-direction:column; gap:6px; }
+.toc-list a{
+  display:block;
+  font-size: .86rem;
+  color: var(--text-secondary);
+  padding: 4px 0 4px 10px;
+  border-left: 2px solid var(--border-color);
+}
+.toc-list a:hover{ color: var(--color-primary); text-decoration:none; }
+.toc-list a.h3{ padding-left: 20px; font-size:.82rem; }
+.toc-list a.active{ color: var(--color-primary); border-left-color: var(--color-primary); font-weight:600; }
+
+@media (max-width: 1100px){
+  .toc-panel{ display:none; }
+}
+
+/* ===== MARKDOWN BODY ===== */
+.markdown-body{
+  line-height: 1.75;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+.markdown-body h2{
+  font-size: 1.35rem;
+  margin: 34px 0 14px;
+  font-weight:700;
+  scroll-margin-top: 90px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+.markdown-body h3{
+  font-size: 1.12rem;
+  margin: 26px 0 10px;
+  font-weight:700;
+  scroll-margin-top: 90px;
+}
+.markdown-body h4{ font-size: 1rem; margin: 20px 0 8px; font-weight:700; }
+.markdown-body p{ margin: 0 0 16px; color: var(--text-primary); }
+.markdown-body ul, .markdown-body ol{ margin: 0 0 16px; padding-left: 22px; }
+.markdown-body li{ margin-bottom: 6px; }
+.markdown-body strong{ font-weight:700; }
+.markdown-body blockquote{
+  margin: 0 0 16px;
+  padding: 12px 18px;
+  border-left: 4px solid var(--color-primary);
+  background: var(--color-primary-light);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-secondary);
+}
+.markdown-body blockquote p:last-child{ margin-bottom:0; }
+
+.markdown-body table{
+  width:100%;
+  border-collapse: collapse;
+  margin: 0 0 20px;
+  font-size: .92rem;
+  display:block;
+  overflow-x:auto;
+  white-space:nowrap;
+}
+.markdown-body th, .markdown-body td{
+  border: 1px solid var(--border-color);
+  padding: 9px 13px;
+  text-align:left;
+}
+.markdown-body th{
+  background: var(--bg-surface-2);
+  font-weight:700;
+}
+.markdown-body tr:nth-child(even) td{ background: var(--bg-surface-2); }
+
+.markdown-body code{
+  font-family: var(--font-mono);
+  background: var(--code-bg);
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-size: .88em;
+}
+.markdown-body pre{
+  background: var(--code-bg);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  overflow-x: auto;
+  margin: 0 0 18px;
+  border: 1px solid var(--border-color);
+}
+.markdown-body pre code{
+  background: none;
+  padding:0;
+  font-size: .87rem;
+  line-height:1.6;
+}
+.markdown-body img{ border-radius: var(--radius-md); margin: 10px 0; }
+.markdown-body hr{ border:none; border-top:1px solid var(--border-color); margin: 28px 0; }
+
+/* ===== KATEX BLOCK + COPY BUTTON ===== */
+.formula-block{
+  position: relative;
+  margin: 18px 0 24px;
+  padding: 18px 50px 18px 18px;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow-x:auto;
+}
+.formula-block .katex-display{ margin:0; }
+.copy-formula-btn{
+  position:absolute;
+  top:10px; right:10px;
+  width: 30px; height:30px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius: 7px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  cursor:pointer;
+  transition: color .15s, border-color .15s;
+}
+.copy-formula-btn:hover{ color: var(--color-primary); border-color: var(--color-primary); }
+
+.copy-toast{
+  position: fixed;
+  bottom: 26px; left:50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--text-primary);
+  color: var(--bg-surface);
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: .85rem;
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+  opacity:0;
+  transition: opacity .2s, transform .2s;
+  border:none;
+}
+.copy-toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
+
+/* ===== EMPTY STATE / 404 ===== */
+.empty-state{
+  text-align:center;
+  padding: 80px 20px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.empty-state h2{ margin-bottom: 10px; }
+.empty-state p{ color: var(--text-secondary); margin-bottom: 22px; }
+
+/* ===== SCROLLBAR ===== */
+.sidebar::-webkit-scrollbar{ width:6px; }
+.sidebar::-webkit-scrollbar-thumb{ background: var(--border-color); border-radius:3px; }
+
+/* ===== UTIL ===== */
+[hidden]{ display:none !important; }
+</style>
+</head>
+<body>
+
+<!-- ===== TOP NAVBAR ===== -->
+<header class="navbar">
+  <button id="sidebarToggle" class="icon-btn" aria-label="Buka menu materi" title="Menu">
+    <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  </button>
+
+  <a href="#/" class="brand">
+    <span class="brand-logo">Σ</span>
+    <span class="brand-text">Statistika<span class="brand-accent">Ku</span></span>
+  </a>
+
+  <div class="navbar-search">
+    <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    <input type="text" id="searchInput" placeholder="Cari materi... (judul / isi)" autocomplete="off">
+  </div>
+
+  <button id="themeToggle" class="icon-btn" aria-label="Ganti tema" title="Mode gelap/terang">
+    <svg id="themeIcon" viewBox="0 0 24 24" width="20" height="20"><path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="currentColor"/></svg>
+  </button>
+</header>
+
+<div class="app-shell">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <div class="sidebar-search-mobile">
+        <input type="text" id="searchInputMobile" placeholder="Cari materi...">
+      </div>
+      <nav id="materiList" class="materi-list" aria-label="Daftar Materi">
+        <!-- Diisi otomatis oleh script -->
+      </nav>
+      <p class="sidebar-empty" id="searchEmpty" hidden>Materi tidak ditemukan.</p>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="content" id="mainContent">
+
+    <!-- ---- HOME / LANDING ---- -->
+    <section id="view-home" class="view view-home">
+      <div class="hero">
+        <div class="hero-logo">Σ</div>
+        <h1>Selamat Datang di <span class="brand-accent">StatistikaKu</span></h1>
+        <p class="hero-subtitle">
+          Platform belajar statistika gratis — rumus, contoh soal, dan penjelasan
+          lengkap mulai dari statistika deskriptif hingga regresi, langsung di browser.
+        </p>
+        <div class="hero-actions">
+          <a href="#/materi" class="btn btn-primary" id="btnMulaiBelajar">Mulai Belajar →</a>
+        </div>
+      </div>
+
+      <div class="home-grid" id="homeGrid">
+        <!-- kartu materi diisi otomatis -->
+      </div>
+    </section>
+
+    <!-- ---- MATERI VIEW ---- -->
+    <section id="view-materi" class="view view-materi" hidden>
+
+      <nav class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb"></nav>
+
+      <div class="materi-layout">
+        <article class="materi-article">
+          <div class="reading-progress-wrap">
+            <div class="reading-progress-bar" id="readingProgress"></div>
+          </div>
+
+          <header class="materi-header">
+            <span class="materi-kategori" id="materiKategori"></span>
+            <h1 id="materiJudul"></h1>
+          </header>
+
+          <div id="materiBody" class="markdown-body"></div>
+
+          <div class="materi-nav-buttons">
+            <button id="btnPrev" class="btn btn-outline" disabled>← Materi Sebelumnya</button>
+            <button id="btnNext" class="btn btn-outline" disabled>Materi Berikutnya →</button>
+          </div>
+        </article>
+
+        <aside class="toc-panel" id="tocPanel">
+          <div class="toc-title">Daftar Isi</div>
+          <nav id="tocList" class="toc-list"></nav>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ---- NOT FOUND ---- -->
+    <section id="view-notfound" class="view" hidden>
+      <div class="empty-state">
+        <h2>404 — Materi tidak ditemukan</h2>
+        <p>Materi yang kamu cari tidak ada atau sudah dipindahkan.</p>
+        <a href="#/" class="btn btn-primary">Kembali ke Beranda</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<button id="copyToast" class="copy-toast" hidden>Rumus disalin!</button>
+
+<!-- Manifest daftar materi (satu-satunya bagian yang perlu diedit saat menambah materi baru).
+     File fisik tiap materi tetap harus ada di folder /materi karena dimuat
+     secara dinamis saat runtime oleh loadAllMateri() di bawah. -->
+<script>
+const MATERI_LIST = [
+  "statistik_deskriptif",
+  "distribusi_normal",
+  "korelasi",
+  "regresi"
+];
+window.MATERI_LIST = MATERI_LIST;
+</script>
+
+<script>
+/**
+ * ======================================================================
+ * StatistikaKu — Aplikasi (Router + Logika Utama)
+ * Semua HTML, CSS, dan JS digabung dalam satu file index.html agar
+ * lebih sederhana dan mengurangi risiko race-condition antar file.
+ * Materi tetap dipisah di folder /materi agar mudah ditambah.
+ * ======================================================================
+ */
+(() => {
+  "use strict";
+
+  // ===================================================
+  // ROUTER SEDERHANA BERBASIS HASH (#)
+  // ===================================================
+  const Router = (() => {
+    let routes = [];
+    let notFoundHandler = () => {};
+
+    function on(pattern, handler) {
+      routes.push({ pattern, handler });
+      return Router;
+    }
+    function notFound(handler) {
+      notFoundHandler = handler;
+      return Router;
+    }
+    function getCurrentPath() {
+      const hash = window.location.hash || "#/";
+      let path = hash.slice(1);
+      if (path === "") path = "/";
+      return path;
+    }
+    function resolve() {
+      const path = getCurrentPath();
+      for (const route of routes) {
+        const match = path.match(route.pattern);
+        if (match) {
+          route.handler(match);
+          return;
+        }
+      }
+      notFoundHandler();
+    }
+    function navigate(path) {
+      window.location.hash = path;
+    }
+    function init() {
+      window.addEventListener("hashchange", resolve);
+    }
+
+    return { on, notFound, navigate, resolve, getCurrentPath, init };
+  })();
+  Router.init();
+
+  // ===================================================
+  // STATE
+  // ===================================================
+  const state = {
+    materiData: {},     // { id: { id, judul, kategori, isi } }
+    materiOrder: [],    // urutan id sesuai MATERI_LIST
+    loaded: false,
+    currentId: null,
+  };
+
+  // ===================================================
+  // DOM REFS
+  // ===================================================
+  const $ = (sel) => document.querySelector(sel);
+  const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+  const refs = {
+    sidebar: $("#sidebar"),
+    sidebarToggle: $("#sidebarToggle"),
+    sidebarOverlay: $("#sidebarOverlay"),
+    materiList: $("#materiList"),
+    searchEmpty: $("#searchEmpty"),
+    searchInput: $("#searchInput"),
+    searchInputMobile: $("#searchInputMobile"),
+    themeToggle: $("#themeToggle"),
+    themeIcon: $("#themeIcon"),
+
+    viewHome: $("#view-home"),
+    viewMateri: $("#view-materi"),
+    viewNotFound: $("#view-notfound"),
+    homeGrid: $("#homeGrid"),
+
+    breadcrumb: $("#breadcrumb"),
+    materiKategori: $("#materiKategori"),
+    materiJudul: $("#materiJudul"),
+    materiBody: $("#materiBody"),
+    btnPrev: $("#btnPrev"),
+    btnNext: $("#btnNext"),
+    readingProgress: $("#readingProgress"),
+    tocPanel: $("#tocPanel"),
+    tocList: $("#tocList"),
+    copyToast: $("#copyToast"),
+  };
+
+  // ===================================================
+  // MARKDOWN-IT + LATEX (diinisialisasi di dalam init(),
+  // SETELAH library CDN dipastikan siap — lihat waitForLibraries)
+  // ===================================================
+  let md = null;
+  let mathStore = [];
+
+  function stashMath(raw) {
+    let result = raw;
+
+    // Blok $$ ... $$ (multiline)
+    result = result.replace(/\$\$([\s\S]+?)\$\$/g, (_, expr) => {
+      const idx = mathStore.push({ type: "block", expr: expr.trim() }) - 1;
+      return `\n\n@@MATH_BLOCK_${idx}@@\n\n`;
+    });
+
+    // Inline $ ... $ (tidak menangkap $$ karena sudah diganti di atas)
+    result = result.replace(/\$([^\$\n]+?)\$/g, (_, expr) => {
+      const idx = mathStore.push({ type: "inline", expr: expr.trim() }) - 1;
+      return `@@MATH_INLINE_${idx}@@`;
+    });
+
+    return result;
+  }
+
+  function renderMathPlaceholders(html) {
+    html = html.replace(/@@MATH_BLOCK_(\d+)@@/g, (_, i) => {
+      const item = mathStore[parseInt(i, 10)];
+      if (!item) return "";
+      let rendered = "";
+      try {
+        rendered = window.katex.renderToString(item.expr, { displayMode: true, throwOnError: false });
+      } catch (e) {
+        rendered = `<span class="katex-error">${escapeHtml(item.expr)}</span>`;
+      }
+      return `<div class="formula-block" data-formula="${escapeAttr(item.expr)}">
+        <button class="copy-formula-btn" title="Salin rumus" aria-label="Salin rumus">
+          <svg viewBox="0 0 24 24" width="15" height="15"><rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M5 15V5a2 2 0 0 1 2-2h10" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        </button>
+        ${rendered}
+      </div>`;
+    });
+
+    html = html.replace(/@@MATH_INLINE_(\d+)@@/g, (_, i) => {
+      const item = mathStore[parseInt(i, 10)];
+      if (!item) return "";
+      try {
+        return window.katex.renderToString(item.expr, { displayMode: false, throwOnError: false });
+      } catch (e) {
+        return `<span class="katex-error">${escapeHtml(item.expr)}</span>`;
+      }
+    });
+
+    return html;
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[c]));
+  }
+  function escapeAttr(str) {
+    return str.replace(/"/g, "&quot;");
+  }
+
+  function renderMarkdownWithMath(rawText) {
+    mathStore = [];
+    const stashed = stashMath(rawText);
+    let html = md.render(stashed);
+    html = renderMathPlaceholders(html);
+    return html;
+  }
+
+  // ===================================================
+  // LOADING MATERI (dinamis via <script> injection)
+  // ===================================================
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error("Gagal memuat: " + src));
+      document.body.appendChild(script);
+    });
+  }
+
+  async function loadAllMateri() {
+    const list = window.MATERI_LIST || [];
+    state.materiOrder = list.slice();
+
+    for (const id of list) {
+      try {
+        // Setiap file materi mendefinisikan ulang window.MATERI,
+        // jadi kita tangkap nilainya tepat setelah script dimuat.
+        await loadScript(`materi/${id}.js`);
+        if (window.MATERI && window.MATERI.id) {
+          state.materiData[window.MATERI.id] = {
+            id: window.MATERI.id,
+            judul: window.MATERI.judul || window.MATERI.id,
+            kategori: window.MATERI.kategori || "Umum",
+            isi: window.MATERI.isi || "",
+          };
+        }
+      } catch (err) {
+        console.error(`[StatistikaKu] Gagal memuat materi "${id}":`, err);
+      }
+    }
+    state.loaded = true;
+  }
+
+  // ===================================================
+  // SIDEBAR RENDER
+  // ===================================================
+  function renderSidebar(filterText = "") {
+    const filter = filterText.trim().toLowerCase();
+    refs.materiList.innerHTML = "";
+
+    const grouped = {};
+    state.materiOrder.forEach((id) => {
+      const m = state.materiData[id];
+      if (!m) return;
+
+      const matchSearch =
+        !filter ||
+        m.judul.toLowerCase().includes(filter) ||
+        m.isi.toLowerCase().includes(filter) ||
+        m.kategori.toLowerCase().includes(filter);
+
+      if (!matchSearch) return;
+
+      if (!grouped[m.kategori]) grouped[m.kategori] = [];
+      grouped[m.kategori].push(m);
+    });
+
+    const categories = Object.keys(grouped);
+
+    if (categories.length === 0) {
+      refs.searchEmpty.hidden = false;
+      return;
+    }
+    refs.searchEmpty.hidden = true;
+
+    categories.forEach((cat) => {
+      const label = document.createElement("div");
+      label.className = "materi-group-label";
+      label.textContent = cat;
+      refs.materiList.appendChild(label);
+
+      grouped[cat].forEach((m) => {
+        const link = document.createElement("a");
+        link.href = `#/materi/${m.id}`;
+        link.className = "materi-link" + (state.currentId === m.id ? " active" : "");
+        link.innerHTML = `<span class="dot"></span><span>${escapeHtml(m.judul)}</span>`;
+        link.addEventListener("click", () => closeMobileSidebar());
+        refs.materiList.appendChild(link);
+      });
+    });
+  }
+
+  function renderHomeGrid() {
+    refs.homeGrid.innerHTML = "";
+    state.materiOrder.forEach((id) => {
+      const m = state.materiData[id];
+      if (!m) return;
+      const plainText = m.isi.replace(/[#*`$>\-]/g, "").replace(/\n+/g, " ").trim();
+      const card = document.createElement("a");
+      card.href = `#/materi/${m.id}`;
+      card.className = "materi-card";
+      card.innerHTML = `
+        <span class="cat">${escapeHtml(m.kategori)}</span>
+        <h3>${escapeHtml(m.judul)}</h3>
+        <p>${escapeHtml(plainText.slice(0, 110))}...</p>
+      `;
+      refs.homeGrid.appendChild(card);
+    });
+  }
+
+  // ===================================================
+  // VIEW SWITCHING
+  // ===================================================
+  function showView(viewName) {
+    refs.viewHome.hidden = viewName !== "home";
+    refs.viewMateri.hidden = viewName !== "materi";
+    refs.viewNotFound.hidden = viewName !== "notfound";
+    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+  }
+
+  // ===================================================
+  // RENDER HALAMAN MATERI
+  // ===================================================
+  function renderMateriPage(id) {
+    const m = state.materiData[id];
+    if (!m) {
+      showView("notfound");
+      state.currentId = null;
+      renderSidebar(refs.searchInput.value);
+      return;
+    }
+
+    state.currentId = id;
+    showView("materi");
+
+    refs.breadcrumb.innerHTML = `
+      <a href="#/">Beranda</a>
+      <span class="sep">/</span>
+      <span>${escapeHtml(m.kategori)}</span>
+      <span class="sep">/</span>
+      <span class="current">${escapeHtml(m.judul)}</span>
+    `;
+
+    refs.materiKategori.textContent = m.kategori;
+    refs.materiJudul.textContent = m.judul;
+    refs.materiBody.innerHTML = renderMarkdownWithMath(m.isi);
+
+    if (window.hljs) {
+      refs.materiBody.querySelectorAll("pre code").forEach((block) => {
+        window.hljs.highlightElement(block);
+      });
+    }
+
+    buildTOC();
+    attachCopyFormulaHandlers();
+    setupPrevNext(id);
+    renderSidebar(refs.searchInput.value);
+    updateReadingProgress();
+    document.title = `${m.judul} — StatistikaKu`;
+  }
+
+  // ===================================================
+  // DAFTAR ISI (TOC) OTOMATIS
+  // ===================================================
+  function buildTOC() {
+    const headings = refs.materiBody.querySelectorAll("h2, h3");
+    refs.tocList.innerHTML = "";
+
+    if (headings.length === 0) {
+      refs.tocPanel.style.display = "none";
+      return;
+    }
+    refs.tocPanel.style.display = "";
+
+    headings.forEach((h, i) => {
+      const slug = `sec-${i}-` + h.textContent.toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .trim()
+        .replace(/\s+/g, "-");
+      h.id = slug;
+
+      const a = document.createElement("a");
+      a.href = `#${slug}`;
+      a.textContent = h.textContent;
+      a.className = h.tagName.toLowerCase() === "h3" ? "h3" : "h2";
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.replaceState(null, "", `#/materi/${state.currentId}`);
+      });
+      refs.tocList.appendChild(a);
+    });
+
+    observeTOCHighlight(headings);
+  }
+
+  let tocObserver = null;
+  function observeTOCHighlight(headings) {
+    if (tocObserver) tocObserver.disconnect();
+    tocObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            $$(".toc-list a").forEach((a) => a.classList.remove("active"));
+            const activeLink = refs.tocList.querySelector(`a[href="#${id}"]`);
+            if (activeLink) activeLink.classList.add("active");
+          }
+        });
+      },
+      { rootMargin: "-100px 0px -70% 0px" }
+    );
+    headings.forEach((h) => tocObserver.observe(h));
+  }
+
+  // ===================================================
+  // TOMBOL SALIN RUMUS
+  // ===================================================
+  function attachCopyFormulaHandlers() {
+    refs.materiBody.querySelectorAll(".copy-formula-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const formula = btn.closest(".formula-block").dataset.formula;
+        copyToClipboard(formula);
+      });
+    });
+  }
+
+  function copyToClipboard(text) {
+    const fallback = () => {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      showToast();
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(showToast).catch(fallback);
+    } else {
+      fallback();
+    }
+  }
+
+  let toastTimer = null;
+  function showToast() {
+    refs.copyToast.hidden = false;
+    requestAnimationFrame(() => refs.copyToast.classList.add("show"));
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      refs.copyToast.classList.remove("show");
+      setTimeout(() => { refs.copyToast.hidden = true; }, 200);
+    }, 1600);
+  }
+
+  // ===================================================
+  // NAVIGASI PREV / NEXT
+  // ===================================================
+  function setupPrevNext(id) {
+    const idx = state.materiOrder.indexOf(id);
+    const prevId = idx > 0 ? state.materiOrder[idx - 1] : null;
+    const nextId = idx >= 0 && idx < state.materiOrder.length - 1 ? state.materiOrder[idx + 1] : null;
+
+    if (prevId && state.materiData[prevId]) {
+      refs.btnPrev.disabled = false;
+      refs.btnPrev.textContent = `← ${state.materiData[prevId].judul}`;
+      refs.btnPrev.onclick = () => Router.navigate(`/materi/${prevId}`);
+    } else {
+      refs.btnPrev.disabled = true;
+      refs.btnPrev.textContent = "← Materi Sebelumnya";
+      refs.btnPrev.onclick = null;
+    }
+
+    if (nextId && state.materiData[nextId]) {
+      refs.btnNext.disabled = false;
+      refs.btnNext.textContent = `${state.materiData[nextId].judul} →`;
+      refs.btnNext.onclick = () => Router.navigate(`/materi/${nextId}`);
+    } else {
+      refs.btnNext.disabled = true;
+      refs.btnNext.textContent = "Materi Berikutnya →";
+      refs.btnNext.onclick = null;
+    }
+  }
+
+  // ===================================================
+  // PROGRESS MEMBACA
+  // ===================================================
+  function updateReadingProgress() {
+    const article = $(".materi-article");
+    if (!article) return;
+    const onScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = article.offsetHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
+      refs.readingProgress.style.width = pct + "%";
+    };
+    window.removeEventListener("scroll", window.__scrollHandlerStatistikaKu || (() => {}));
+    window.__scrollHandlerStatistikaKu = onScroll;
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  // ===================================================
+  // PENCARIAN
+  // ===================================================
+  function setupSearch() {
+    const handler = (e) => {
+      const val = e.target.value;
+      refs.searchInput.value = val;
+      refs.searchInputMobile.value = val;
+      renderSidebar(val);
+    };
+    refs.searchInput.addEventListener("input", handler);
+    refs.searchInputMobile.addEventListener("input", handler);
+  }
+
+  // ===================================================
+  // SIDEBAR MOBILE TOGGLE
+  // ===================================================
+  function openMobileSidebar() {
+    refs.sidebar.classList.add("open");
+    refs.sidebarOverlay.classList.add("show");
+  }
+  function closeMobileSidebar() {
+    refs.sidebar.classList.remove("open");
+    refs.sidebarOverlay.classList.remove("show");
+  }
+  function setupSidebarToggle() {
+    refs.sidebarToggle.addEventListener("click", () => {
+      refs.sidebar.classList.contains("open") ? closeMobileSidebar() : openMobileSidebar();
+    });
+    refs.sidebarOverlay.addEventListener("click", closeMobileSidebar);
+  }
+
+  // ===================================================
+  // DARK / LIGHT MODE
+  // ===================================================
+  const THEME_KEY = "statistikaku-theme";
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    refs.themeIcon.innerHTML =
+      theme === "dark"
+        ? '<path d="M12 3a9 9 0 109 9 7 7 0 01-9-9z" fill="currentColor"/>'
+        : '<path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="currentColor"/>';
+    const hljsTheme = $("#hljs-theme");
+    if (hljsTheme) {
+      hljsTheme.href = theme === "dark"
+        ? "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+        : "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
+    }
+  }
+
+  function setupTheme() {
+    let saved = localStorage.getItem(THEME_KEY);
+    if (!saved) {
+      saved = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    applyTheme(saved);
+
+    refs.themeToggle.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme");
+      const next = current === "dark" ? "light" : "dark";
+      applyTheme(next);
+      localStorage.setItem(THEME_KEY, next);
+    });
+  }
+
+  // ===================================================
+  // ROUTING SETUP
+  // ===================================================
+  function setupRoutes() {
+    Router.on(/^\/$/, () => {
+      showView("home");
+      state.currentId = null;
+      renderHomeGrid();
+      renderSidebar(refs.searchInput.value);
+      document.title = "StatistikaKu — Belajar Statistika";
+    });
+
+    Router.on(/^\/materi\/([a-zA-Z0-9_\-]+)$/, (match) => {
+      const id = match[1];
+      renderMateriPage(id);
+    });
+
+    Router.on(/^\/materi$/, () => {
+      if (state.materiOrder.length > 0) {
+        Router.navigate(`/materi/${state.materiOrder[0]}`);
+      } else {
+        Router.navigate("/");
+      }
+    });
+
+    Router.notFound(() => {
+      showView("notfound");
+      document.title = "Materi tidak ditemukan — StatistikaKu";
+    });
+  }
+
+  // ===================================================
+  // PENGAMAN: TUNGGU LIBRARY CDN SIAP
+  // ===================================================
+  // Mencegah error "window.markdownit is not a function" / "katex is not defined"
+  // jika CDN sedikit lambat dimuat (terutama di koneksi lambat / mobile).
+  function waitForLibraries(maxWaitMs = 8000) {
+    return new Promise((resolve) => {
+      const start = Date.now();
+      const check = () => {
+        const ready =
+          typeof window.markdownit === "function" &&
+          typeof window.katex !== "undefined";
+        if (ready) {
+          resolve(true);
+        } else if (Date.now() - start > maxWaitMs) {
+          console.error("[StatistikaKu] Library CDN (markdown-it/KaTeX) gagal dimuat. Periksa koneksi internet atau apakah CDN diblokir.");
+          resolve(false);
+        } else {
+          setTimeout(check, 100);
+        }
+      };
+      check();
+    });
+  }
+
+  // ===================================================
+  // INIT
+  // ===================================================
+  async function init() {
+    setupTheme();
+    setupSearch();
+    setupSidebarToggle();
+    setupRoutes();
+
+    const librariesReady = await waitForLibraries();
+    if (!librariesReady) {
+      refs.homeGrid.innerHTML = `
+        <div class="empty-state" style="grid-column:1/-1;">
+          <h2>Gagal memuat library</h2>
+          <p>Markdown/KaTeX dari CDN tidak berhasil dimuat. Periksa koneksi internet kamu, lalu refresh halaman ini.</p>
+          <button class="btn btn-primary" onclick="location.reload()">Coba Lagi</button>
+        </div>`;
+      return;
+    }
+
+    // Inisialisasi markdown-it HANYA setelah dipastikan library siap.
+    md = window.markdownit({
+      html: false,
+      linkify: true,
+      typographer: true,
+      breaks: false,
+    });
+
+    await loadAllMateri();
+
+    renderSidebar();
+    renderHomeGrid();
+    Router.resolve();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
