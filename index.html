@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>StatistikaKu — Belajar Statistika</title>
-<meta name="description" content="StatistikaKu: platform belajar statistika gratis, materi lengkap, rumus matematika, dan contoh soal." />
+<meta name="description" content="Platform belajar statistika gratis — rumus, contoh soal, dan penjelasan lengkap."/>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
@@ -13,595 +13,677 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
 <style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
 :root {
-  --primary: #2563EB;
-  --primary-dark: #1E4FCB;
+  --primary:       #2563EB;
+  --primary-dark:  #1E4FCB;
   --primary-light: #EFF4FF;
-  --accent: #0EA5E9;
 
-  --bg-app: #F4F6F9;
-  --bg-surface: #FFFFFF;
-  --bg-surface-2: #F8F9FB;
-  --bg-sidebar: #FFFFFF;
-  --border: #E5E8EE;
+  --bg-app:      #F4F6F9;
+  --bg-surface:  #FFFFFF;
+  --bg-surface2: #F8F9FB;
+  --bg-sidebar:  #FFFFFF;
+  --border:      #E5E8EE;
 
   --text-1: #111827;
   --text-2: #5B6472;
-  --text-3: #8A93A2;
+  --text-3: #9CA3AF;
 
-  --code-bg: #F1F3F8;
-  --shadow-sm: 0 1px 2px rgba(16,24,40,.06);
-  --shadow-md: 0 4px 16px rgba(16,24,40,.08);
-  --shadow-lg: 0 12px 32px rgba(16,24,40,.12);
+  --code-bg:   #F1F3F8;
+  --sh-sm: 0 1px 3px rgba(16,24,40,.07);
+  --sh-md: 0 4px 16px rgba(16,24,40,.09);
+  --sh-lg: 0 12px 40px rgba(16,24,40,.14);
 
   --r-sm: 8px;
   --r-md: 12px;
   --r-lg: 18px;
 
-  --sidebar-w: 280px;
-  --nav-h: 64px;
+  --sidebar-w: 272px;
+  --nav-h:     60px;
 
-  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --mono: "JetBrains Mono", SFMono-Regular, Consolas, monospace;
+  --sans: "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --mono: "JetBrains Mono",SFMono-Regular,Consolas,monospace;
   color-scheme: light;
 }
-
 [data-theme="dark"] {
-  --bg-app: #0F1420;
-  --bg-surface: #161D2E;
-  --bg-surface-2: #1B2336;
-  --bg-sidebar: #131A2A;
-  --border: #263049;
+  --bg-app:      #0F1420;
+  --bg-surface:  #161D2E;
+  --bg-surface2: #1B2336;
+  --bg-sidebar:  #131A2A;
+  --border:      #263049;
   --text-1: #E8ECF4;
   --text-2: #A6AFC2;
   --text-3: #717A8E;
   --code-bg: #1E2740;
   --primary-light: #1B2A4D;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
-  --shadow-md: 0 4px 16px rgba(0,0,0,.35);
-  --shadow-lg: 0 12px 32px rgba(0,0,0,.45);
+  --sh-sm: 0 1px 3px rgba(0,0,0,.28);
+  --sh-md: 0 4px 16px rgba(0,0,0,.36);
+  --sh-lg: 0 12px 40px rgba(0,0,0,.48);
   color-scheme: dark;
 }
 
-*,*::before,*::after { box-sizing: border-box; }
-html,body { margin:0; padding:0; }
-body {
-  font-family: var(--sans);
-  background: var(--bg-app);
-  color: var(--text-1);
-  -webkit-font-smoothing: antialiased;
-  transition: background .25s, color .25s;
+/* ============================================================
+   RESET
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--sans);
+  background:var(--bg-app);
+  color:var(--text-1);
+  -webkit-font-smoothing:antialiased;
+  transition:background .25s,color .25s;
 }
-a { color: var(--primary); text-decoration: none; }
-a:hover { text-decoration: underline; }
-button { font-family: inherit; }
-ul { margin:0; padding:0; list-style:none; }
-img { max-width: 100%; }
-[hidden] { display: none !important; }
+a{color:var(--primary);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit;cursor:pointer}
+ul,ol{margin:0;padding:0;list-style:none}
+img{max-width:100%}
+[hidden]{display:none!important}
 
-/* ===== NAVBAR ===== */
-.navbar {
-  position: sticky; top:0; z-index: 50;
-  height: var(--nav-h);
-  display: flex; align-items: center; gap: 14px;
-  padding: 0 18px;
-  background: var(--bg-surface);
-  border-bottom: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.navbar{
+  position:sticky;top:0;z-index:60;
+  height:var(--nav-h);
+  display:flex;align-items:center;gap:12px;
+  padding:0 16px;
+  background:var(--bg-surface);
+  border-bottom:1px solid var(--border);
+  box-shadow:var(--sh-sm);
 }
-.icon-btn {
-  display: flex; align-items: center; justify-content: center;
-  width: 38px; height: 38px;
-  border-radius: var(--r-sm);
-  border: 1px solid transparent;
-  background: transparent;
-  color: var(--text-2);
-  cursor: pointer;
-  transition: background .15s, color .15s;
-  flex-shrink: 0;
+.icon-btn{
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;
+  border-radius:var(--r-sm);
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--text-2);
+  transition:background .15s,color .15s;
+  flex-shrink:0;
 }
-.icon-btn:hover { background: var(--bg-surface-2); color: var(--primary); }
-.brand {
-  display: flex; align-items: center; gap: 8px;
-  font-weight: 700; font-size: 1.15rem;
-  color: var(--text-1); flex-shrink: 0;
+.icon-btn:hover{background:var(--bg-surface2);color:var(--primary)}
+.brand{
+  display:flex;align-items:center;gap:8px;
+  font-weight:700;font-size:1.1rem;
+  color:var(--text-1);flex-shrink:0;
 }
-.brand:hover { text-decoration: none; }
-.brand-logo {
-  display: flex; align-items: center; justify-content: center;
-  width: 34px; height: 34px; border-radius: 9px;
-  background: linear-gradient(135deg, var(--primary), #4F8CFF);
-  color: #fff; font-weight: 700; font-size: 1.1rem;
+.brand:hover{text-decoration:none}
+.brand-logo{
+  display:flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,var(--primary),#4F8CFF);
+  color:#fff;font-weight:800;font-size:1rem;
 }
-.brand-accent { color: var(--primary); }
-.navbar-search {
-  flex: 1; max-width: 440px; margin: 0 auto 0 12px;
-  display: flex; align-items: center; gap: 8px;
-  background: var(--bg-surface-2);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  padding: 8px 12px; color: var(--text-3);
+.brand-accent{color:var(--primary)}
+.nav-search{
+  flex:1;max-width:400px;margin-left:8px;
+  display:flex;align-items:center;gap:8px;
+  background:var(--bg-surface2);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  padding:7px 12px;
+  color:var(--text-3);
 }
-.navbar-search input {
-  border: none; outline: none; background: transparent;
-  width: 100%; font-size: .92rem; color: var(--text-1);
+.nav-search input{
+  border:none;outline:none;background:transparent;
+  width:100%;font-size:.88rem;color:var(--text-1);
 }
-@media (max-width: 720px) { .navbar-search { display: none; } }
+@media(max-width:680px){.nav-search{display:none}}
 
-/* ===== APP SHELL ===== */
-.app-shell { display: flex; min-height: calc(100vh - var(--nav-h)); }
-
-/* ===== SIDEBAR ===== */
-.sidebar {
-  width: var(--sidebar-w); flex-shrink: 0;
-  background: var(--bg-sidebar);
-  border-right: 1px solid var(--border);
-  position: sticky; top: var(--nav-h);
-  height: calc(100vh - var(--nav-h));
-  overflow-y: auto;
-}
-.sidebar-inner { padding: 12px 10px 40px; }
-.sidebar-search-mobile { display: none; margin-bottom: 12px; }
-.sidebar-search-mobile input {
-  width: 100%; padding: 9px 12px;
-  border-radius: var(--r-sm); border: 1px solid var(--border);
-  background: var(--bg-surface-2); color: var(--text-1); outline: none;
+/* ============================================================
+   APP SHELL
+   ============================================================ */
+.app-shell{
+  display:flex;
+  min-height:calc(100vh - var(--nav-h));
 }
 
-/* --- SIDEBAR CATEGORY ACCORDION --- */
-.sb-category { margin-bottom: 4px; }
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar{
+  width:var(--sidebar-w);flex-shrink:0;
+  background:var(--bg-sidebar);
+  border-right:1px solid var(--border);
+  position:sticky;top:var(--nav-h);
+  height:calc(100vh - var(--nav-h));
+  overflow-y:auto;
+  display:flex;flex-direction:column;
+}
+.sidebar-inner{padding:10px 8px 48px;flex:1}
 
-.sb-cat-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 8px 10px 8px 8px;
-  border-radius: var(--r-sm);
-  cursor: pointer;
-  user-select: none;
-  transition: background .15s;
-  gap: 8px;
-}
-.sb-cat-header:hover { background: var(--bg-surface-2); }
-.sb-cat-header.open { background: var(--primary-light); }
-
-.sb-cat-icon {
-  width: 28px; height: 28px; border-radius: 7px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: .9rem; flex-shrink: 0;
-  background: var(--primary-light);
-}
-.sb-cat-header.open .sb-cat-icon { background: var(--primary); }
-
-.sb-cat-label {
-  flex: 1;
-  font-size: .82rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: .05em;
-  color: var(--text-2);
-}
-.sb-cat-header.open .sb-cat-label { color: var(--primary); }
-
-.sb-cat-chevron {
-  width: 16px; height: 16px; flex-shrink: 0;
-  color: var(--text-3);
-  transition: transform .2s;
-}
-.sb-cat-header.open .sb-cat-chevron { transform: rotate(180deg); }
-
-/* --- SIDEBAR TOPIC (Materi Utama) --- */
-.sb-topics { overflow: hidden; }
-.sb-topic {
-  margin: 2px 0;
-}
-.sb-topic-header {
-  display: flex; align-items: center; gap: 8px;
-  padding: 7px 10px 7px 14px;
-  border-radius: var(--r-sm);
-  cursor: pointer;
-  color: var(--text-2);
-  font-size: .88rem; font-weight: 600;
-  transition: background .15s, color .15s;
-}
-.sb-topic-header:hover { background: var(--bg-surface-2); color: var(--text-1); }
-.sb-topic-header.active { background: var(--primary-light); color: var(--primary); }
-
-.sb-topic-chevron {
-  width: 14px; height: 14px; flex-shrink: 0; margin-left: auto;
-  color: var(--text-3); transition: transform .2s;
-}
-.sb-topic-header.open .sb-topic-chevron { transform: rotate(180deg); }
-.sb-topic-header.active .sb-topic-chevron { color: var(--primary); }
-
-/* --- SIDEBAR SUB MATERI --- */
-.sb-subtopics { overflow: hidden; }
-.sb-sub-link {
-  display: flex; align-items: center; gap: 8px;
-  padding: 6px 10px 6px 32px;
-  border-radius: var(--r-sm);
-  color: var(--text-2);
-  font-size: .84rem;
-  cursor: pointer;
-  transition: background .15s, color .15s;
-}
-.sb-sub-link:hover { background: var(--bg-surface-2); color: var(--text-1); text-decoration: none; }
-.sb-sub-link.active {
-  background: var(--primary-light);
-  color: var(--primary);
-  font-weight: 600;
-}
-.sb-sub-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--text-3); flex-shrink: 0;
-}
-.sb-sub-link.active .sb-sub-dot { background: var(--primary); }
-
-.sidebar-empty { text-align: center; color: var(--text-3); font-size: .88rem; padding: 20px 10px; }
-.sidebar-overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,.4); z-index: 45;
+/* mobile search */
+.sb-search-mobile{display:none;margin-bottom:10px;padding:0 4px}
+.sb-search-mobile input{
+  width:100%;padding:8px 12px;
+  border-radius:var(--r-sm);
+  border:1px solid var(--border);
+  background:var(--bg-surface2);
+  color:var(--text-1);font-size:.88rem;outline:none;
 }
 
-@media (max-width: 960px) {
-  .sidebar {
-    position: fixed; top: var(--nav-h); left: 0;
-    height: calc(100vh - var(--nav-h));
-    transform: translateX(-100%);
-    transition: transform .25s ease; z-index: 46;
-    box-shadow: var(--shadow-lg);
+/* category group label */
+.sb-cat-label{
+  display:flex;align-items:center;gap:7px;
+  font-size:.68rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.07em;
+  color:var(--text-3);
+  padding:16px 10px 6px;
+  user-select:none;
+}
+.sb-cat-label .cat-icon{font-size:.9rem}
+
+/* materi link */
+.sb-link{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 10px;
+  border-radius:var(--r-sm);
+  color:var(--text-2);
+  font-size:.875rem;
+  transition:background .15s,color .15s;
+  cursor:pointer;
+  line-height:1.35;
+}
+.sb-link:hover{background:var(--bg-surface2);color:var(--text-1);text-decoration:none}
+.sb-link.active{
+  background:var(--primary-light);
+  color:var(--primary);
+  font-weight:600;
+}
+.sb-link .sb-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--border);flex-shrink:0;
+  transition:background .15s;
+}
+.sb-link.active .sb-dot{background:var(--primary)}
+
+.sb-empty{
+  text-align:center;color:var(--text-3);
+  font-size:.85rem;padding:24px 12px;
+}
+
+/* overlay */
+.sb-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.38);z-index:55;
+}
+
+@media(max-width:960px){
+  .sidebar{
+    position:fixed;top:var(--nav-h);left:0;
+    height:calc(100vh - var(--nav-h));
+    transform:translateX(-100%);
+    transition:transform .25s ease;
+    z-index:56;box-shadow:var(--sh-lg);
   }
-  .sidebar.open { transform: translateX(0); }
-  .sidebar-search-mobile { display: block; }
-  .sidebar-overlay.show { display: block; }
+  .sidebar.open{transform:translateX(0)}
+  .sb-search-mobile{display:block}
+  .sb-overlay.show{display:block}
 }
 
-/* ===== MAIN CONTENT ===== */
-.content { flex: 1; min-width: 0; padding: 32px 28px 80px; }
-@media (max-width: 640px) { .content { padding: 22px 16px 60px; } }
+/* scrollbar */
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 
-/* ===== HOME HERO ===== */
-.view-home { max-width: 1080px; margin: 0 auto; }
-.hero { text-align: center; padding: 48px 16px 36px; }
-.hero-logo {
-  width: 64px; height: 64px; margin: 0 auto 18px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 16px;
-  background: linear-gradient(135deg, var(--primary), #4F8CFF);
-  color: #fff; font-size: 1.8rem; font-weight: 700;
-  box-shadow: var(--shadow-md);
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+.content{
+  flex:1;min-width:0;
+  padding:36px 32px 100px;
 }
-.hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin: 0 0 12px; font-weight: 800; letter-spacing: -.02em; }
-.hero-subtitle { color: var(--text-2); font-size: 1.02rem; max-width: 620px; margin: 0 auto 26px; line-height: 1.6; }
-.hero-actions { display: flex; justify-content: center; gap: 12px; }
+@media(max-width:640px){.content{padding:22px 16px 80px}}
 
-/* ===== HOME CATEGORY SECTIONS ===== */
-.home-cats { margin-top: 32px; display: flex; flex-direction: column; gap: 36px; }
-.home-cat-section {}
-.home-cat-title {
-  font-size: 1.1rem; font-weight: 700; color: var(--text-1);
-  margin: 0 0 16px;
-  display: flex; align-items: center; gap: 10px;
+/* ============================================================
+   HOME VIEW
+   ============================================================ */
+.view-home{max-width:960px;margin:0 auto}
+.hero{
+  text-align:center;
+  padding:52px 16px 40px;
 }
-.home-cat-title .cat-badge {
-  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
-  color: var(--primary); background: var(--primary-light);
-  padding: 3px 10px; border-radius: 999px;
+.hero-logo{
+  width:68px;height:68px;margin:0 auto 18px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:18px;
+  background:linear-gradient(135deg,var(--primary),#4F8CFF);
+  color:#fff;font-size:2rem;font-weight:800;
+  box-shadow:var(--sh-md);
 }
-.home-topic-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 14px;
+.hero h1{
+  font-size:clamp(1.6rem,4vw,2.4rem);
+  margin:0 0 12px;font-weight:800;letter-spacing:-.025em;
 }
-.topic-card {
-  display: block;
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 18px 20px;
-  transition: transform .15s, box-shadow .15s, border-color .15s;
-  cursor: pointer;
+.hero-sub{
+  color:var(--text-2);font-size:1rem;
+  max-width:580px;margin:0 auto 28px;line-height:1.65;
 }
-.topic-card:hover {
-  text-decoration: none; transform: translateY(-3px);
-  box-shadow: var(--shadow-md); border-color: var(--primary);
-}
-.topic-card-icon {
-  width: 38px; height: 38px; border-radius: 10px;
-  background: var(--primary-light);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem; margin-bottom: 12px;
-}
-.topic-card h3 { margin: 0 0 5px; font-size: 1rem; color: var(--text-1); }
-.topic-card .sub-count { font-size: .8rem; color: var(--text-3); }
+.hero-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
 
-/* ===== KATEGORI OVERVIEW PAGE ===== */
-.view-kategori { max-width: 900px; margin: 0 auto; }
-.kat-hero {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 28px 32px 24px;
-  margin-bottom: 28px;
-  display: flex; align-items: center; gap: 20px;
+/* stat chips on home */
+.home-stats{
+  display:flex;justify-content:center;gap:24px;
+  flex-wrap:wrap;margin-bottom:40px;
 }
-.kat-hero-icon {
-  width: 56px; height: 56px; border-radius: 14px;
-  background: linear-gradient(135deg, var(--primary), #4F8CFF);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.6rem; flex-shrink: 0;
+.home-stat{text-align:center}
+.home-stat strong{display:block;font-size:1.4rem;font-weight:800;color:var(--primary)}
+.home-stat span{font-size:.8rem;color:var(--text-3)}
+
+/* category cards on home */
+.home-cats{display:flex;flex-direction:column;gap:32px}
+.home-cat-title{
+  font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.07em;
+  color:var(--text-3);margin:0 0 12px;
+  display:flex;align-items:center;gap:8px;
 }
-.kat-hero-text h1 { margin: 0 0 6px; font-size: 1.7rem; font-weight: 800; }
-.kat-hero-text p { margin: 0; color: var(--text-2); font-size: .95rem; line-height: 1.5; }
-
-.kat-topics-title { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--text-3); margin: 0 0 14px; }
-.kat-topic-list { display: flex; flex-direction: column; gap: 12px; }
-.kat-topic-item {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  padding: 16px 20px;
-  cursor: pointer;
-  transition: border-color .15s, box-shadow .15s;
+.home-cat-title::after{
+  content:'';flex:1;height:1px;background:var(--border);
 }
-.kat-topic-item:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); text-decoration: none; }
-.kat-topic-item-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-.kat-topic-num {
-  width: 28px; height: 28px; border-radius: 8px;
-  background: var(--primary-light); color: var(--primary);
-  display: flex; align-items: center; justify-content: center;
-  font-size: .8rem; font-weight: 800; flex-shrink: 0;
+.home-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+  gap:12px;
 }
-.kat-topic-item-header h3 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-1); }
-.kat-topic-desc { font-size: .875rem; color: var(--text-2); line-height: 1.5; margin: 0 0 12px; }
-.kat-sub-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.kat-sub-chip {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: .76rem; color: var(--primary);
-  background: var(--primary-light);
-  padding: 3px 10px; border-radius: 999px;
-  cursor: pointer; transition: background .15s;
+.home-card{
+  display:block;
+  background:var(--bg-surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  padding:18px 20px;
+  transition:transform .15s,box-shadow .15s,border-color .15s;
 }
-.kat-sub-chip:hover { background: var(--primary); color: #fff; text-decoration: none; }
-
-/* ===== TOPIC OVERVIEW PAGE ===== */
-.view-topic { max-width: 900px; margin: 0 auto; }
-.topic-overview-header {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 24px 28px;
-  margin-bottom: 24px;
+.home-card:hover{
+  text-decoration:none;
+  transform:translateY(-3px);
+  box-shadow:var(--sh-md);
+  border-color:var(--primary);
 }
-.topic-overview-header .cat-tag {
-  display: inline-block; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
-  color: var(--primary); background: var(--primary-light);
-  padding: 3px 10px; border-radius: 999px; margin-bottom: 10px;
-  cursor: pointer;
+.home-card-cat{
+  font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--primary);background:var(--primary-light);
+  padding:2px 8px;border-radius:999px;
+  display:inline-block;margin-bottom:9px;
 }
-.topic-overview-header .cat-tag:hover { text-decoration: none; background: var(--primary); color: #fff; }
-.topic-overview-header h1 { margin: 0 0 8px; font-size: 1.7rem; font-weight: 800; }
-.topic-overview-header p { margin: 0; color: var(--text-2); font-size: .95rem; line-height: 1.5; }
-
-.sub-list-title { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--text-3); margin: 0 0 14px; }
-.sub-list { display: flex; flex-direction: column; gap: 10px; }
-.sub-list-item {
-  display: flex; align-items: center; gap: 14px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  padding: 14px 18px;
-  cursor: pointer;
-  transition: border-color .15s, transform .12s;
+.home-card h3{margin:0 0 5px;font-size:.95rem;color:var(--text-1);font-weight:700}
+.home-card p{
+  margin:0;font-size:.8rem;color:var(--text-2);line-height:1.5;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
-.sub-list-item:hover { border-color: var(--primary); transform: translateX(3px); text-decoration: none; }
-.sub-list-num {
-  width: 32px; height: 32px; border-radius: 9px;
-  background: var(--primary-light); color: var(--primary);
-  display: flex; align-items: center; justify-content: center;
-  font-size: .82rem; font-weight: 800; flex-shrink: 0;
+
+/* ============================================================
+   MATERI (ARTICLE) VIEW
+   ============================================================ */
+.view-materi{max-width:820px;margin:0 auto}
+
+/* breadcrumb */
+.breadcrumb{
+  display:flex;align-items:center;gap:4px;flex-wrap:wrap;
+  font-size:.82rem;color:var(--text-3);
+  margin-bottom:22px;
 }
-.sub-list-text { flex: 1; min-width: 0; }
-.sub-list-text h4 { margin: 0 0 3px; font-size: .95rem; font-weight: 600; color: var(--text-1); }
-.sub-list-text p { margin: 0; font-size: .82rem; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.sub-list-arrow { color: var(--text-3); flex-shrink: 0; }
+.breadcrumb a{color:var(--text-2)}
+.breadcrumb a:hover{color:var(--primary)}
+.breadcrumb .sep{color:var(--text-3);margin:0 1px}
+.breadcrumb .cur{color:var(--primary);font-weight:600}
 
-/* ===== BUTTONS ===== */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  gap: 6px; padding: 10px 20px; border-radius: var(--r-md);
-  font-weight: 600; font-size: .94rem; cursor: pointer;
-  border: 1px solid transparent;
-  transition: transform .12s, box-shadow .12s, background .15s;
+/* article card */
+.materi-article{
+  background:var(--bg-surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  padding:0 40px 44px;
+  position:relative;overflow:hidden;
 }
-.btn:hover { text-decoration: none; }
-.btn-primary { background: var(--primary); color: #fff; box-shadow: var(--shadow-sm); }
-.btn-primary:hover { background: var(--primary-dark); box-shadow: var(--shadow-md); }
-.btn-outline { background: var(--bg-surface); color: var(--text-1); border-color: var(--border); }
-.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
-.btn:disabled { opacity: .4; cursor: not-allowed; }
-
-/* ===== BREADCRUMB ===== */
-.breadcrumb { font-size: .84rem; color: var(--text-3); margin-bottom: 18px; display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
-.breadcrumb a { color: var(--text-2); }
-.breadcrumb a:hover { color: var(--primary); }
-.breadcrumb .sep { color: var(--text-3); }
-.breadcrumb .current { color: var(--primary); font-weight: 600; }
-
-/* ===== MATERI LAYOUT ===== */
-.materi-layout { display: flex; gap: 32px; max-width: 1200px; margin: 0 auto; align-items: flex-start; }
-.materi-article {
-  flex: 1; min-width: 0;
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 8px 36px 36px;
-  position: relative; overflow: hidden;
+@media(max-width:640px){
+  .materi-article{padding:0 18px 32px;border-radius:var(--r-md)}
 }
-@media (max-width: 640px) { .materi-article { padding: 8px 18px 26px; border-radius: var(--r-md); } }
 
-.reading-progress-wrap { position: sticky; top: 0; height: 4px; background: var(--border); margin: 0 -36px 26px; }
-@media (max-width: 640px) { .reading-progress-wrap { margin: 0 -18px 20px; } }
-.reading-progress-bar { height: 100%; width: 0%; background: var(--primary); transition: width .1s linear; }
-
-.materi-header { margin-bottom: 22px; }
-.materi-breadcrumb-tags { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
-.materi-tag {
-  display: inline-block; font-size: .72rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: .05em;
-  padding: 3px 10px; border-radius: 999px;
-  cursor: pointer;
+/* reading progress bar */
+.rp-wrap{
+  position:sticky;top:0;height:3px;
+  background:var(--border);
+  margin:0 -40px 32px;
+  z-index:2;
 }
-.materi-tag.cat { color: var(--primary); background: var(--primary-light); }
-.materi-tag.cat:hover { background: var(--primary); color: #fff; text-decoration: none; }
-.materi-tag.topic { color: var(--text-2); background: var(--bg-surface-2); border: 1px solid var(--border); }
-.materi-tag.topic:hover { border-color: var(--primary); color: var(--primary); text-decoration: none; }
-.materi-tag-sep { color: var(--text-3); font-size: .8rem; }
-
-.materi-header h1 { margin: 0; font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; }
-
-.materi-nav-buttons {
-  display: flex; justify-content: space-between; gap: 10px;
-  margin-top: 36px; padding-top: 22px;
-  border-top: 1px solid var(--border);
+@media(max-width:640px){.rp-wrap{margin:0 -18px 24px}}
+.rp-bar{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--primary),#4F8CFF);
+  transition:width .08s linear;
 }
-@media (max-width: 560px) { .materi-nav-buttons { flex-direction: column; } .materi-nav-buttons .btn { width: 100%; } }
 
-/* ===== TOC ===== */
-.toc-panel { width: 220px; flex-shrink: 0; position: sticky; top: calc(var(--nav-h) + 24px); }
-.toc-title { font-size: .76rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-3); margin-bottom: 10px; }
-.toc-list { display: flex; flex-direction: column; gap: 4px; }
-.toc-list a { display: block; font-size: .85rem; color: var(--text-2); padding: 4px 0 4px 10px; border-left: 2px solid var(--border); }
-.toc-list a:hover { color: var(--primary); text-decoration: none; }
-.toc-list a.h3 { padding-left: 20px; font-size: .8rem; }
-.toc-list a.active { color: var(--primary); border-left-color: var(--primary); font-weight: 600; }
-@media (max-width: 1100px) { .toc-panel { display: none; } }
+/* article header */
+.art-header{margin-bottom:28px;padding-top:32px}
+.art-cat-tag{
+  display:inline-block;
+  font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--primary);background:var(--primary-light);
+  padding:3px 10px;border-radius:999px;
+  margin-bottom:12px;
+  cursor:pointer;
+}
+.art-cat-tag:hover{background:var(--primary);color:#fff;text-decoration:none}
+.art-header h1{
+  margin:0 0 14px;
+  font-size:clamp(1.5rem,3.5vw,2.1rem);
+  font-weight:800;letter-spacing:-.02em;
+  line-height:1.2;
+}
+.art-meta{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding-bottom:20px;
+  border-bottom:1px solid var(--border);
+  font-size:.8rem;color:var(--text-3);
+}
+.art-meta-item{display:flex;align-items:center;gap:5px}
 
-/* ===== MARKDOWN BODY ===== */
-.markdown-body { line-height: 1.75; font-size: 1rem; color: var(--text-1); }
-.markdown-body h2 { font-size: 1.35rem; margin: 34px 0 14px; font-weight: 700; scroll-margin-top: 90px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-.markdown-body h3 { font-size: 1.12rem; margin: 26px 0 10px; font-weight: 700; scroll-margin-top: 90px; }
-.markdown-body h4 { font-size: 1rem; margin: 20px 0 8px; font-weight: 700; }
-.markdown-body p { margin: 0 0 16px; }
-.markdown-body ul, .markdown-body ol { margin: 0 0 16px; padding-left: 22px; }
-.markdown-body li { margin-bottom: 6px; }
-.markdown-body strong { font-weight: 700; }
-.markdown-body blockquote { margin: 0 0 16px; padding: 12px 18px; border-left: 4px solid var(--primary); background: var(--primary-light); border-radius: 0 8px 8px 0; color: var(--text-2); }
-.markdown-body blockquote p:last-child { margin-bottom: 0; }
-.markdown-body table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: .92rem; display: block; overflow-x: auto; white-space: nowrap; }
-.markdown-body th, .markdown-body td { border: 1px solid var(--border); padding: 9px 13px; text-align: left; }
-.markdown-body th { background: var(--bg-surface-2); font-weight: 700; }
-.markdown-body tr:nth-child(even) td { background: var(--bg-surface-2); }
-.markdown-body code { font-family: var(--mono); background: var(--code-bg); padding: 2px 6px; border-radius: 5px; font-size: .88em; }
-.markdown-body pre { background: var(--code-bg); border-radius: var(--r-md); padding: 16px 18px; overflow-x: auto; margin: 0 0 18px; border: 1px solid var(--border); }
-.markdown-body pre code { background: none; padding: 0; font-size: .87rem; line-height: 1.6; }
-.markdown-body img { border-radius: var(--r-md); margin: 10px 0; }
-.markdown-body hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+/* prev/next */
+.art-nav{
+  display:flex;justify-content:space-between;gap:10px;
+  margin-top:40px;padding-top:24px;
+  border-top:1px solid var(--border);
+}
+@media(max-width:520px){
+  .art-nav{flex-direction:column}
+  .art-nav .btn{width:100%}
+}
 
-/* ===== KATEX ===== */
-.formula-block { position: relative; margin: 18px 0 24px; padding: 18px 50px 18px 18px; background: var(--bg-surface-2); border: 1px solid var(--border); border-radius: var(--r-md); overflow-x: auto; }
-.formula-block .katex-display { margin: 0; }
-.copy-formula-btn { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 7px; border: 1px solid var(--border); background: var(--bg-surface); color: var(--text-3); cursor: pointer; transition: color .15s, border-color .15s; }
-.copy-formula-btn:hover { color: var(--primary); border-color: var(--primary); }
-.copy-toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%) translateY(10px); background: var(--text-1); color: var(--bg-surface); padding: 9px 18px; border-radius: 999px; font-size: .85rem; box-shadow: var(--shadow-lg); z-index: 200; opacity: 0; transition: opacity .2s, transform .2s; border: none; }
-.copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+/* ============================================================
+   FLOATING TOC BUTTON + PANEL
+   ============================================================ */
+.toc-fab{
+  position:fixed;
+  right:22px;
+  bottom:28px;
+  z-index:70;
+  width:46px;height:46px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  box-shadow:var(--sh-lg);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s,transform .15s,box-shadow .15s;
+}
+.toc-fab:hover{background:var(--primary-dark);transform:scale(1.06);box-shadow:0 8px 28px rgba(37,99,235,.4)}
+.toc-fab.hidden-fab{opacity:0;pointer-events:none;transform:scale(.8)}
 
-/* ===== EMPTY STATE ===== */
-.empty-state { text-align: center; padding: 80px 20px; max-width: 480px; margin: 0 auto; }
-.empty-state h2 { margin-bottom: 10px; }
-.empty-state p { color: var(--text-2); margin-bottom: 22px; }
+/* panel */
+.toc-panel{
+  position:fixed;
+  right:22px;
+  bottom:82px;
+  z-index:69;
+  width:260px;
+  max-height:min(420px, calc(100vh - 120px));
+  background:var(--bg-surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  box-shadow:var(--sh-lg);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  /* hidden state */
+  opacity:0;
+  transform:translateY(12px) scale(.97);
+  pointer-events:none;
+  transition:opacity .2s ease,transform .2s ease;
+}
+.toc-panel.open{
+  opacity:1;
+  transform:none;
+  pointer-events:all;
+}
+.toc-panel-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 14px 10px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.toc-panel-title{
+  font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em;
+  color:var(--text-3);
+}
+.toc-close{
+  width:26px;height:26px;
+  border-radius:6px;border:none;
+  background:transparent;color:var(--text-3);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s,color .15s;
+}
+.toc-close:hover{background:var(--bg-surface2);color:var(--text-1)}
 
-/* ===== SCROLLBAR ===== */
-.sidebar::-webkit-scrollbar { width: 5px; }
-.sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.toc-body{overflow-y:auto;padding:8px 6px 10px;flex:1}
+.toc-body::-webkit-scrollbar{width:3px}
+.toc-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 
-/* ===== VIEW TRANSITIONS ===== */
-.view { animation: fadeIn .18s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.toc-item{
+  display:block;
+  padding:5px 10px;
+  border-radius:6px;
+  font-size:.83rem;
+  color:var(--text-2);
+  line-height:1.4;
+  cursor:pointer;
+  transition:background .12s,color .12s;
+  border-left:2px solid transparent;
+}
+.toc-item:hover{background:var(--bg-surface2);color:var(--text-1);text-decoration:none}
+.toc-item.h3{padding-left:20px;font-size:.79rem;color:var(--text-3)}
+.toc-item.h4{padding-left:30px;font-size:.76rem;color:var(--text-3)}
+.toc-item.active{
+  background:var(--primary-light);
+  color:var(--primary);
+  font-weight:600;
+  border-left-color:var(--primary);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:6px;padding:9px 18px;
+  border-radius:var(--r-md);
+  font-weight:600;font-size:.88rem;
+  border:1px solid transparent;
+  transition:transform .12s,box-shadow .12s,background .15s,border-color .15s;
+}
+.btn:hover{text-decoration:none}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:var(--sh-sm)}
+.btn-primary:hover{background:var(--primary-dark);box-shadow:var(--sh-md)}
+.btn-outline{background:var(--bg-surface);color:var(--text-1);border-color:var(--border)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+.btn:disabled{opacity:.38;cursor:not-allowed}
+
+/* ============================================================
+   MARKDOWN BODY
+   ============================================================ */
+.md-body{line-height:1.8;font-size:.98rem;color:var(--text-1)}
+.md-body h2{
+  font-size:1.4rem;margin:40px 0 14px;font-weight:800;
+  scroll-margin-top:24px;
+  padding-bottom:9px;border-bottom:2px solid var(--border);
+  letter-spacing:-.01em;
+}
+.md-body h3{
+  font-size:1.1rem;margin:28px 0 10px;font-weight:700;
+  scroll-margin-top:24px;
+  color:var(--text-1);
+}
+.md-body h4{font-size:.98rem;margin:20px 0 8px;font-weight:700;scroll-margin-top:24px}
+.md-body p{margin:0 0 16px}
+.md-body ul,.md-body ol{margin:0 0 16px;padding-left:22px;list-style:initial}
+.md-body ol{list-style:decimal}
+.md-body li{margin-bottom:5px;line-height:1.7}
+.md-body strong{font-weight:700}
+.md-body em{font-style:italic}
+.md-body hr{border:none;border-top:1px solid var(--border);margin:30px 0}
+.md-body blockquote{
+  margin:0 0 18px;padding:13px 18px;
+  border-left:4px solid var(--primary);
+  background:var(--primary-light);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;
+  color:var(--text-2);
+}
+.md-body blockquote p:last-child{margin:0}
+.md-body table{
+  width:100%;border-collapse:collapse;
+  margin:0 0 20px;font-size:.88rem;
+  display:block;overflow-x:auto;
+}
+.md-body th,.md-body td{
+  border:1px solid var(--border);padding:9px 13px;text-align:left;
+}
+.md-body th{background:var(--bg-surface2);font-weight:700;white-space:nowrap}
+.md-body tr:nth-child(even) td{background:var(--bg-surface2)}
+.md-body code{
+  font-family:var(--mono);background:var(--code-bg);
+  padding:2px 6px;border-radius:5px;font-size:.85em;
+}
+.md-body pre{
+  background:var(--code-bg);border-radius:var(--r-md);
+  padding:16px 18px;overflow-x:auto;
+  margin:0 0 18px;border:1px solid var(--border);
+}
+.md-body pre code{background:none;padding:0;font-size:.85rem;line-height:1.65}
+.md-body img{border-radius:var(--r-md);margin:8px 0}
+
+/* KaTeX formula block */
+.formula-block{
+  position:relative;
+  margin:20px 0 26px;
+  padding:18px 52px 18px 18px;
+  background:var(--bg-surface2);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  overflow-x:auto;
+}
+.formula-block .katex-display{margin:0}
+.copy-f-btn{
+  position:absolute;top:10px;right:10px;
+  width:30px;height:30px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:7px;border:1px solid var(--border);
+  background:var(--bg-surface);color:var(--text-3);
+  transition:color .15s,border-color .15s;
+}
+.copy-f-btn:hover{color:var(--primary);border-color:var(--primary)}
+
+/* toast */
+.copy-toast{
+  position:fixed;bottom:26px;left:50%;
+  transform:translateX(-50%) translateY(10px);
+  background:var(--text-1);color:var(--bg-surface);
+  padding:8px 18px;border-radius:999px;
+  font-size:.82rem;box-shadow:var(--sh-lg);
+  z-index:200;opacity:0;
+  transition:opacity .2s,transform .2s;border:none;
+}
+.copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ============================================================
+   404 / EMPTY
+   ============================================================ */
+.empty-state{
+  text-align:center;padding:80px 20px;
+  max-width:440px;margin:0 auto;
+}
+.empty-state h2{margin-bottom:10px}
+.empty-state p{color:var(--text-2);margin-bottom:22px}
+
+/* ============================================================
+   HIGHLIGHT (materi heading yang di-scroll ke)
+   ============================================================ */
+.heading-highlight{
+  animation: hl-pulse .9s ease;
+}
+@keyframes hl-pulse{
+  0%  {background:rgba(37,99,235,.15);border-radius:4px}
+  100%{background:transparent}
+}
 </style>
 </head>
 <body>
 
+<!-- NAVBAR -->
 <header class="navbar">
-  <button id="sidebarToggle" class="icon-btn" aria-label="Menu">
-    <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  <button id="sbToggle" class="icon-btn" aria-label="Menu">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M3 6h18M3 12h18M3 18h18"/>
+    </svg>
   </button>
   <a href="#/" class="brand">
     <span class="brand-logo">Σ</span>
     <span>Statistika<span class="brand-accent">Ku</span></span>
   </a>
-  <div class="navbar-search">
-    <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  <div class="nav-search">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg>
     <input type="text" id="searchInput" placeholder="Cari materi..." autocomplete="off">
   </div>
-  <button id="themeToggle" class="icon-btn" aria-label="Ganti tema">
-    <svg id="themeIcon" viewBox="0 0 24 24" width="20" height="20"><path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="currentColor"/></svg>
-  </button>
+  <div style="margin-left:auto;display:flex;gap:6px">
+    <button id="themeToggle" class="icon-btn" aria-label="Ganti tema">
+      <svg id="themeIcon" viewBox="0 0 24 24" width="18" height="18"><path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="currentColor"/></svg>
+    </button>
+  </div>
 </header>
 
 <div class="app-shell">
 
+  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-inner">
-      <div class="sidebar-search-mobile">
-        <input type="text" id="searchInputMobile" placeholder="Cari materi...">
+      <div class="sb-search-mobile">
+        <input type="text" id="searchMobile" placeholder="Cari materi...">
       </div>
-      <nav id="sidebarNav" aria-label="Navigasi Materi"></nav>
-      <p class="sidebar-empty" id="searchEmpty" hidden>Materi tidak ditemukan.</p>
+      <nav id="sbNav" aria-label="Daftar Materi"></nav>
+      <p class="sb-empty" id="sbEmpty" hidden>Materi tidak ditemukan.</p>
     </div>
   </aside>
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="sb-overlay" id="sbOverlay"></div>
 
+  <!-- MAIN -->
   <main class="content" id="mainContent">
 
     <!-- HOME -->
     <section id="view-home" class="view view-home">
       <div class="hero">
         <div class="hero-logo">Σ</div>
-        <h1>Selamat Datang di <span class="brand-accent">StatistikaKu</span></h1>
-        <p class="hero-subtitle">Platform belajar statistika gratis — materi lengkap dengan rumus, contoh soal, dan penjelasan dari dasar hingga mahir.</p>
+        <h1>Belajar Statistika<br><span class="brand-accent">Mudah & Gratis</span></h1>
+        <p class="hero-sub">Rumus lengkap, contoh soal nyata, dan penjelasan step-by-step — dari statistika deskriptif hingga uji hipotesis.</p>
         <div class="hero-actions">
           <a href="#/materi" class="btn btn-primary">Mulai Belajar →</a>
         </div>
       </div>
+      <div id="homeStats" class="home-stats"></div>
       <div id="homeCats" class="home-cats"></div>
     </section>
 
-    <!-- KATEGORI OVERVIEW -->
-    <section id="view-kategori" class="view view-kategori" hidden>
-      <nav class="breadcrumb" id="katBreadcrumb"></nav>
-      <div id="katContent"></div>
+    <!-- MATERI -->
+    <section id="view-materi" class="view view-materi" hidden>
+      <nav class="breadcrumb" id="breadcrumb"></nav>
+      <article class="materi-article" id="materiArticle">
+        <div class="rp-wrap"><div class="rp-bar" id="rpBar"></div></div>
+        <header class="art-header">
+          <a class="art-cat-tag" id="artCatTag" href="#/"></a>
+          <h1 id="artTitle"></h1>
+          <div class="art-meta" id="artMeta"></div>
+        </header>
+        <div id="artBody" class="md-body"></div>
+        <div class="art-nav">
+          <button id="btnPrev" class="btn btn-outline" disabled>← Sebelumnya</button>
+          <button id="btnNext" class="btn btn-outline" disabled>Berikutnya →</button>
+        </div>
+      </article>
     </section>
 
-    <!-- TOPIC OVERVIEW -->
-    <section id="view-topic" class="view view-topic" hidden>
-      <nav class="breadcrumb" id="topicBreadcrumb"></nav>
-      <div id="topicContent"></div>
-    </section>
-
-    <!-- SUB MATERI -->
-    <section id="view-materi" class="view" hidden>
-      <nav class="breadcrumb" id="materiBreadcrumb"></nav>
-      <div class="materi-layout">
-        <article class="materi-article">
-          <div class="reading-progress-wrap">
-            <div class="reading-progress-bar" id="readingProgress"></div>
-          </div>
-          <header class="materi-header">
-            <div class="materi-breadcrumb-tags" id="materiTags"></div>
-            <h1 id="materiJudul"></h1>
-          </header>
-          <div id="materiBody" class="markdown-body"></div>
-          <div class="materi-nav-buttons">
-            <button id="btnPrev" class="btn btn-outline" disabled>← Sebelumnya</button>
-            <button id="btnNext" class="btn btn-outline" disabled>Berikutnya →</button>
-          </div>
-        </article>
-        <aside class="toc-panel" id="tocPanel">
-          <div class="toc-title">Daftar Isi</div>
-          <nav id="tocList" class="toc-list"></nav>
-        </aside>
-      </div>
-    </section>
-
-    <!-- NOT FOUND -->
-    <section id="view-notfound" class="view" hidden>
+    <!-- 404 -->
+    <section id="view-404" class="view" hidden>
       <div class="empty-state">
         <h2>404 — Halaman tidak ditemukan</h2>
         <p>Materi yang kamu cari tidak ada atau sudah dipindahkan.</p>
@@ -612,790 +694,614 @@ img { max-width: 100%; }
   </main>
 </div>
 
-<button id="copyToast" class="copy-toast" hidden>Rumus disalin!</button>
+<!-- FLOATING TOC -->
+<button class="toc-fab hidden-fab" id="tocFab" aria-label="Daftar Isi">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+  </svg>
+</button>
 
-<!-- =====================================================================
-     DATA STRUKTUR MATERI
-     Format: KATEGORI > MATERI UTAMA (topic) > SUB MATERI
-     Setiap sub materi dimuat dari file JS terpisah di folder /materi/
-     ===================================================================== -->
+<div class="toc-panel" id="tocPanel" role="dialog" aria-label="Daftar Isi">
+  <div class="toc-panel-header">
+    <span class="toc-panel-title">Daftar Isi</span>
+    <button class="toc-close" id="tocClose" aria-label="Tutup">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  <div class="toc-body" id="tocBody"></div>
+</div>
+
+<!-- COPY TOAST -->
+<button class="copy-toast" id="copyToast" hidden>✓ Rumus disalin!</button>
+
+<!-- ============================================================
+     KURIKULUM DATA
+     Tambah kategori / materi di sini. Setiap materi = 1 file JS.
+     ============================================================ -->
 <script>
-/**
- * STRUKTUR DATA MATERI
- * 
- * kategori: kelompok besar topik
- * topics: materi utama di dalam kategori
- *   - id: unik, dipakai di URL
- *   - judul: nama materi utama
- *   - icon: emoji/ikon
- *   - deskripsi: pengantar singkat
- *   - subs: daftar sub materi
- *     - id: unik, sesuai nama file JS di /materi/
- *     - judul: nama sub materi
- *     - deskripsi: ringkasan singkat
- */
 window.KURIKULUM = [
   {
     id: "deskriptif",
     label: "Statistika Deskriptif",
     icon: "📊",
-    deskripsi: "Teknik meringkas dan menyajikan data secara informatif tanpa generalisasi ke populasi.",
-    topics: [
-      {
-        id: "ukuran_pemusatan",
-        judul: "Ukuran Pemusatan",
-        icon: "⚖️",
-        deskripsi: "Cara menggambarkan nilai tengah atau nilai yang mewakili sekumpulan data.",
-        subs: [
-          { id: "statistik_deskriptif", judul: "Mean, Median & Modus", deskripsi: "Pengertian, rumus, dan perbandingan ketiga ukuran pusat." },
-          { id: "distribusi_normal",    judul: "Distribusi Normal",    deskripsi: "Bentuk distribusi simetris yang paling umum dalam statistika." },
-        ]
-      },
-      {
-        id: "korelasi_regresi",
-        judul: "Korelasi & Regresi",
-        icon: "📈",
-        deskripsi: "Mengukur dan memodelkan hubungan antar variabel.",
-        subs: [
-          { id: "korelasi", judul: "Korelasi",       deskripsi: "Kekuatan dan arah hubungan linier antara dua variabel." },
-          { id: "regresi",  judul: "Regresi Linier", deskripsi: "Memprediksi nilai variabel berdasarkan variabel lain." },
-        ]
-      }
+    items: [
+      { id: "statistik_deskriptif", judul: "Mean, Median & Modus" },
+      { id: "distribusi_normal",    judul: "Distribusi Normal"    },
+    ]
+  },
+  {
+    id: "hubungan",
+    label: "Korelasi & Regresi",
+    icon: "📈",
+    items: [
+      { id: "korelasi", judul: "Korelasi"       },
+      { id: "regresi",  judul: "Regresi Linier" },
     ]
   },
   {
     id: "inferensial",
     label: "Statistika Inferensial",
-    icon: "🔍",
-    deskripsi: "Teknik menarik kesimpulan tentang populasi berdasarkan sampel data.",
-    topics: [
-      {
-        id: "uji_hipotesis",
-        judul: "Uji Hipotesis",
-        icon: "🧪",
-        deskripsi: "Prosedur formal untuk menguji klaim atau asumsi tentang populasi.",
-        subs: [
-          { id: "uji_t",   judul: "Uji-t",      deskripsi: "Membandingkan rata-rata satu atau dua kelompok sampel." },
-          { id: "uji_chi", judul: "Uji Chi-Kuadrat", deskripsi: "Menguji kecocokan distribusi dan independensi dua variabel kategorik." },
-        ]
-      }
+    icon: "🔬",
+    items: [
+      { id: "uji_t",   judul: "Uji-t"          },
+      { id: "uji_chi", judul: "Uji Chi-Kuadrat" },
     ]
   }
 ];
 </script>
 
+<!-- ============================================================
+     APP SCRIPT
+     ============================================================ -->
 <script>
 (() => {
-  "use strict";
+"use strict";
 
-  // =====================================================================
-  // ROUTER
-  // =====================================================================
-  const Router = (() => {
-    let routes = [];
-    let notFoundCb = () => {};
-    const on = (pat, fn) => { routes.push({ pat, fn }); return Router; };
-    const notFound = (fn) => { notFoundCb = fn; return Router; };
-    const path = () => { const h = window.location.hash || "#/"; let p = h.slice(1); return p || "/"; };
-    const resolve = () => {
-      const p = path();
-      for (const r of routes) { const m = p.match(r.pat); if (m) { r.fn(m); return; } }
-      notFoundCb();
-    };
-    const go = (p) => { window.location.hash = p; };
-    window.addEventListener("hashchange", resolve);
-    return { on, notFound, resolve, go, path };
-  })();
-
-  // =====================================================================
-  // STATE
-  // =====================================================================
-  const state = {
-    subData: {},       // id -> { id, judul, kategoriId, topicId, isi }
-    subOrder: [],      // flat ordered list of sub materi ids
-    topicMap: {},      // topicId -> topic object
-    katMap: {},        // katId -> kategori object
-    loaded: false,
-    currentId: null,
-    sidebarOpenKats: new Set(),
-    sidebarOpenTopics: new Set(),
+/* ─────────── ROUTER ─────────── */
+const Router = (() => {
+  const routes = [];
+  let nf = () => {};
+  const path = () => { const h = location.hash||"#/"; return h.slice(1)||"/"; };
+  const on  = (p,fn) => { routes.push({p,fn}); return Router; };
+  const notFound = fn => { nf=fn; return Router; };
+  const resolve  = () => {
+    const p = path();
+    for(const r of routes){ const m=p.match(r.p); if(m){r.fn(m);return;} }
+    nf();
   };
+  const go = p => { location.hash=p; };
+  window.addEventListener("hashchange", resolve);
+  return {on,notFound,resolve,go,path};
+})();
 
-  const $ = (s) => document.querySelector(s);
-  const $$ = (s) => Array.from(document.querySelectorAll(s));
+/* ─────────── STATE ─────────── */
+const state = {
+  materiData: {},   // id → { id, judul, katId, katLabel, isi, readMin }
+  order: [],        // flat array of ids in curriculum order
+  currentId: null,
+  loaded: false,
+};
 
-  const refs = {
-    sidebar: $("#sidebar"),
-    sidebarToggle: $("#sidebarToggle"),
-    sidebarOverlay: $("#sidebarOverlay"),
-    sidebarNav: $("#sidebarNav"),
-    searchEmpty: $("#searchEmpty"),
-    searchInput: $("#searchInput"),
-    searchInputMobile: $("#searchInputMobile"),
-    themeToggle: $("#themeToggle"),
-    themeIcon: $("#themeIcon"),
-    homeCats: $("#homeCats"),
-    viewHome: $("#view-home"),
-    viewKategori: $("#view-kategori"),
-    viewTopic: $("#view-topic"),
-    viewMateri: $("#view-materi"),
-    viewNotFound: $("#view-notfound"),
-    katBreadcrumb: $("#katBreadcrumb"),
-    katContent: $("#katContent"),
-    topicBreadcrumb: $("#topicBreadcrumb"),
-    topicContent: $("#topicContent"),
-    materiBreadcrumb: $("#materiBreadcrumb"),
-    materiTags: $("#materiTags"),
-    materiJudul: $("#materiJudul"),
-    materiBody: $("#materiBody"),
-    btnPrev: $("#btnPrev"),
-    btnNext: $("#btnNext"),
-    readingProgress: $("#readingProgress"),
-    tocPanel: $("#tocPanel"),
-    tocList: $("#tocList"),
-    copyToast: $("#copyToast"),
-  };
+const KUR = window.KURIKULUM || [];
 
-  // =====================================================================
-  // BUILD INDEX dari KURIKULUM
-  // =====================================================================
-  const KUR = window.KURIKULUM || [];
-  KUR.forEach((kat) => {
-    state.katMap[kat.id] = kat;
-    kat.topics.forEach((topic) => {
-      topic.katId = kat.id;
-      state.topicMap[topic.id] = topic;
-      topic.subs.forEach((sub) => {
-        sub.katId = kat.id;
-        sub.topicId = topic.id;
-        state.subOrder.push(sub.id);
-      });
+// build order & katMap from curriculum
+KUR.forEach(kat => {
+  kat.items.forEach(item => {
+    state.order.push(item.id);
+  });
+});
+
+/* ─────────── DOM ─────────── */
+const $  = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+const refs = {
+  sidebar:       $("#sidebar"),
+  sbToggle:      $("#sbToggle"),
+  sbOverlay:     $("#sbOverlay"),
+  sbNav:         $("#sbNav"),
+  sbEmpty:       $("#sbEmpty"),
+  searchInput:   $("#searchInput"),
+  searchMobile:  $("#searchMobile"),
+  themeToggle:   $("#themeToggle"),
+  themeIcon:     $("#themeIcon"),
+  viewHome:      $("#view-home"),
+  viewMateri:    $("#view-materi"),
+  view404:       $("#view-404"),
+  homeStats:     $("#homeStats"),
+  homeCats:      $("#homeCats"),
+  breadcrumb:    $("#breadcrumb"),
+  artCatTag:     $("#artCatTag"),
+  artTitle:      $("#artTitle"),
+  artMeta:       $("#artMeta"),
+  artBody:       $("#artBody"),
+  btnPrev:       $("#btnPrev"),
+  btnNext:       $("#btnNext"),
+  rpBar:         $("#rpBar"),
+  tocFab:        $("#tocFab"),
+  tocPanel:      $("#tocPanel"),
+  tocBody:       $("#tocBody"),
+  tocClose:      $("#tocClose"),
+  copyToast:     $("#copyToast"),
+};
+
+/* ─────────── MARKDOWN + KATEX ─────────── */
+let md = null;
+let mathStore = [];
+
+function stashMath(raw){
+  let r = raw;
+  r = r.replace(/\$\$([\s\S]+?)\$\$/g, (_,e)=>{
+    const i = mathStore.push({type:"block",expr:e.trim()})-1;
+    return `\n\n@@MB${i}@@\n\n`;
+  });
+  r = r.replace(/\$([^\$\n]+?)\$/g, (_,e)=>{
+    const i = mathStore.push({type:"inline",expr:e.trim()})-1;
+    return `@@MI${i}@@`;
+  });
+  return r;
+}
+
+function restoreMath(html){
+  html = html.replace(/@@MB(\d+)@@/g, (_,i)=>{
+    const it = mathStore[+i];
+    let r="";
+    try{ r=katex.renderToString(it.expr,{displayMode:true,throwOnError:false}); }
+    catch(e){ r=escH(it.expr); }
+    return `<div class="formula-block" data-formula="${escA(it.expr)}">
+      <button class="copy-f-btn" title="Salin rumus">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>
+        </svg>
+      </button>${r}</div>`;
+  });
+  html = html.replace(/@@MI(\d+)@@/g, (_,i)=>{
+    const it = mathStore[+i];
+    try{ return katex.renderToString(it.expr,{displayMode:false,throwOnError:false}); }
+    catch(e){ return escH(it.expr); }
+  });
+  return html;
+}
+
+function renderMD(raw){
+  mathStore=[];
+  return restoreMath(md.render(stashMath(raw)));
+}
+
+const escH = s => s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const escA = s => s.replace(/"/g,"&quot;");
+
+/* ─────────── LOAD SCRIPTS ─────────── */
+function loadScript(src){
+  return new Promise((res,rej)=>{
+    const s=document.createElement("script");
+    s.src=src; s.onload=res;
+    s.onerror=()=>rej(new Error("Gagal: "+src));
+    document.body.appendChild(s);
+  });
+}
+
+async function loadAll(){
+  for(const kat of KUR){
+    for(const item of kat.items){
+      try{
+        await loadScript(`materi/${item.id}.js`);
+        if(window.MATERI && window.MATERI.id){
+          const raw = window.MATERI.isi||"";
+          const words = raw.replace(/[#*`$>\[\]()-]/g,"").split(/\s+/).length;
+          state.materiData[window.MATERI.id]={
+            id: window.MATERI.id,
+            judul: window.MATERI.judul || item.judul,
+            katId: kat.id,
+            katLabel: kat.label,
+            katIcon: kat.icon,
+            isi: raw,
+            readMin: Math.max(1, Math.round(words/200)),
+          };
+        }
+      }catch(e){
+        console.warn("[SKu] Gagal muat:",item.id,e);
+        state.materiData[item.id]={
+          id:item.id,
+          judul:item.judul,
+          katId:kat.id,
+          katLabel:kat.label,
+          katIcon:kat.icon,
+          isi:`## ${item.judul}\n\n_Konten belum tersedia._`,
+          readMin:1,
+        };
+      }
+    }
+  }
+  state.loaded=true;
+}
+
+/* ─────────── VIEWS ─────────── */
+function showView(name){
+  refs.viewHome.hidden   = name!=="home";
+  refs.viewMateri.hidden = name!=="materi";
+  refs.view404.hidden    = name!=="404";
+  // hide TOC fab when not on materi
+  if(name!=="materi"){
+    refs.tocFab.classList.add("hidden-fab");
+    closeTOC();
+  }
+  window.scrollTo({top:0,behavior:"instant"in window?"instant":"auto"});
+}
+
+/* ─────────── HOME ─────────── */
+function renderHome(){
+  // stats
+  const total = state.order.length;
+  const cats  = KUR.length;
+  refs.homeStats.innerHTML = `
+    <div class="home-stat"><strong>${total}</strong><span>Materi</span></div>
+    <div class="home-stat"><strong>${cats}</strong><span>Kategori</span></div>
+    <div class="home-stat"><strong>100%</strong><span>Gratis</span></div>`;
+
+  // category cards
+  refs.homeCats.innerHTML="";
+  KUR.forEach(kat=>{
+    const sec=document.createElement("div");
+    const cardsHTML = kat.items.map(item=>{
+      const m = state.materiData[item.id];
+      const preview = m ? m.isi.replace(/[#*`$>\[\]()-]/g,"").replace(/\n+/g," ").trim().slice(0,90) : "";
+      return `<a href="#/materi/${item.id}" class="home-card">
+        <span class="home-card-cat">${escH(kat.icon)} ${escH(kat.label)}</span>
+        <h3>${escH(item.judul)}</h3>
+        <p>${escH(preview)}…</p>
+      </a>`;
+    }).join("");
+    sec.innerHTML=`
+      <div class="home-cat-title">${kat.icon} ${escH(kat.label)}</div>
+      <div class="home-grid">${cardsHTML}</div>`;
+    refs.homeCats.appendChild(sec);
+  });
+}
+
+/* ─────────── SIDEBAR ─────────── */
+function renderSidebar(filter=""){
+  const q=filter.trim().toLowerCase();
+  refs.sbNav.innerHTML="";
+  let any=false;
+
+  KUR.forEach(kat=>{
+    const matched = kat.items.filter(item=>{
+      if(!q) return true;
+      const m=state.materiData[item.id];
+      return item.judul.toLowerCase().includes(q) ||
+             (m && m.isi.toLowerCase().includes(q));
+    });
+    if(!matched.length) return;
+    any=true;
+
+    const label=document.createElement("div");
+    label.className="sb-cat-label";
+    label.innerHTML=`<span class="cat-icon">${kat.icon}</span>${escH(kat.label)}`;
+    refs.sbNav.appendChild(label);
+
+    matched.forEach(item=>{
+      const a=document.createElement("a");
+      a.href=`#/materi/${item.id}`;
+      a.className="sb-link"+(state.currentId===item.id?" active":"");
+      a.innerHTML=`<span class="sb-dot"></span><span>${escH(item.judul)}</span>`;
+      a.addEventListener("click",closeMobileSidebar);
+      refs.sbNav.appendChild(a);
     });
   });
 
-  // =====================================================================
-  // MARKDOWN + KATEX
-  // =====================================================================
-  let md = null;
-  let mathStore = [];
+  refs.sbEmpty.hidden=any;
+}
 
-  function stashMath(raw) {
-    let r = raw;
-    r = r.replace(/\$\$([\s\S]+?)\$\$/g, (_, e) => {
-      const i = mathStore.push({ type: "block", expr: e.trim() }) - 1;
-      return `\n\n@@MATH_B_${i}@@\n\n`;
-    });
-    r = r.replace(/\$([^\$\n]+?)\$/g, (_, e) => {
-      const i = mathStore.push({ type: "inline", expr: e.trim() }) - 1;
-      return `@@MATH_I_${i}@@`;
-    });
-    return r;
+/* ─────────── MATERI PAGE ─────────── */
+function renderMateriPage(id){
+  const m=state.materiData[id];
+  if(!m){ showView("404"); return; }
+
+  state.currentId=id;
+  showView("materi");
+  document.title=`${m.judul} — StatistikaKu`;
+
+  // breadcrumb
+  refs.breadcrumb.innerHTML=`
+    <a href="#/">Beranda</a>
+    <span class="sep">/</span>
+    <a href="#/">${escH(m.katLabel)}</a>
+    <span class="sep">/</span>
+    <span class="cur">${escH(m.judul)}</span>`;
+
+  // header
+  refs.artCatTag.textContent=`${m.katIcon} ${m.katLabel}`;
+  refs.artCatTag.href="#/";
+  refs.artTitle.textContent=m.judul;
+  refs.artMeta.innerHTML=`
+    <span class="art-meta-item">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      ${m.readMin} menit baca
+    </span>
+    <span class="art-meta-item">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      ${escH(m.katLabel)}
+    </span>`;
+
+  // body
+  refs.artBody.innerHTML=renderMD(m.isi);
+
+  if(window.hljs){
+    refs.artBody.querySelectorAll("pre code").forEach(b=>hljs.highlightElement(b));
   }
 
-  function renderMath(html) {
-    html = html.replace(/@@MATH_B_(\d+)@@/g, (_, i) => {
-      const it = mathStore[+i];
-      let rendered = "";
-      try { rendered = window.katex.renderToString(it.expr, { displayMode: true, throwOnError: false }); }
-      catch (e) { rendered = escH(it.expr); }
-      return `<div class="formula-block" data-formula="${escA(it.expr)}">
-        <button class="copy-formula-btn" title="Salin rumus">
-          <svg viewBox="0 0 24 24" width="15" height="15"><rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M5 15V5a2 2 0 0 1 2-2h10" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-        </button>${rendered}</div>`;
-    });
-    html = html.replace(/@@MATH_I_(\d+)@@/g, (_, i) => {
-      const it = mathStore[+i];
-      try { return window.katex.renderToString(it.expr, { displayMode: false, throwOnError: false }); }
-      catch (e) { return escH(it.expr); }
-    });
-    return html;
+  buildTOC();
+  attachCopyHandlers();
+  setupPrevNext(id);
+  setupReadingProgress();
+  renderSidebar(refs.searchInput.value);
+
+  // show TOC fab
+  refs.tocFab.classList.remove("hidden-fab");
+}
+
+/* ─────────── TOC ─────────── */
+let tocObs=null;
+function buildTOC(){
+  const heads = refs.artBody.querySelectorAll("h2,h3,h4");
+  refs.tocBody.innerHTML="";
+
+  if(!heads.length){
+    refs.tocFab.classList.add("hidden-fab");
+    return;
   }
 
-  function renderMD(raw) {
-    mathStore = [];
-    return renderMath(md.render(stashMath(raw)));
-  }
+  heads.forEach((h,i)=>{
+    // give each heading an id
+    const slug=`h-${i}-`+h.textContent.toLowerCase()
+      .replace(/[^\w\s-]/g,"").trim().replace(/\s+/g,"-");
+    h.id=slug;
 
-  function escH(s) { return s.replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c])); }
-  function escA(s) { return s.replace(/"/g, "&quot;"); }
-
-  // =====================================================================
-  // LOAD SUB MATERI (dinamis dari file JS)
-  // =====================================================================
-  function loadScript(src) {
-    return new Promise((res, rej) => {
-      const s = document.createElement("script");
-      s.src = src; s.onload = res; s.onerror = () => rej(new Error("Gagal: " + src));
-      document.body.appendChild(s);
+    const a=document.createElement("a");
+    a.href=`#${slug}`;
+    a.className="toc-item "+h.tagName.toLowerCase();
+    a.textContent=h.textContent;
+    a.addEventListener("click",e=>{
+      e.preventDefault();
+      // scroll to heading
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // highlight briefly
+      h.classList.add("heading-highlight");
+      setTimeout(()=>h.classList.remove("heading-highlight"),900);
+      // update active
+      $$(".toc-item").forEach(x=>x.classList.remove("active"));
+      a.classList.add("active");
+      // close panel on mobile
+      if(window.innerWidth<640) closeTOC();
+      history.replaceState(null,"",`#/materi/${state.currentId}`);
     });
-  }
+    refs.tocBody.appendChild(a);
+  });
 
-  async function loadAll() {
-    for (const kat of KUR) {
-      for (const topic of kat.topics) {
-        for (const sub of topic.subs) {
-          try {
-            await loadScript(`materi/${sub.id}.js`);
-            if (window.MATERI && window.MATERI.id) {
-              state.subData[window.MATERI.id] = {
-                id: window.MATERI.id,
-                judul: window.MATERI.judul || window.MATERI.id,
-                isi: window.MATERI.isi || "",
-                katId: sub.katId,
-                topicId: sub.topicId,
-              };
-            }
-          } catch (e) {
-            console.warn(`[StatistikaKu] Gagal memuat: ${sub.id}`, e);
-            // Buat placeholder agar halaman tetap tampil
-            state.subData[sub.id] = {
-              id: sub.id,
-              judul: sub.judul,
-              isi: `## ${sub.judul}\n\n_Konten sub materi ini belum tersedia atau gagal dimuat._`,
-              katId: sub.katId,
-              topicId: sub.topicId,
-            };
-          }
+  observeTOC(heads);
+}
+
+function observeTOC(heads){
+  if(tocObs) tocObs.disconnect();
+  tocObs=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id=entry.target.id;
+        $$(".toc-item").forEach(a=>a.classList.remove("active"));
+        const a=refs.tocBody.querySelector(`a[href="#${id}"]`);
+        if(a){
+          a.classList.add("active");
+          // scroll the toc item into view within panel
+          a.scrollIntoView({block:"nearest"});
         }
       }
-    }
-    state.loaded = true;
-  }
-
-  // =====================================================================
-  // VIEWS
-  // =====================================================================
-  function showView(name) {
-    refs.viewHome.hidden      = name !== "home";
-    refs.viewKategori.hidden  = name !== "kategori";
-    refs.viewTopic.hidden     = name !== "topic";
-    refs.viewMateri.hidden    = name !== "materi";
-    refs.viewNotFound.hidden  = name !== "notfound";
-    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
-  }
-
-  // =====================================================================
-  // HOME
-  // =====================================================================
-  function renderHome() {
-    refs.homeCats.innerHTML = "";
-    KUR.forEach((kat) => {
-      const sec = document.createElement("div");
-      sec.className = "home-cat-section";
-      let topicsHTML = kat.topics.map((topic) => {
-        const subCount = topic.subs.length;
-        return `<a href="#/kategori/${kat.id}/topic/${topic.id}" class="topic-card">
-          <div class="topic-card-icon">${topic.icon}</div>
-          <h3>${escH(topic.judul)}</h3>
-          <span class="sub-count">${subCount} sub materi</span>
-        </a>`;
-      }).join("");
-      sec.innerHTML = `
-        <div class="home-cat-title">
-          <a href="#/kategori/${kat.id}" class="cat-badge">${escH(kat.label)}</a>
-          ${escH(kat.label)}
-        </div>
-        <div class="home-topic-grid">${topicsHTML}</div>`;
-      refs.homeCats.appendChild(sec);
     });
-  }
+  },{rootMargin:"-80px 0px -60% 0px"});
+  heads.forEach(h=>tocObs.observe(h));
+}
 
-  // =====================================================================
-  // KATEGORI PAGE
-  // =====================================================================
-  function renderKategoriPage(katId) {
-    const kat = state.katMap[katId];
-    if (!kat) { showView("notfound"); return; }
-    showView("kategori");
-    document.title = `${kat.label} — StatistikaKu`;
-
-    refs.katBreadcrumb.innerHTML = `
-      <a href="#/">Beranda</a><span class="sep">/</span>
-      <span class="current">${escH(kat.label)}</span>`;
-
-    const topicsHTML = kat.topics.map((topic, idx) => {
-      const subsChips = topic.subs.map((sub) =>
-        `<a href="#/materi/${sub.id}" class="kat-sub-chip">
-          <svg viewBox="0 0 24 24" width="11" height="11"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-          ${escH(sub.judul)}
-        </a>`
-      ).join("");
-      return `
-        <a href="#/kategori/${kat.id}/topic/${topic.id}" class="kat-topic-item">
-          <div class="kat-topic-item-header">
-            <div class="kat-topic-num">${idx + 1}</div>
-            <h3>${escH(topic.judul)}</h3>
-          </div>
-          <p class="kat-topic-desc">${escH(topic.deskripsi)}</p>
-          <div class="kat-sub-chips">${subsChips}</div>
-        </a>`;
-    }).join("");
-
-    refs.katContent.innerHTML = `
-      <div class="kat-hero">
-        <div class="kat-hero-icon">${kat.icon}</div>
-        <div class="kat-hero-text">
-          <h1>${escH(kat.label)}</h1>
-          <p>${escH(kat.deskripsi)}</p>
-        </div>
-      </div>
-      <p class="kat-topics-title">Materi Utama dalam Kategori Ini</p>
-      <div class="kat-topic-list">${topicsHTML}</div>`;
-
-    renderSidebar();
-    setSidebarActive(null, null);
-  }
-
-  // =====================================================================
-  // TOPIC (MATERI UTAMA) PAGE
-  // =====================================================================
-  function renderTopicPage(katId, topicId) {
-    const kat = state.katMap[katId];
-    const topic = state.topicMap[topicId];
-    if (!kat || !topic) { showView("notfound"); return; }
-    showView("topic");
-    document.title = `${topic.judul} — StatistikaKu`;
-
-    refs.topicBreadcrumb.innerHTML = `
-      <a href="#/">Beranda</a><span class="sep">/</span>
-      <a href="#/kategori/${kat.id}">${escH(kat.label)}</a><span class="sep">/</span>
-      <span class="current">${escH(topic.judul)}</span>`;
-
-    const subsHTML = topic.subs.map((sub, idx) => {
-      const d = state.subData[sub.id];
-      const preview = d ? d.isi.replace(/[#*`$>\-]/g, "").replace(/\n+/g, " ").trim().slice(0, 80) : sub.deskripsi;
-      return `
-        <a href="#/materi/${sub.id}" class="sub-list-item">
-          <div class="sub-list-num">${idx + 1}</div>
-          <div class="sub-list-text">
-            <h4>${escH(sub.judul)}</h4>
-            <p>${escH(preview)}...</p>
-          </div>
-          <svg class="sub-list-arrow" viewBox="0 0 24 24" width="18" height="18"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-        </a>`;
-    }).join("");
-
-    refs.topicContent.innerHTML = `
-      <div class="topic-overview-header">
-        <a href="#/kategori/${kat.id}" class="cat-tag">${escH(kat.label)}</a>
-        <h1>${topic.icon} ${escH(topic.judul)}</h1>
-        <p>${escH(topic.deskripsi)}</p>
-      </div>
-      <p class="sub-list-title">Sub Materi (${topic.subs.length} topik)</p>
-      <div class="sub-list">${subsHTML}</div>`;
-
-    renderSidebar();
-    setSidebarActive(null, topicId);
-    state.sidebarOpenKats.add(katId);
-    state.sidebarOpenTopics.add(topicId);
-    renderSidebar();
-  }
-
-  // =====================================================================
-  // SUB MATERI PAGE
-  // =====================================================================
-  function renderSubMateriPage(id) {
-    const m = state.subData[id];
-    if (!m) { showView("notfound"); return; }
-
-    const kat = state.katMap[m.katId];
-    const topic = state.topicMap[m.topicId];
-
-    state.currentId = id;
-    showView("materi");
-    document.title = `${m.judul} — StatistikaKu`;
-
-    refs.materiBreadcrumb.innerHTML = `
-      <a href="#/">Beranda</a><span class="sep">/</span>
-      <a href="#/kategori/${kat.id}">${escH(kat.label)}</a><span class="sep">/</span>
-      <a href="#/kategori/${kat.id}/topic/${topic.id}">${escH(topic.judul)}</a><span class="sep">/</span>
-      <span class="current">${escH(m.judul)}</span>`;
-
-    refs.materiTags.innerHTML = `
-      <a href="#/kategori/${kat.id}" class="materi-tag cat">${escH(kat.label)}</a>
-      <span class="materi-tag-sep">›</span>
-      <a href="#/kategori/${kat.id}/topic/${topic.id}" class="materi-tag topic">${escH(topic.judul)}</a>`;
-
-    refs.materiJudul.textContent = m.judul;
-    refs.materiBody.innerHTML = renderMD(m.isi);
-
-    if (window.hljs) {
-      refs.materiBody.querySelectorAll("pre code").forEach((b) => window.hljs.highlightElement(b));
+function openTOC(){
+  refs.tocPanel.classList.add("open");
+  refs.tocFab.setAttribute("aria-expanded","true");
+}
+function closeTOC(){
+  refs.tocPanel.classList.remove("open");
+  refs.tocFab.setAttribute("aria-expanded","false");
+}
+function setupTOC(){
+  refs.tocFab.addEventListener("click",()=>{
+    refs.tocPanel.classList.contains("open") ? closeTOC() : openTOC();
+  });
+  refs.tocClose.addEventListener("click", closeTOC);
+  // close when clicking outside
+  document.addEventListener("click",e=>{
+    if(!refs.tocPanel.contains(e.target) && e.target!==refs.tocFab){
+      closeTOC();
     }
+  });
+}
 
-    buildTOC();
-    attachCopyHandlers();
-    setupPrevNext(id);
-    updateProgress();
+/* ─────────── PREV / NEXT ─────────── */
+function setupPrevNext(id){
+  const idx=state.order.indexOf(id);
+  const prevId=idx>0?state.order[idx-1]:null;
+  const nextId=idx<state.order.length-1?state.order[idx+1]:null;
 
-    // Sidebar: buka kategori & topic yang relevan
-    state.sidebarOpenKats.add(m.katId);
-    state.sidebarOpenTopics.add(m.topicId);
-    renderSidebar();
-    setSidebarActive(id, m.topicId);
+  if(prevId&&state.materiData[prevId]){
+    refs.btnPrev.disabled=false;
+    refs.btnPrev.textContent=`← ${state.materiData[prevId].judul}`;
+    refs.btnPrev.onclick=()=>Router.go(`/materi/${prevId}`);
+  } else {
+    refs.btnPrev.disabled=true;
+    refs.btnPrev.textContent="← Sebelumnya";
+    refs.btnPrev.onclick=null;
   }
 
-  // =====================================================================
-  // SIDEBAR
-  // =====================================================================
-  function renderSidebar(filter = "") {
-    const q = filter.trim().toLowerCase();
-    refs.sidebarNav.innerHTML = "";
-    let anyVisible = false;
+  if(nextId&&state.materiData[nextId]){
+    refs.btnNext.disabled=false;
+    refs.btnNext.textContent=`${state.materiData[nextId].judul} →`;
+    refs.btnNext.onclick=()=>Router.go(`/materi/${nextId}`);
+  } else {
+    refs.btnNext.disabled=true;
+    refs.btnNext.textContent="Berikutnya →";
+    refs.btnNext.onclick=null;
+  }
+}
 
-    KUR.forEach((kat) => {
-      // Filter check
-      const katMatch = !q || kat.label.toLowerCase().includes(q);
-      const topicsFiltered = kat.topics.map((topic) => {
-        const topicMatch = !q || topic.judul.toLowerCase().includes(q);
-        const subsFiltered = topic.subs.filter((sub) =>
-          !q || sub.judul.toLowerCase().includes(q) ||
-          (state.subData[sub.id] && state.subData[sub.id].isi.toLowerCase().includes(q))
-        );
-        if (!q || topicMatch || subsFiltered.length > 0) {
-          return { ...topic, subsFiltered: q ? subsFiltered : topic.subs };
-        }
-        return null;
-      }).filter(Boolean);
+/* ─────────── READING PROGRESS ─────────── */
+function setupReadingProgress(){
+  const art=$(".materi-article");
+  if(!art) return;
+  const onScroll=()=>{
+    const pct=Math.min(100,Math.max(0,
+      (window.scrollY/(Math.max(1,art.offsetHeight-window.innerHeight)))*100));
+    refs.rpBar.style.width=pct+"%";
+  };
+  window.removeEventListener("scroll",window.__skuRP||null);
+  window.__skuRP=onScroll;
+  window.addEventListener("scroll",onScroll,{passive:true});
+  onScroll();
+}
 
-      if (!katMatch && topicsFiltered.length === 0) return;
-      anyVisible = true;
-
-      const isKatOpen = state.sidebarOpenKats.has(kat.id) || !!q;
-
-      const katDiv = document.createElement("div");
-      katDiv.className = "sb-category";
-
-      const catHeader = document.createElement("div");
-      catHeader.className = "sb-cat-header" + (isKatOpen ? " open" : "");
-      catHeader.innerHTML = `
-        <div class="sb-cat-icon">${kat.icon}</div>
-        <span class="sb-cat-label">${escH(kat.label)}</span>
-        <svg class="sb-cat-chevron" viewBox="0 0 24 24" width="16" height="16"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`;
-
-      const topicsDiv = document.createElement("div");
-      topicsDiv.className = "sb-topics";
-      topicsDiv.style.display = isKatOpen ? "block" : "none";
-
-      catHeader.addEventListener("click", () => {
-        const open = catHeader.classList.toggle("open");
-        topicsDiv.style.display = open ? "block" : "none";
-        if (open) state.sidebarOpenKats.add(kat.id);
-        else state.sidebarOpenKats.delete(kat.id);
-      });
-
-      topicsFiltered.forEach((topic) => {
-        const isTopicOpen = state.sidebarOpenTopics.has(topic.id) || !!q;
-        const isTopicActive = state.currentId && topic.subs.some(s => s.id === state.currentId);
-
-        const topicDiv = document.createElement("div");
-        topicDiv.className = "sb-topic";
-
-        const topicHeader = document.createElement("div");
-        topicHeader.className = "sb-topic-header" +
-          (isTopicActive ? " active" : "") +
-          (isTopicOpen ? " open" : "");
-        topicHeader.innerHTML = `
-          <span>${escH(topic.judul)}</span>
-          <svg class="sb-topic-chevron" viewBox="0 0 24 24" width="14" height="14"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`;
-        topicHeader.addEventListener("click", () => {
-          const open = topicHeader.classList.toggle("open");
-          subsDiv.style.display = open ? "block" : "none";
-          if (open) state.sidebarOpenTopics.add(topic.id);
-          else state.sidebarOpenTopics.delete(topic.id);
-          // Klik header topic juga bisa navigate ke topic overview
-        });
-
-        // Double click / long-press tidak praktis; tambahkan link terpisah opsional
-        // Navigasi ke topic page via klik pada nama (bukan chevron):
-        topicHeader.addEventListener("dblclick", (e) => {
-          e.stopPropagation();
-          Router.go(`/kategori/${kat.id}/topic/${topic.id}`);
-          closeMobileSidebar();
-        });
-
-        const subsDiv = document.createElement("div");
-        subsDiv.className = "sb-subtopics";
-        subsDiv.style.display = isTopicOpen ? "block" : "none";
-
-        topic.subsFiltered.forEach((sub) => {
-          const isActive = state.currentId === sub.id;
-          const a = document.createElement("a");
-          a.href = `#/materi/${sub.id}`;
-          a.className = "sb-sub-link" + (isActive ? " active" : "");
-          a.innerHTML = `<span class="sb-sub-dot"></span><span>${escH(sub.judul)}</span>`;
-          a.addEventListener("click", () => closeMobileSidebar());
-          subsDiv.appendChild(a);
-        });
-
-        topicDiv.appendChild(topicHeader);
-        topicDiv.appendChild(subsDiv);
-        topicsDiv.appendChild(topicDiv);
-      });
-
-      katDiv.appendChild(catHeader);
-      katDiv.appendChild(topicsDiv);
-      refs.sidebarNav.appendChild(katDiv);
+/* ─────────── COPY FORMULA ─────────── */
+function attachCopyHandlers(){
+  refs.artBody.querySelectorAll(".copy-f-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      copyText(btn.closest(".formula-block").dataset.formula);
     });
+  });
+}
 
-    refs.searchEmpty.hidden = anyVisible;
-  }
+function copyText(text){
+  const fb=()=>{
+    const ta=Object.assign(document.createElement("textarea"),{value:text});
+    ta.style.cssText="position:fixed;opacity:0";
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand("copy")}catch(_){}
+    document.body.removeChild(ta);toast();
+  };
+  if(navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(toast).catch(fb);
+  else fb();
+}
 
-  function setSidebarActive(subId, topicId) {
-    state.currentId = subId;
-  }
+let toastT=null;
+function toast(){
+  refs.copyToast.hidden=false;
+  requestAnimationFrame(()=>refs.copyToast.classList.add("show"));
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>{
+    refs.copyToast.classList.remove("show");
+    setTimeout(()=>{refs.copyToast.hidden=true;},220);
+  },1600);
+}
 
-  // =====================================================================
-  // PREV / NEXT
-  // =====================================================================
-  function setupPrevNext(id) {
-    const idx = state.subOrder.indexOf(id);
-    const prevId = idx > 0 ? state.subOrder[idx - 1] : null;
-    const nextId = idx < state.subOrder.length - 1 ? state.subOrder[idx + 1] : null;
+/* ─────────── SEARCH ─────────── */
+function setupSearch(){
+  const h=e=>{
+    refs.searchInput.value=refs.searchMobile.value=e.target.value;
+    renderSidebar(e.target.value);
+  };
+  refs.searchInput.addEventListener("input",h);
+  refs.searchMobile.addEventListener("input",h);
+}
 
-    if (prevId && state.subData[prevId]) {
-      refs.btnPrev.disabled = false;
-      refs.btnPrev.textContent = `← ${state.subData[prevId].judul}`;
-      refs.btnPrev.onclick = () => Router.go(`/materi/${prevId}`);
-    } else {
-      refs.btnPrev.disabled = true;
-      refs.btnPrev.textContent = "← Sebelumnya";
-      refs.btnPrev.onclick = null;
-    }
+/* ─────────── SIDEBAR MOBILE ─────────── */
+function closeMobileSidebar(){
+  refs.sidebar.classList.remove("open");
+  refs.sbOverlay.classList.remove("show");
+}
+function setupSidebarToggle(){
+  refs.sbToggle.addEventListener("click",()=>{
+    const open=refs.sidebar.classList.toggle("open");
+    refs.sbOverlay.classList.toggle("show",open);
+  });
+  refs.sbOverlay.addEventListener("click",closeMobileSidebar);
+}
 
-    if (nextId && state.subData[nextId]) {
-      refs.btnNext.disabled = false;
-      refs.btnNext.textContent = `${state.subData[nextId].judul} →`;
-      refs.btnNext.onclick = () => Router.go(`/materi/${nextId}`);
-    } else {
-      refs.btnNext.disabled = true;
-      refs.btnNext.textContent = "Berikutnya →";
-      refs.btnNext.onclick = null;
-    }
-  }
+/* ─────────── DARK MODE ─────────── */
+const THEME_KEY="sku-theme";
+function applyTheme(t){
+  document.documentElement.setAttribute("data-theme",t);
+  refs.themeIcon.innerHTML=t==="dark"
+    ?'<path d="M12 3a9 9 0 109 9 7 7 0 01-9-9z" fill="currentColor"/>'
+    :'<path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="currentColor"/>';
+  const el=$("#hljs-theme");
+  if(el) el.href=t==="dark"
+    ?"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    :"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
+}
+function setupTheme(){
+  const saved=localStorage.getItem(THEME_KEY)||
+    (matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
+  applyTheme(saved);
+  refs.themeToggle.addEventListener("click",()=>{
+    const next=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";
+    applyTheme(next);localStorage.setItem(THEME_KEY,next);
+  });
+}
 
-  // =====================================================================
-  // TOC
-  // =====================================================================
-  function buildTOC() {
-    const heads = refs.materiBody.querySelectorAll("h2, h3");
-    refs.tocList.innerHTML = "";
-    if (!heads.length) { refs.tocPanel.style.display = "none"; return; }
-    refs.tocPanel.style.display = "";
-    heads.forEach((h, i) => {
-      const slug = `s${i}-${h.textContent.toLowerCase().replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-")}`;
-      h.id = slug;
-      const a = document.createElement("a");
-      a.href = `#${slug}`; a.textContent = h.textContent;
-      a.className = h.tagName === "H3" ? "h3" : "h2";
-      a.addEventListener("click", (e) => {
-        e.preventDefault();
-        h.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-      refs.tocList.appendChild(a);
+/* ─────────── ROUTES ─────────── */
+function setupRoutes(){
+  Router
+    .on(/^\/$/, ()=>{
+      state.currentId=null;
+      showView("home");
+      renderHome();
+      renderSidebar(refs.searchInput.value);
+      document.title="StatistikaKu — Belajar Statistika";
+    })
+    .on(/^\/materi\/([a-zA-Z0-9_-]+)$/, m=>{
+      renderMateriPage(m[1]);
+    })
+    .on(/^\/materi$/, ()=>{
+      if(state.order.length) Router.go(`/materi/${state.order[0]}`);
+      else Router.go("/");
+    })
+    .notFound(()=>{
+      showView("404");
+      document.title="Tidak Ditemukan — StatistikaKu";
     });
-    observeTOC(heads);
-  }
+}
 
-  let tocObs = null;
-  function observeTOC(heads) {
-    if (tocObs) tocObs.disconnect();
-    tocObs = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          $$(".toc-list a").forEach((a) => a.classList.remove("active"));
-          const a = refs.tocList.querySelector(`a[href="#${entry.target.id}"]`);
-          if (a) a.classList.add("active");
-        }
-      });
-    }, { rootMargin: "-100px 0px -70% 0px" });
-    heads.forEach((h) => tocObs.observe(h));
-  }
-
-  // =====================================================================
-  // COPY FORMULA
-  // =====================================================================
-  function attachCopyHandlers() {
-    refs.materiBody.querySelectorAll(".copy-formula-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        copyText(btn.closest(".formula-block").dataset.formula);
-      });
-    });
-  }
-
-  function copyText(text) {
-    const fallback = () => {
-      const ta = Object.assign(document.createElement("textarea"), { value: text });
-      ta.style.cssText = "position:fixed;opacity:0";
-      document.body.appendChild(ta); ta.select();
-      try { document.execCommand("copy"); } catch (_) {}
-      document.body.removeChild(ta); showToast();
+/* ─────────── WAIT LIBS ─────────── */
+function waitLibs(max=8000){
+  return new Promise(res=>{
+    const t0=Date.now();
+    const chk=()=>{
+      if(typeof markdownit==="function"&&typeof katex!=="undefined") return res(true);
+      if(Date.now()-t0>max) return res(false);
+      setTimeout(chk,100);
     };
-    if (navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(showToast).catch(fallback);
-    else fallback();
+    chk();
+  });
+}
+
+/* ─────────── INIT ─────────── */
+async function init(){
+  setupTheme();
+  setupSearch();
+  setupSidebarToggle();
+  setupTOC();
+  setupRoutes();
+
+  const ok=await waitLibs();
+  if(!ok){
+    refs.homeCats.innerHTML=`<div class="empty-state"><h2>Library gagal dimuat</h2><p>Periksa koneksi internet lalu refresh.</p><button class="btn btn-primary" onclick="location.reload()">Coba Lagi</button></div>`;
+    return;
   }
+  md=markdownit({html:false,linkify:true,typographer:true});
 
-  let toastTmr = null;
-  function showToast() {
-    refs.copyToast.hidden = false;
-    requestAnimationFrame(() => refs.copyToast.classList.add("show"));
-    clearTimeout(toastTmr);
-    toastTmr = setTimeout(() => {
-      refs.copyToast.classList.remove("show");
-      setTimeout(() => { refs.copyToast.hidden = true; }, 200);
-    }, 1600);
-  }
+  await loadAll();
+  renderHome();
+  renderSidebar();
+  Router.resolve();
+}
 
-  // =====================================================================
-  // READING PROGRESS
-  // =====================================================================
-  function updateProgress() {
-    const art = $(".materi-article");
-    if (!art) return;
-    const onScroll = () => {
-      const pct = Math.min(100, Math.max(0, (window.scrollY / Math.max(1, art.offsetHeight - window.innerHeight)) * 100));
-      refs.readingProgress.style.width = pct + "%";
-    };
-    window.removeEventListener("scroll", window.__skuScroll || (() => {}));
-    window.__skuScroll = onScroll;
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-  }
-
-  // =====================================================================
-  // SEARCH
-  // =====================================================================
-  function setupSearch() {
-    const handler = (e) => {
-      const v = e.target.value;
-      refs.searchInput.value = v;
-      refs.searchInputMobile.value = v;
-      renderSidebar(v);
-    };
-    refs.searchInput.addEventListener("input", handler);
-    refs.searchInputMobile.addEventListener("input", handler);
-  }
-
-  // =====================================================================
-  // SIDEBAR MOBILE
-  // =====================================================================
-  function closeMobileSidebar() {
-    refs.sidebar.classList.remove("open");
-    refs.sidebarOverlay.classList.remove("show");
-  }
-  function setupSidebarToggle() {
-    refs.sidebarToggle.addEventListener("click", () => {
-      const open = refs.sidebar.classList.toggle("open");
-      refs.sidebarOverlay.classList.toggle("show", open);
-    });
-    refs.sidebarOverlay.addEventListener("click", closeMobileSidebar);
-  }
-
-  // =====================================================================
-  // DARK MODE
-  // =====================================================================
-  const THEME_KEY = "statistikaku-theme";
-  function applyTheme(t) {
-    document.documentElement.setAttribute("data-theme", t);
-    refs.themeIcon.innerHTML = t === "dark"
-      ? '<path d="M12 3a9 9 0 109 9 7 7 0 01-9-9z" fill="currentColor"/>'
-      : '<path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="currentColor"/>';
-    const el = $("#hljs-theme");
-    if (el) el.href = t === "dark"
-      ? "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
-      : "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
-  }
-  function setupTheme() {
-    const saved = localStorage.getItem(THEME_KEY) ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    applyTheme(saved);
-    refs.themeToggle.addEventListener("click", () => {
-      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      applyTheme(next); localStorage.setItem(THEME_KEY, next);
-    });
-  }
-
-  // =====================================================================
-  // ROUTES
-  // =====================================================================
-  function setupRoutes() {
-    Router
-      .on(/^\/$/, () => {
-        showView("home");
-        state.currentId = null;
-        renderHome();
-        renderSidebar(refs.searchInput.value);
-        document.title = "StatistikaKu — Belajar Statistika";
-      })
-      .on(/^\/kategori\/([^/]+)$/, (m) => {
-        renderKategoriPage(m[1]);
-      })
-      .on(/^\/kategori\/([^/]+)\/topic\/([^/]+)$/, (m) => {
-        renderTopicPage(m[1], m[2]);
-      })
-      .on(/^\/materi\/([a-zA-Z0-9_\-]+)$/, (m) => {
-        renderSubMateriPage(m[1]);
-      })
-      .on(/^\/materi$/, () => {
-        const firstId = state.subOrder[0];
-        if (firstId) Router.go(`/materi/${firstId}`);
-        else Router.go("/");
-      })
-      .notFound(() => {
-        showView("notfound");
-        document.title = "Tidak Ditemukan — StatistikaKu";
-      });
-  }
-
-  // =====================================================================
-  // WAIT FOR LIBRARIES
-  // =====================================================================
-  function waitLibs(max = 8000) {
-    return new Promise((res) => {
-      const t0 = Date.now();
-      const check = () => {
-        if (typeof window.markdownit === "function" && typeof window.katex !== "undefined") return res(true);
-        if (Date.now() - t0 > max) return res(false);
-        setTimeout(check, 100);
-      };
-      check();
-    });
-  }
-
-  // =====================================================================
-  // INIT
-  // =====================================================================
-  async function init() {
-    setupTheme();
-    setupSearch();
-    setupSidebarToggle();
-    setupRoutes();
-
-    const ok = await waitLibs();
-    if (!ok) {
-      refs.homeCats.innerHTML = `<div class="empty-state"><h2>Gagal memuat library</h2><p>Periksa koneksi internet lalu refresh halaman.</p><button class="btn btn-primary" onclick="location.reload()">Coba Lagi</button></div>`;
-      return;
-    }
-
-    md = window.markdownit({ html: false, linkify: true, typographer: true });
-
-    // Buka kategori pertama secara default
-    if (KUR.length > 0) {
-      state.sidebarOpenKats.add(KUR[0].id);
-      if (KUR[0].topics.length > 0) {
-        state.sidebarOpenTopics.add(KUR[0].topics[0].id);
-      }
-    }
-
-    await loadAll();
-
-    renderHome();
-    renderSidebar();
-    Router.resolve();
-  }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
-  else init();
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init);
+else init();
 })();
 </script>
 </body>
