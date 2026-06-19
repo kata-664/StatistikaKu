@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StatistikaKu — Belajar Statistika</title>
+<meta name="description" content="StatistikaKu: platform belajar statistika gratis, materi lengkap, rumus matematika, dan contoh soal." />
+
+<!-- KaTeX untuk render rumus matematika -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+<!-- Markdown parser ringan -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/14.1.0/markdown-it.min.js"></script>
+
+<!-- Syntax highlight -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" id="hljs-theme">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<!-- ===== TOP NAVBAR ===== -->
+<header class="navbar">
+  <button id="sidebarToggle" class="icon-btn" aria-label="Buka menu materi" title="Menu">
+    <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  </button>
+
+  <a href="#/" class="brand">
+    <span class="brand-logo">Σ</span>
+    <span class="brand-text">Statistika<span class="brand-accent">Ku</span></span>
+  </a>
+
+  <div class="navbar-search">
+    <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    <input type="text" id="searchInput" placeholder="Cari materi... (judul / isi)" autocomplete="off">
+  </div>
+
+  <button id="themeToggle" class="icon-btn" aria-label="Ganti tema" title="Mode gelap/terang">
+    <svg id="themeIcon" viewBox="0 0 24 24" width="20" height="20"><path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="currentColor"/></svg>
+  </button>
+</header>
+
+<div class="app-shell">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <div class="sidebar-search-mobile">
+        <input type="text" id="searchInputMobile" placeholder="Cari materi...">
+      </div>
+      <nav id="materiList" class="materi-list" aria-label="Daftar Materi">
+        <!-- Diisi otomatis oleh app.js -->
+      </nav>
+      <p class="sidebar-empty" id="searchEmpty" hidden>Materi tidak ditemukan.</p>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="content" id="mainContent">
+
+    <!-- ---- HOME / LANDING ---- -->
+    <section id="view-home" class="view view-home">
+      <div class="hero">
+        <div class="hero-logo">Σ</div>
+        <h1>Selamat Datang di <span class="brand-accent">StatistikaKu</span></h1>
+        <p class="hero-subtitle">
+          Platform belajar statistika gratis — rumus, contoh soal, dan penjelasan
+          lengkap mulai dari statistika deskriptif hingga regresi, langsung di browser.
+        </p>
+        <div class="hero-actions">
+          <a href="#/materi" class="btn btn-primary" id="btnMulaiBelajar">Mulai Belajar →</a>
+        </div>
+      </div>
+
+      <div class="home-grid" id="homeGrid">
+        <!-- kartu materi diisi otomatis -->
+      </div>
+    </section>
+
+    <!-- ---- MATERI VIEW ---- -->
+    <section id="view-materi" class="view view-materi" hidden>
+
+      <nav class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb"></nav>
+
+      <div class="materi-layout">
+        <article class="materi-article">
+          <div class="reading-progress-wrap">
+            <div class="reading-progress-bar" id="readingProgress"></div>
+          </div>
+
+          <header class="materi-header">
+            <span class="materi-kategori" id="materiKategori"></span>
+            <h1 id="materiJudul"></h1>
+          </header>
+
+          <div id="materiBody" class="markdown-body"></div>
+
+          <div class="materi-nav-buttons">
+            <button id="btnPrev" class="btn btn-outline" disabled>← Materi Sebelumnya</button>
+            <button id="btnNext" class="btn btn-outline" disabled>Materi Berikutnya →</button>
+          </div>
+        </article>
+
+        <aside class="toc-panel" id="tocPanel">
+          <div class="toc-title">Daftar Isi</div>
+          <nav id="tocList" class="toc-list"></nav>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ---- NOT FOUND ---- -->
+    <section id="view-notfound" class="view" hidden>
+      <div class="empty-state">
+        <h2>404 — Materi tidak ditemukan</h2>
+        <p>Materi yang kamu cari tidak ada atau sudah dipindahkan.</p>
+        <a href="#/" class="btn btn-primary">Kembali ke Beranda</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<button id="copyToast" class="copy-toast" hidden>Rumus disalin!</button>
+
+<script src="materi/index.js"></script>
+<script src="js/router.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
